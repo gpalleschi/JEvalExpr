@@ -11,9 +11,9 @@ import com.gpsoft.jevalexpr.Utility;
 import com.gpsoft.jevalexpr.ValueType;
 import com.gpsoft.jevalexpr.log.Logger;
 
-public class FSub extends Function{
+public class FMul extends Function{
 
-	public FSub(String name) {
+	public FMul(String name) {
 		super();
 		
 		this.name = name;
@@ -22,7 +22,7 @@ public class FSub extends Function{
 		this.operatorPriority = OperatorPriority.E_lev0;
 		this.idxPartOpe = 0;
 		this.valueType = ValueType.E_nat;
-		this.typeStep =TypeStep.E_sum; 
+		this.typeStep =TypeStep.E_div; 
 		this.stepRef = 0;
 		this.typeData = TypeData.E_string;
 		
@@ -33,7 +33,7 @@ public class FSub extends Function{
 		int idxOpd1;
 		int idxOpd2;
 		if (step.getOpnd().size() != 2 ) {
-			Logger.error("Function sub (+) work with two argument not with " + step.getOpnd().size() + ".");
+			Logger.error("Function sum (+) work with two argument not with " + step.getOpnd().size() + ".");
 			return false;
 		}
 		
@@ -42,13 +42,13 @@ public class FSub extends Function{
 		
 		if ( expBin.getStep().get(idxOpd1).getResType() != TypeData.E_int &&
 		     expBin.getStep().get(idxOpd1).getResType() != TypeData.E_double ) {
-			Logger.error("function sub (+) work only with number arguments.");
+			Logger.error("function sum (+) work only with number arguments.");
 			return false;
 		}
 
 		if ( expBin.getStep().get(idxOpd2).getResType() != TypeData.E_int &&
 		     expBin.getStep().get(idxOpd2).getResType() != TypeData.E_double ) {
-			Logger.error("function sub (+) work only with number arguments.");
+			Logger.error("function sum (+) work only with number arguments.");
 			return false;
 		}
 			
@@ -63,24 +63,24 @@ public class FSub extends Function{
 		return true;
 	}
 	
-	private double execSub(Double op1, Double op2) {
-		return op1 - op2;
+	private double execMul(Double op1, Double op2) {
+		return op1 * op2;
 	}
 	
-	private double execSub(Double op1, Integer op2) {
-		return op1 - op2;
+	private double execMul(Double op1, Integer op2) {
+		return op1 * op2;
 	}
 	
-	private double execSub(Integer op1, Double op2) {
-		return op1 - op2;
+	private double execMul(Integer op1, Double op2) {
+		return op1 * op2;
 	}
 	
-	private int execSub(Integer op1, Integer op2) {
-		return op1 - op2;
+	private int execMul(Integer op1, Integer op2) {
+		return op1 * op2;
 	}
 	
 	public boolean exec(ExpBin<?> expBin, int idxStep) {
-		Logger.debug("In Exec FSub");	
+		Logger.debug("In Exec FMul");	
 		Step<?> step = expBin.getStep().get(idxStep);
 		
 		int idxOpd1;
@@ -103,13 +103,16 @@ public class FSub extends Function{
 			return true;
 		}
 		
+		Logger.debug("In FMul index Opd1 : " + idxOpd1);
+		Logger.debug("In FMul index Opd2 : " + idxOpd2);
+		
 		if ( Utility.isDouble(expBin.getStep().get(idxOpd1).getData().getValue()) &&
 		     Utility.isDouble(expBin.getStep().get(idxOpd2).getData().getValue()) ) {
 			
     		Double valueOp1 = (Double) expBin.getStep().get(idxOpd1).getData().getValue();
 		    Double valueOp2 = (Double) expBin.getStep().get(idxOpd2).getData().getValue();
 
-		    expBin.getStep().get(idxStep).setData(new DataValue<Double>(execSub(valueOp1, valueOp2)));
+		    expBin.getStep().get(idxStep).setData(new DataValue<Double>(execMul(valueOp1, valueOp2)));
      		expBin.getStep().get(idxStep).setResType(TypeData.E_double);
 		    expBin.getStep().get(idxStep).setNull(false);
 
@@ -121,7 +124,7 @@ public class FSub extends Function{
     		Integer valueOp1 = (Integer) expBin.getStep().get(idxOpd1).getData().getValue();
 		    Double valueOp2 = (Double) expBin.getStep().get(idxOpd2).getData().getValue();
 
-		    expBin.getStep().get(idxStep).setData(new DataValue<Double>(execSub(valueOp1, valueOp2)));
+		    expBin.getStep().get(idxStep).setData(new DataValue<Double>(execMul(valueOp1, valueOp2)));
      		expBin.getStep().get(idxStep).setResType(TypeData.E_double);
 		    expBin.getStep().get(idxStep).setNull(false);
 		}
@@ -132,7 +135,7 @@ public class FSub extends Function{
     		Double valueOp1 = (Double) expBin.getStep().get(idxOpd1).getData().getValue();
 		    Integer valueOp2 = (Integer) expBin.getStep().get(idxOpd2).getData().getValue();
 
-		    expBin.getStep().get(idxStep).setData(new DataValue<Double>(execSub(valueOp1, valueOp2)));
+		    expBin.getStep().get(idxStep).setData(new DataValue<Double>(execMul(valueOp1, valueOp2)));
      		expBin.getStep().get(idxStep).setResType(TypeData.E_double);
 		    expBin.getStep().get(idxStep).setNull(false);
 		}
@@ -143,19 +146,22 @@ public class FSub extends Function{
     		Integer valueOp1 = (Integer) expBin.getStep().get(idxOpd1).getData().getValue();
 		    Integer valueOp2 = (Integer) expBin.getStep().get(idxOpd2).getData().getValue();
 
-		    expBin.getStep().get(idxStep).setData(new DataValue<Integer>(execSub(valueOp1, valueOp2)));
+		    expBin.getStep().get(idxStep).setData(new DataValue<Integer>(execMul(valueOp1, valueOp2)));
      		expBin.getStep().get(idxStep).setResType(TypeData.E_int);
 		    expBin.getStep().get(idxStep).setNull(false);
 		}
+	/*	
+		Logger.debug("Type 1 : " + expBin.getStep().get(idxOpd1).getResType());
+		Logger.debug("Type 2 : " + expBin.getStep().get(idxOpd2).getResType());
 		
-//		Logger.debug("Type 1 : " + expBin.getStep().get(idxOpd1).getResType());
-//		Logger.debug("Type 2 : " + expBin.getStep().get(idxOpd2).getResType());
-//		
-//		Logger.debug("Class name 1 : " + expBin.getStep().get(idxOpd1).getData().getClass().getName());
-//		Logger.debug("Class name 2 : " + expBin.getStep().get(idxOpd2).getData().getClass().getName());
-//
-//		Logger.debug("Value 1 : " + expBin.getStep().get(idxOpd1).getData());
-//		Logger.debug("Value 2 : " + expBin.getStep().get(idxOpd2).getData());
+		Logger.debug("Class name 1 : " + expBin.getStep().get(idxOpd1).getData().getValue().getClass().getName());
+		Logger.debug("Class name 2 : " + expBin.getStep().get(idxOpd2).getData().getValue().getClass().getName());
+
+		Logger.debug("Value 1 : " + expBin.getStep().get(idxOpd1).getData().getValue());
+		Logger.debug("Value 2 : " + expBin.getStep().get(idxOpd2).getData().getValue());
+		
+		Logger.debug("Ris : " + expBin.getStep().get(idxStep).getData().getValue());
+	*/
 		
 		return true;
 	}

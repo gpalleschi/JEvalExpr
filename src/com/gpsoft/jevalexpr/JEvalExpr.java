@@ -13,19 +13,22 @@ public class JEvalExpr {
                                      new Variable<Boolean>("v2", true),
 				  };
 		  
-		  Logger.setLevel(15);
+		  Logger.setLevel(8);
 		  
 		  Logger.debug(variables[0].getValue());
 		  Logger.debug(variables[1].getValue());
 		  
-		  expression = new Expression("((1 - 2 + to_number(v1)))",variables);
+//		  expression = new Expression("((1 - 2 + to_number(v1)))",variables);
+		  
+		  String Expression = "3 * 2";
+		  
+		  expression = new Expression(Expression,variables);
 		  
 		  if ( !expression.compExpr() ) {
 			  Logger.error("During Compilation");
 		  } else {
 			  Logger.info("Compilation OK.");
 		  }
-		  
 		  
 		  Variable<?>[] variables2 = {new Variable<String>("v1", "18"),
                   new Variable<Boolean>("v2", false),

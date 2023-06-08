@@ -103,6 +103,9 @@ public class FSum extends Function{
 			return true;
 		}
 		
+		Logger.debug("In FSum index Opd1 : " + idxOpd1);
+		Logger.debug("In FSum index Opd2 : " + idxOpd2);
+		
 		if ( Utility.isDouble(expBin.getStep().get(idxOpd1).getData().getValue()) &&
 		     Utility.isDouble(expBin.getStep().get(idxOpd2).getData().getValue()) ) {
 			

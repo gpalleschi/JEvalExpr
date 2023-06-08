@@ -17,12 +17,7 @@ import com.gpsoft.jevalexpr.TypeToken;
 import com.gpsoft.jevalexpr.Utility;
 import com.gpsoft.jevalexpr.ValueType;
 import com.gpsoft.jevalexpr.Variable;
-import com.gpsoft.jevalexpr.functions.FConstant;
-import com.gpsoft.jevalexpr.functions.FSub;
-import com.gpsoft.jevalexpr.functions.FSum;
-import com.gpsoft.jevalexpr.functions.FVariable;
-import com.gpsoft.jevalexpr.functions.Function;
-import com.gpsoft.jevalexpr.functions.Functions;
+import com.gpsoft.jevalexpr.functions.*;
 import com.gpsoft.jevalexpr.log.Logger;
 
 public class Expression  { 
@@ -138,7 +133,9 @@ public class Expression  {
 				startPos++;
 			}
 			
-			if ( expPos == startPos )  startPos++;
+			if ( expPos == startPos || startPos + 1 == humanExpr.length() )  startPos++;
+			
+//			Logger.debug("expPos : " + expPos + " startPos : " + startPos);
 			
 			//TODO: check if only one character and value is "."
 			
@@ -230,7 +227,7 @@ public class Expression  {
 			TypeStep step_type = TypeStep.E_ge;
 			int idx_part_op = 0;
 			boolean equalChar = false;
-			Function funToAdd;
+			Function funToAdd = null;
 			
 			switch(humanExpr.charAt(expPos)) {
 		      case '-':
@@ -273,6 +270,7 @@ public class Expression  {
 		      }
 		      case '^':
 		      {
+		    	funToAdd = new FSub("sub"); 		    	  
 				tokens.add(new Token<Object>(String.valueOf(humanExpr.charAt(expPos)), // String tokenName, 
 				             TypeToken.E_op, // TypeToken typeToken, 
 				             OperatorSyntaxType.E_two, // OperatorSyntaxType opeartorSyntaxType,
@@ -283,7 +281,8 @@ public class Expression  {
 				             0, // int stepRef,
            		             TypeData.E_string,
 				             null,
-				             tokens.size())); // int nativeIdx		    	  
+				             tokens.size(),
+				             funToAdd)); // int nativeIdx		    	  
 				break;
 		      }
 		      case '?':
@@ -318,28 +317,33 @@ public class Expression  {
 		    	if ( '*' == humanExpr.charAt(expPos) ) {
 		    	  step_type = TypeStep.E_mul;
 		    	  op_prio = OperatorPriority.E_lev0;
+		    	  funToAdd = new FMul("mul"); 
 		    	 }
 
 		    	if ( '/' == humanExpr.charAt(expPos) ) {
 		    	  step_type = TypeStep.E_div;
 		    	  op_prio = OperatorPriority.E_lev0;
+		    	  funToAdd = new FDiv("div"); 
 		    	}
 
 		    	if ( '%' == humanExpr.charAt(expPos) ) {
 		    	  step_type = TypeStep.E_mod;
 		    	  op_prio = OperatorPriority.E_lev0;
+		    	  funToAdd = new FSub("sub"); 
 		    	 }
 
 		    	if ( '&' == humanExpr.charAt(expPos) )
 		    	{
 		    	  step_type = TypeStep.E_and;
 		    	  op_prio = OperatorPriority.E_lev3;
+		    	  funToAdd = new FSub("sub"); 
 		    	}
 
 		    	if ( '=' == humanExpr.charAt(expPos) )
 		    	{
 		    	  step_type = TypeStep.E_eq;
 		    	  op_prio = OperatorPriority.E_lev2;
+		    	  funToAdd = new FSub("sub"); 
 		    	}
 
 				tokens.add(new Token<Object>(String.valueOf(humanExpr.charAt(expPos)), // String tokenName, 
@@ -352,7 +356,8 @@ public class Expression  {
 				             0, // int stepRef,
              		         TypeData.E_string,
 				             null,
-				             tokens.size())); // int nativeIdx
+				             tokens.size(),
+				             funToAdd)); // int nativeIdx
 				break;
 		    	  
 		      }
@@ -1040,6 +1045,7 @@ public class Expression  {
 		
 		return 0;
 	}
+
 	
 	private int checkExpr() {
 		if ( tokens.size() != 3 ) {
