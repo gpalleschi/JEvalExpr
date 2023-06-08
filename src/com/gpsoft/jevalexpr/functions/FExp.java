@@ -11,9 +11,9 @@ import com.gpsoft.jevalexpr.Utility;
 import com.gpsoft.jevalexpr.ValueType;
 import com.gpsoft.jevalexpr.log.Logger;
 
-public class FDiv extends Function{
+public class FExp extends Function{
 
-	public FDiv(String name) {
+	public FExp(String name) {
 		super();
 		
 		this.name = name;
@@ -22,7 +22,7 @@ public class FDiv extends Function{
 		this.operatorPriority = OperatorPriority.E_lev0;
 		this.idxPartOpe = 0;
 		this.valueType = ValueType.E_nat;
-		this.typeStep =TypeStep.E_div; 
+		this.typeStep =TypeStep.E_sum; 
 		this.stepRef = 0;
 		this.typeData = TypeData.E_string;
 		
@@ -33,7 +33,7 @@ public class FDiv extends Function{
 		int idxOpd1;
 		int idxOpd2;
 		if (step.getOpnd().size() != 2 ) {
-			Logger.error("Function div (+) work with two argument not with " + step.getOpnd().size() + ".");
+			Logger.error("Function " + name + " (+) work with two argument not with " + step.getOpnd().size() + ".");
 			return false;
 		}
 		
@@ -42,13 +42,13 @@ public class FDiv extends Function{
 		
 		if ( expBin.getStep().get(idxOpd1).getResType() != TypeData.E_int &&
 		     expBin.getStep().get(idxOpd1).getResType() != TypeData.E_double ) {
-			Logger.error("function div (+) work only with number arguments.");
+			Logger.error("function " + name + " (+) work only with number arguments.");
 			return false;
 		}
 
 		if ( expBin.getStep().get(idxOpd2).getResType() != TypeData.E_int &&
 		     expBin.getStep().get(idxOpd2).getResType() != TypeData.E_double ) {
-			Logger.error("function div (+) work only with number arguments.");
+			Logger.error("function " + name + " (+) work only with number arguments.");
 			return false;
 		}
 			
@@ -63,24 +63,24 @@ public class FDiv extends Function{
 		return true;
 	}
 	
-	private double execDiv(Double op1, Double op2) {
-		return op1 / op2;
+	private double execExp(Double op1, Double op2) {
+		return Math.pow(op1,op2);
 	}
 	
-	private double execDiv(Double op1, Integer op2) {
-		return op1 / op2;
+	private double execExp(Double op1, Integer op2) {
+		return Math.pow(op1,op2);
 	}
 	
-	private double execDiv(Integer op1, Double op2) {
-		return op1 / op2;
+	private double execExp(Integer op1, Double op2) {
+		return Math.pow(op1,op2);
 	}
 	
-	private double execDiv(Integer op1, Integer op2) {
-		return (double)((double)op1 / (double)op2);
+	private double execExp(Integer op1, Integer op2) {
+		return Math.pow(op1,op2);
 	}
 	
 	public boolean exec(ExpBin<?> expBin, int idxStep) {
-		Logger.debug("In Exec FDiv");	
+		Logger.debug("In Exec FSum");	
 		Step<?> step = expBin.getStep().get(idxStep);
 		
 		int idxOpd1;
@@ -103,8 +103,8 @@ public class FDiv extends Function{
 			return true;
 		}
 		
-		Logger.debug("In FDiv index Opd1 : " + idxOpd1);
-		Logger.debug("In FDiv index Opd2 : " + idxOpd2);
+		Logger.debug("In FSum index Opd1 : " + idxOpd1);
+		Logger.debug("In FSum index Opd2 : " + idxOpd2);
 		
 		if ( Utility.isDouble(expBin.getStep().get(idxOpd1).getData().getValue()) &&
 		     Utility.isDouble(expBin.getStep().get(idxOpd2).getData().getValue()) ) {
@@ -112,7 +112,7 @@ public class FDiv extends Function{
     		Double valueOp1 = (Double) expBin.getStep().get(idxOpd1).getData().getValue();
 		    Double valueOp2 = (Double) expBin.getStep().get(idxOpd2).getData().getValue();
 
-		    expBin.getStep().get(idxStep).setData(new DataValue<Double>(execDiv(valueOp1, valueOp2)));
+		    expBin.getStep().get(idxStep).setData(new DataValue<Double>(execExp(valueOp1, valueOp2)));
      		expBin.getStep().get(idxStep).setResType(TypeData.E_double);
 		    expBin.getStep().get(idxStep).setNull(false);
 
@@ -124,7 +124,7 @@ public class FDiv extends Function{
     		Integer valueOp1 = (Integer) expBin.getStep().get(idxOpd1).getData().getValue();
 		    Double valueOp2 = (Double) expBin.getStep().get(idxOpd2).getData().getValue();
 
-		    expBin.getStep().get(idxStep).setData(new DataValue<Double>(execDiv(valueOp1, valueOp2)));
+		    expBin.getStep().get(idxStep).setData(new DataValue<Double>(execExp(valueOp1, valueOp2)));
      		expBin.getStep().get(idxStep).setResType(TypeData.E_double);
 		    expBin.getStep().get(idxStep).setNull(false);
 		}
@@ -135,7 +135,7 @@ public class FDiv extends Function{
     		Double valueOp1 = (Double) expBin.getStep().get(idxOpd1).getData().getValue();
 		    Integer valueOp2 = (Integer) expBin.getStep().get(idxOpd2).getData().getValue();
 
-		    expBin.getStep().get(idxStep).setData(new DataValue<Double>(execDiv(valueOp1, valueOp2)));
+		    expBin.getStep().get(idxStep).setData(new DataValue<Double>(execExp(valueOp1, valueOp2)));
      		expBin.getStep().get(idxStep).setResType(TypeData.E_double);
 		    expBin.getStep().get(idxStep).setNull(false);
 		}
@@ -146,7 +146,7 @@ public class FDiv extends Function{
     		Integer valueOp1 = (Integer) expBin.getStep().get(idxOpd1).getData().getValue();
 		    Integer valueOp2 = (Integer) expBin.getStep().get(idxOpd2).getData().getValue();
 
-		    expBin.getStep().get(idxStep).setData(new DataValue<Double>(execDiv(valueOp1, valueOp2)));
+		    expBin.getStep().get(idxStep).setData(new DataValue<Double>(execExp(valueOp1, valueOp2)));
      		expBin.getStep().get(idxStep).setResType(TypeData.E_double);
 		    expBin.getStep().get(idxStep).setNull(false);
 		}

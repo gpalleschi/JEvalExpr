@@ -9,6 +9,7 @@ public enum TypeStep {
 	  E_mul,                      /* * MOLTIPLICAZIONE            */
 	  E_div,                      /* / DIVISIONE                  */
 	  E_mod,                      /* % RESTO DI DIVISIONE         */
+	  E_exp,                      /* ^ ESPONENZIALE               */
 	  E_eq,                       /* = UGUAGLIANZA LOGICA         */
 	  E_ne,                       /* != DIVERSITA LOGICA          */
 	  E_gt,                       /* > MAGGIORE LOGICO            */

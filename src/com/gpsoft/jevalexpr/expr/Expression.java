@@ -373,14 +373,17 @@ public class Expression  {
 		    		  
 		    		  if ( '<' == humanExpr.charAt(expPos) ) {
 		    			  step_type = TypeStep.E_le;
+		    			  funToAdd = new FLe("le");
 		    		  }
 
 		    		  if ( '>' == humanExpr.charAt(expPos) ) {
 		    			  step_type = TypeStep.E_ge;
+		    			  funToAdd = new FGe("ge");
 		    		  }
 
 		    		  if ( '!' == humanExpr.charAt(expPos) ) {
 		    			  step_type = TypeStep.E_ne;
+		    			  funToAdd = new FNe("ge");
 		    		  }
 
 					  tokens.add(new Token<Object>(String.valueOf(humanExpr.charAt(expPos)) + "=", // String tokenName, 
@@ -393,7 +396,8 @@ public class Expression  {
 					             0, // int stepRef,
                  		         TypeData.E_string,
 					             null,
-					             tokens.size())); // int nativeIdx
+					             tokens.size(),
+					             funToAdd)); // int nativeIdx
 					  expPos++;
 					  break;
 		    	  } else if ( '<' == humanExpr.charAt(expPos) || 
@@ -403,8 +407,10 @@ public class Expression  {
 		    		  op_prio = OperatorPriority.E_lev2;
 		    		  
 		    		  if ( '<' == humanExpr.charAt(expPos) ) {
+		    			  funToAdd = new FLt("lt");
 		    			  step_type = TypeStep.E_lt;
 		    		  } else {
+		    			  funToAdd = new FGt("gt");
 		    			  step_type = TypeStep.E_gt;
 		    		  }
 		    	  } else {
@@ -423,7 +429,8 @@ public class Expression  {
 				             0, // int stepRef,
                		         TypeData.E_string,
 				             null,
-				             tokens.size())); // int nativeIdx		    	  
+				             tokens.size(),
+				             funToAdd)); // int nativeIdx		    	  
 				  break;
 		      }
 		      case '|':

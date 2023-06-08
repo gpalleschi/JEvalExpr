@@ -32,7 +32,7 @@ public class FOr extends Function {
 		int idxOpd1;
 		int idxOpd2;
 		if (step.getOpnd().size() != 2 ) {
-			Logger.error("Function sum (+) work with two argument not with " + step.getOpnd().size() + ".");
+			Logger.error("Function or (+) work with two argument not with " + step.getOpnd().size() + ".");
 			return false;
 		}
 		
