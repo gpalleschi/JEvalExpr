@@ -33,7 +33,7 @@ public class FMod extends Function{
 		int idxOpd1;
 		int idxOpd2;
 		if (step.getOpnd().size() != 2 ) {
-			Logger.error("Function sum (+) work with two argument not with " + step.getOpnd().size() + ".");
+			Logger.error("Function " + this.name + " (+) work with two argument not with " + step.getOpnd().size() + ".");
 			return false;
 		}
 		
@@ -42,13 +42,13 @@ public class FMod extends Function{
 		
 		if ( expBin.getStep().get(idxOpd1).getResType() != TypeData.E_int &&
 		     expBin.getStep().get(idxOpd1).getResType() != TypeData.E_double ) {
-			Logger.error("function sum (+) work only with number arguments.");
+			Logger.error("function " + this.name + "  (+) work only with number arguments.");
 			return false;
 		}
 
 		if ( expBin.getStep().get(idxOpd2).getResType() != TypeData.E_int &&
 		     expBin.getStep().get(idxOpd2).getResType() != TypeData.E_double ) {
-			Logger.error("function sum (+) work only with number arguments.");
+			Logger.error("function " + this.name + " (+) work only with number arguments.");
 			return false;
 		}
 			

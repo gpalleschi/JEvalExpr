@@ -11,6 +11,7 @@ public class JEvalExpr {
 		  
 		  Variable<?>[] variables = {new Variable<String>("v1", "11"),
                                      new Variable<Boolean>("v2", true),
+                                     new Variable<Double>("v3", 1.23),
 				  };
 		  
 		  Logger.setLevel(8);
@@ -20,7 +21,7 @@ public class JEvalExpr {
 		  
 //		  expression = new Expression("((1 - 2 + to_number(v1)))",variables);
 		  
-		  String Expression = "3 * 2";
+		  String Expression = "1 + to_number(v1) - v3";
 		  
 		  expression = new Expression(Expression,variables);
 		  
@@ -31,7 +32,8 @@ public class JEvalExpr {
 		  }
 		  
 		  Variable<?>[] variables2 = {new Variable<String>("v1", "18"),
-                  new Variable<Boolean>("v2", false),
+                  new Variable<Boolean>("v2", true),
+                  new Variable<Double>("v3", 1.23),
           };
 		 
 		  if ( expression.execExpr(variables2) != 0 ) {

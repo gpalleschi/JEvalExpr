@@ -9,6 +9,7 @@ public class Functions {
 	{
 	    put("to_number", new FTo_number("to_number"));
 	    put("not", new FNot("not"));
+	    put("or", new FOr("or"));
 	}};
 
 }

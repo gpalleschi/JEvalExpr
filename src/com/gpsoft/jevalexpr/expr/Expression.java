@@ -329,21 +329,21 @@ public class Expression  {
 		    	if ( '%' == humanExpr.charAt(expPos) ) {
 		    	  step_type = TypeStep.E_mod;
 		    	  op_prio = OperatorPriority.E_lev0;
-		    	  funToAdd = new FSub("sub"); 
+		    	  funToAdd = new FMod("sub"); 
 		    	 }
 
 		    	if ( '&' == humanExpr.charAt(expPos) )
 		    	{
 		    	  step_type = TypeStep.E_and;
 		    	  op_prio = OperatorPriority.E_lev3;
-		    	  funToAdd = new FSub("sub"); 
+		    	  funToAdd = new FAnd("and"); 
 		    	}
 
 		    	if ( '=' == humanExpr.charAt(expPos) )
 		    	{
 		    	  step_type = TypeStep.E_eq;
 		    	  op_prio = OperatorPriority.E_lev2;
-		    	  funToAdd = new FSub("sub"); 
+		    	  funToAdd = new FEq("eq"); 
 		    	}
 
 				tokens.add(new Token<Object>(String.valueOf(humanExpr.charAt(expPos)), // String tokenName, 
@@ -442,6 +442,7 @@ public class Expression  {
 					             tokens.size())); // int nativeIdx				    		  
 					  expPos++;
 		    	  } else {
+		    		  funToAdd = new FOr("or"); 
 					  tokens.add(new Token<Object>(String.valueOf(humanExpr.charAt(expPos)), // String tokenName, 
 					             TypeToken.E_op, // TypeToken typeToken, 
 					             OperatorSyntaxType.E_two, // OperatorSyntaxType opeartorSyntaxType,
@@ -452,7 +453,9 @@ public class Expression  {
 					             0, // int stepRef,
                  		         TypeData.E_string,
 					             null,
-					             tokens.size())); 		    		  
+					             tokens.size(),
+					             funToAdd
+					             )); 		    		  
 		    	  }
 		    	  
 				  break;

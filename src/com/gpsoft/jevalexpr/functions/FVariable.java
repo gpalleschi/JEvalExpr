@@ -54,6 +54,10 @@ public class FVariable extends Function {
 				Double value = (Double) expBin.getVariables()[indVar].getValue();
 				expBin.getStep().get(idxStep).setData(new DataValue<Double>(value));
 			    expBin.getStep().get(idxStep).setTypeData(TypeData.E_double);
+			} else if ( expBin.getVariables()[indVar].getTypeVariable() == TypeData.E_boolean ) {
+				Boolean value = (Boolean) expBin.getVariables()[indVar].getValue();
+				expBin.getStep().get(idxStep).setData(new DataValue<Boolean>(value));
+			    expBin.getStep().get(idxStep).setTypeData(TypeData.E_boolean);
 			} else {
 				return false;
 			}
