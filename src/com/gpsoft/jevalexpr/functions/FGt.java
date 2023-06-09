@@ -21,10 +21,10 @@ public class FGt extends Function {
 		this.name = name;
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_two;
-		this.operatorPriority = OperatorPriority.E_lev3;
+		this.operatorPriority = OperatorPriority.E_lev2;
 		this.idxPartOpe = 0;
 		this.valueType = ValueType.E_nat;
-		this.typeStep =TypeStep.E_and; 
+		this.typeStep =TypeStep.E_gt; 
 		this.stepRef = 0;
 		this.typeData = TypeData.E_string;
 	}

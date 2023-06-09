@@ -22,7 +22,7 @@ public class FSub extends Function{
 		this.operatorPriority = OperatorPriority.E_lev0;
 		this.idxPartOpe = 0;
 		this.valueType = ValueType.E_nat;
-		this.typeStep =TypeStep.E_sum; 
+		this.typeStep =TypeStep.E_sub; 
 		this.stepRef = 0;
 		this.typeData = TypeData.E_string;
 		

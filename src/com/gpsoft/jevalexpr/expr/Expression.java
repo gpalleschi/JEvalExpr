@@ -133,7 +133,9 @@ public class Expression  {
 				startPos++;
 			}
 			
-			if ( expPos == startPos || startPos + 1 == humanExpr.length() )  startPos++;
+			if ( expPos == startPos )  startPos++;
+			
+// TODO: When in "1.2" don't work			
 			
 //			Logger.debug("expPos : " + expPos + " startPos : " + startPos);
 			
@@ -270,14 +272,14 @@ public class Expression  {
 		      }
 		      case '^':
 		      {
-		    	funToAdd = new FSub("sub"); 		    	  
+		    	funToAdd = new FExp("exp"); 		    	  
 				tokens.add(new Token<Object>(String.valueOf(humanExpr.charAt(expPos)), // String tokenName, 
 				             TypeToken.E_op, // TypeToken typeToken, 
 				             OperatorSyntaxType.E_two, // OperatorSyntaxType opeartorSyntaxType,
 				             OperatorPriority.E_lev4, // OperatorPriority operatorPriority, 
 				             0, // int idxPartOpe, 
 				             ValueType.E_nat, // ValueType valueType,
-				             TypeStep.E_xor, // TypeStep typeStep, 
+				             TypeStep.E_exp, // TypeStep typeStep, 
 				             0, // int stepRef,
            		             TypeData.E_string,
 				             null,
@@ -288,6 +290,7 @@ public class Expression  {
 		      case '?':
 		      case ':':
 		      {
+		        funToAdd = new FIfThenElse("IfThenElse"); 		  
 		    	if ( '?' == humanExpr.charAt(expPos) ) {
 		    		idx_part_op = 0;
 		    	}
@@ -305,7 +308,8 @@ public class Expression  {
 			             0, // int stepRef,
            		         TypeData.E_string,
 			             null,
-			             tokens.size())); // int nativeIdx
+			             tokens.size(),
+			             funToAdd)); // int nativeIdx
 				break;
 		      }
 		      case '*':
@@ -329,7 +333,7 @@ public class Expression  {
 		    	if ( '%' == humanExpr.charAt(expPos) ) {
 		    	  step_type = TypeStep.E_mod;
 		    	  op_prio = OperatorPriority.E_lev0;
-		    	  funToAdd = new FMod("sub"); 
+		    	  funToAdd = new FMod("mod"); 
 		    	 }
 
 		    	if ( '&' == humanExpr.charAt(expPos) )
@@ -417,6 +421,7 @@ public class Expression  {
 		    		  op_syn_type = OperatorSyntaxType.E_one;
 		    		  op_prio = OperatorPriority.E_lev0;
 		    		  step_type = TypeStep.E_not;
+		    		  funToAdd = new FNot("not");
 		    	  }
 
 				  tokens.add(new Token<Object>(String.valueOf(humanExpr.charAt(expPos)), // String tokenName, 
@@ -436,6 +441,7 @@ public class Expression  {
 		      case '|':
 		      {
 		    	  if ( expPos + 1 < humanExpr.length() && '|' == humanExpr.charAt(expPos + 1) ) {
+		    		  funToAdd = new FConc("conc");
 					  tokens.add(new Token<Object>(String.valueOf(humanExpr.charAt(expPos) + "|"), // String tokenName, 
 					             TypeToken.E_op, // TypeToken typeToken, 
 					             OperatorSyntaxType.E_two, // OperatorSyntaxType opeartorSyntaxType,
@@ -446,7 +452,8 @@ public class Expression  {
 					             0, // int stepRef,
                  		         TypeData.E_string,
 					             null,
-					             tokens.size())); // int nativeIdx				    		  
+					             tokens.size(),
+					             funToAdd)); // int nativeIdx				    		  
 					  expPos++;
 		    	  } else {
 		    		  funToAdd = new FOr("or"); 

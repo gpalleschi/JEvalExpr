@@ -9,7 +9,10 @@ public class Functions {
 	{
 	    put("to_number", new FTo_number("to_number"));
 	    put("not", new FNot("not"));
+	    put("mod", new FMod("mod"));
+	    put("xor", new FXor("xor"));
 	    put("or", new FOr("or"));
+	    put("in", new FIn("in"));
 	}};
 
 }

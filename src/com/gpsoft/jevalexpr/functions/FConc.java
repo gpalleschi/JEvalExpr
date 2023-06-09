@@ -12,19 +12,17 @@ import com.gpsoft.jevalexpr.Utility;
 import com.gpsoft.jevalexpr.ValueType;
 import com.gpsoft.jevalexpr.log.Logger;
 
-// Function Great or equal
-
-public class FGe extends Function {
+public class FConc extends Function {
 	
-	public FGe(String name) {
+	public FConc(String name) {
 		super();
 		this.name = name;
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_two;
-		this.operatorPriority = OperatorPriority.E_lev2;
+		this.operatorPriority = OperatorPriority.E_lev1;
 		this.idxPartOpe = 0;
 		this.valueType = ValueType.E_nat;
-		this.typeStep =TypeStep.E_ge; 
+		this.typeStep =TypeStep.E_conc; 
 		this.stepRef = 0;
 		this.typeData = TypeData.E_string;
 	}
@@ -41,12 +39,8 @@ public class FGe extends Function {
 		idxOpd1 = step.getOpnd().get(0);
 		idxOpd2 = step.getOpnd().get(1);
 		
-		if ( expBin.getStep().get(idxOpd1).getResType() != expBin.getStep().get(idxOpd2).getResType() ) {
-			Logger.error("function " + this.name + " (+) work only with same types of arguments.");
-			return false;
-		}
-		if ( expBin.getStep().get(idxOpd1).getResType() == TypeData.E_boolean ) {
-			Logger.error("function " + this.name + " (+) don't work with boolean arguments.");
+		if ( expBin.getStep().get(idxOpd1).getResType() != TypeData.E_string || expBin.getStep().get(idxOpd1).getResType() != expBin.getStep().get(idxOpd2).getResType() ) {
+			Logger.error("function " + this.name + " (+) work only with strings.");
 			return false;
 		}
 
@@ -55,7 +49,7 @@ public class FGe extends Function {
 
 	public boolean exec(ExpBin<?> expBin, int idxStep) {
 		
-		Logger.debug("In Exec FGe");	
+		Logger.debug("In Exec FEq");	
 		Step<?> step = expBin.getStep().get(idxStep);
 		
 		int idxOpd1;
@@ -77,44 +71,20 @@ public class FGe extends Function {
 			return true;
 		}
 		
-		Boolean ris = false;
-		
-		if ( Utility.isInteger(expBin.getStep().get(idxOpd1).getData().getValue()) &&
-		     Utility.isInteger(expBin.getStep().get(idxOpd2).getData().getValue()) ) {
-			
-			if ( (Integer)expBin.getStep().get(idxOpd1).getData().getValue() >= 
-			     (Integer)expBin.getStep().get(idxOpd2).getData().getValue() ) {
-				ris = true;
-			} else {
-				ris = false;
-			}
-		}
-		if ( Utility.isDouble(expBin.getStep().get(idxOpd1).getData().getValue()) &&
-		     Utility.isDouble(expBin.getStep().get(idxOpd2).getData().getValue()) ) {
-				
-			if ( (Double)expBin.getStep().get(idxOpd1).getData().getValue() >= 
-			     (Double)expBin.getStep().get(idxOpd2).getData().getValue() ) {
-				ris = true;
-			} else {
-				ris = false;
-			}
-		}
 		if ( Utility.isString(expBin.getStep().get(idxOpd1).getData().getValue()) &&
-			 Utility.isString(expBin.getStep().get(idxOpd2).getData().getValue()) ) {
+		     Utility.isString(expBin.getStep().get(idxOpd2).getData().getValue()) ) {
 			
-			 String value1 = (String)(expBin.getStep().get(idxOpd1).getData().getValue());
-			 String value2 = (String)(expBin.getStep().get(idxOpd2).getData().getValue());
-			 
-			 if ( value1.compareTo(value2) >= 0 ) {
-				ris = true;
-			 } else {
-				ris = false;
-			 }
-	    }
-					
-		expBin.getStep().get(idxStep).setData(new DataValue<Boolean>(ris));
-     	expBin.getStep().get(idxStep).setResType(TypeData.E_boolean);
-		expBin.getStep().get(idxStep).setNull(false);
+			String val1 = (String)expBin.getStep().get(idxOpd1).getData().getValue(); 
+			String val2 = (String)expBin.getStep().get(idxOpd2).getData().getValue(); 
+
+			expBin.getStep().get(idxStep).setData(new DataValue<String>(val1 + val2));
+	     	expBin.getStep().get(idxStep).setResType(TypeData.E_string);
+			expBin.getStep().get(idxStep).setNull(false);
+			
+		} else {
+			Logger.error("Binary Expression corrupted");
+			return false;
+		}
 		
 		return true;
 	}

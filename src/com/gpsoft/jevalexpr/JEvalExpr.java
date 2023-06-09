@@ -14,14 +14,14 @@ public class JEvalExpr {
                                      new Variable<Double>("v3", 1.23),
 				  };
 		  
-		  Logger.setLevel(8);
+		  Logger.setLevel(15);
 		  
 		  Logger.debug(variables[0].getValue());
 		  Logger.debug(variables[1].getValue());
 		  
 //		  expression = new Expression("((1 - 2 + to_number(v1)))",variables);
 		  
-		  String Expression = "1 + to_number(v1) - v3";
+		  String Expression = "'11' in ('12','13','11')";
 		  
 		  expression = new Expression(Expression,variables);
 		  

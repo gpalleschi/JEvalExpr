@@ -12,9 +12,9 @@ import com.gpsoft.jevalexpr.Utility;
 import com.gpsoft.jevalexpr.ValueType;
 import com.gpsoft.jevalexpr.log.Logger;
 
-public class FOr extends Function {
+public class FXor extends Function {
 	
-	public FOr(String name) {
+	public FXor(String name) {
 		super();
 		this.name = name;
 		this.typeToken = TypeToken.E_op;
@@ -22,7 +22,7 @@ public class FOr extends Function {
 		this.operatorPriority = OperatorPriority.E_lev4;
 		this.idxPartOpe = 0;
 		this.valueType = ValueType.E_nat;
-		this.typeStep =TypeStep.E_or; 
+		this.typeStep =TypeStep.E_xor; 
 		this.stepRef = 0;
 		this.typeData = TypeData.E_string;
 	}
@@ -32,7 +32,7 @@ public class FOr extends Function {
 		int idxOpd1;
 		int idxOpd2;
 		if (step.getOpnd().size() != 2 ) {
-			Logger.error("Function or (+) work with two argument not with " + step.getOpnd().size() + ".");
+			Logger.error("Function xor (+) work with two argument not with " + step.getOpnd().size() + ".");
 			return false;
 		}
 		
@@ -41,13 +41,13 @@ public class FOr extends Function {
 		
 		if ( expBin.getStep().get(idxOpd1).getResType() != TypeData.E_int &&
 		     expBin.getStep().get(idxOpd1).getResType() != TypeData.E_boolean ) {
-			Logger.error("function or (+) work only with number or boolean arguments.");
+			Logger.error("function xor (+) work only with number or boolean arguments.");
 			return false;
 		}
 
 		if ( expBin.getStep().get(idxOpd2).getResType() != TypeData.E_int &&
 		     expBin.getStep().get(idxOpd2).getResType() != TypeData.E_boolean ) {
-			Logger.error("function or (+) work only with number or boolean arguments.");
+			Logger.error("function sum (+) work only with number or boolean arguments.");
 			return false;
 		}
 		
@@ -101,7 +101,7 @@ public class FOr extends Function {
         	valueOp2 = (Boolean) expBin.getStep().get(idxOpd2).getData().getValue();
 		}
 		
-		if ( valueOp1 || valueOp2 ) {
+		if ( valueOp1 ^ valueOp2 ) {
 		    expBin.getStep().get(idxStep).setData(new DataValue<Boolean>(true));
      		expBin.getStep().get(idxStep).setResType(TypeData.E_boolean);
 		    expBin.getStep().get(idxStep).setNull(false);
