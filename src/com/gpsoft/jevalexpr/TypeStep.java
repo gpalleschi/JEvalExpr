@@ -24,16 +24,17 @@ public enum TypeStep {
 	  E_conc,                     /* || CONCATENAZIONE            */
 	  E_in,                       /* in                           */
 	  E_if_then,                  /* L'OPERATORE C ?:             */
-	  E_between_and,              /* between and                  */
 	  E_to_char,                  /* FUNZIONE to_char             */
 	  E_is_number,                /* FUNZIONE is_number           */
 	  E_to_number,                /* FUNZIONE to_number           */
-	  E_is_real,                  /* FUNZIONE is_real             */
-	  E_to_real,                  /* FUNZIONE to_real             */
-	  E_to_date,                  /* FUNZIONE to_date             */
-	  E_to_secs,                  /* FUNZIONE to_secs             */
+	  
+	  E_to_date,                  /* FUNZIONE to_date   TODO      */
+	  E_to_secs,                  /* FUNZIONE to_secs   TODO      */
+	  
 	  E_rtrim,                    /* FUNZIONE rtrim               */
 	  E_ltrim,                    /* FUNZIONE ltrim               */
+	  E_trim,                     /* FUNZIONE trim                */
+	  
 	  E_rpad,                     /* FUNZIONE rpad                */
 	  E_lpad,                     /* FUNZIONE lpad                */
 	  E_decode,                   /* FUNZIONE decode              */

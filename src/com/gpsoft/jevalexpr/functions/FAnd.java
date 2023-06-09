@@ -93,9 +93,9 @@ public class FAnd extends Function {
 
 		if ( Utility.isInteger(expBin.getStep().get(idxOpd2).getData().getValue()) ) {
 			if ( (Integer)expBin.getStep().get(idxOpd2).getData().getValue() == 0 ) {
-				valueOp2 = true;
-			} else {
 				valueOp2 = false;
+			} else {
+				valueOp2 = true;
 			}
 		} else {
         	valueOp2 = (Boolean) expBin.getStep().get(idxOpd2).getData().getValue();

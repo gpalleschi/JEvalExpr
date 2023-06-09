@@ -141,6 +141,8 @@ public class Expression  {
 			
 			//TODO: check if only one character and value is "."
 			
+			Logger.debug("Numeric Value : " + humanExpr.substring(expPos,startPos));
+			
 		    if ( isDouble ) {
 				tokens.add(new Token<Object>(humanExpr.substring(expPos,startPos), // String tokenName, 
 			             TypeToken.E_value, // TypeToken typeToken, 
@@ -555,7 +557,7 @@ public class Expression  {
 	    tokens.add(new Token<Object>(TypeToken.E_lim,0));	
 	    
 	    while ( true ) {
-	    	Logger.debug("expPos : " + expPos);
+	    	//Logger.debug("expPos : " + expPos);
 	    	int retGetToken = getToken(expPos);
 	    	if ( retGetToken < 0 ) {
 	    		ret = false;
@@ -564,7 +566,7 @@ public class Expression  {
 	    		if (retGetToken == 0 ) {
 	    			break;
 	    		}
-	    		Logger.debug("Valore uscita retGetToken : " + retGetToken);
+	    		//Logger.debug("Valore uscita retGetToken : " + retGetToken);
 	    		expPos = retGetToken;
 	    	}
 	    	
@@ -905,13 +907,15 @@ public class Expression  {
 		
 		for( idx=0; idx<tokens.size(); idx++) {
 			
+			//Logger.debug("Dentro undefSimplify token : " + idx + " type token : " + tokens.get(idx).getTypeToken());
+			
 			nmb_tok_to_del = 0;
 			flag_continue = false;
 			has_right_part = false;
 			
-			if ( tokens.get(idx).getTypeToken() != TypeToken.E_op ) break;
+			if ( tokens.get(idx).getTypeToken() != TypeToken.E_op ) continue;
 
-			if ( tokens.get(idx).getOperatorSyntaxType() != OperatorSyntaxType.E_undef ) break;
+			if ( tokens.get(idx).getOperatorSyntaxType() != OperatorSyntaxType.E_undef ) continue;
 			
 			newStep.setTypeStep(tokens.get(idx).getTypeStep());
 			newStep.setUtil_area(tokens.get(idx).getNativeIdx());
@@ -930,7 +934,7 @@ public class Expression  {
 				 ((tokens.get(idx-2).getOperatorSyntaxType() >= 0) &&
 				  (tokens.get(idx-2).getOperatorSyntaxType() < OperatorSyntaxType.E_nmb_op_chain_syn_type))		 
 		  	   ) {
-				 if ( tokens.get(idx-2).getIdxPartOpe() < (((tokens.get(idx-2).getOperatorSyntaxType()==0?1:0)+tokens.get(idx-2).getOperatorSyntaxType()-1)) ) {
+				 if ( tokens.get(idx-2).getIdxPartOpe() < (((tokens.get(idx-2).getOperatorSyntaxType()==0?1:0)+tokens.get(idx-2).getOperatorSyntaxType())-1) ) {
 					 has_right_part = true;
 				 }
 				 
@@ -982,7 +986,9 @@ public class Expression  {
 				tokens.get(idx-1).setStepRef(expBin.getStep().size());
 			}
 			
-			for(int i=0;i<tokens.size()-idx-nmb_tok_to_del+1;i++) tokens.remove(idx);
+			//Logger.debug("nmb_tok_to_del : " + nmb_tok_to_del);
+			
+			for(int i=0;i<nmb_tok_to_del;i++) tokens.remove(idx);
 			
 			return 0;
 		}
@@ -1039,6 +1045,8 @@ public class Expression  {
 		
 		rs = undefSimplify();
 		
+		//Logger.debug("rs undefSimplify : " + rs);
+		
 		if ( rs < 0 ) {
    		   Logger.error("undefSimplify Problem.");
   		   return rs;
@@ -1056,6 +1064,7 @@ public class Expression  {
 		
 		expBin.setVariables(variables);
 		int idx = expBin.getStep().size()-1;
+		if ( idx < 0 ) idx = 0;
 		if ( !expBin.getStep().get(idx).getFunction().exec(expBin, idx) ) return -1;
 		
 		Logger.always("Risultato : <" + expBin.getStep().get(idx).getData().getValue() + ">");

@@ -33,6 +33,8 @@ public class FIn extends Function {
 		Step<?> step = expBin.getStep().get(idxStep);
 		int idxOpd1;
 		
+		Logger.debug("In check in : " + step.getOpnd().size());
+		
 		idxOpd1 = step.getOpnd().get(0);
 		
 		for ( int idx=1;idx<step.getOpnd().size();idx++ ) {

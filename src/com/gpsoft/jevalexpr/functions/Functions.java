@@ -13,6 +13,12 @@ public class Functions {
 	    put("xor", new FXor("xor"));
 	    put("or", new FOr("or"));
 	    put("in", new FIn("in"));
+	    put("and", new FAnd("and"));
+	    put("to_char", new FTo_char("to_char"));
+	    put("is_number", new FIs_number("is_number"));
+	    put("rtrim", new FRtrim("rtrim"));
+	    put("ltrim", new FLtrim("ltrim"));
+	    put("trim", new FTrim("trim"));
 	}};
 
 }

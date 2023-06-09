@@ -12,16 +12,17 @@ public class JEvalExpr {
 		  Variable<?>[] variables = {new Variable<String>("v1", "11"),
                                      new Variable<Boolean>("v2", true),
                                      new Variable<Double>("v3", 1.23),
+                                     new Variable<Integer>("v4", 2),
 				  };
 		  
-		  Logger.setLevel(15);
+		  Logger.setLevel(8);
 		  
 		  Logger.debug(variables[0].getValue());
 		  Logger.debug(variables[1].getValue());
 		  
 //		  expression = new Expression("((1 - 2 + to_number(v1)))",variables);
 		  
-		  String Expression = "'11' in ('12','13','11')";
+		  String Expression = " rtrim('12222     ') ";
 		  
 		  expression = new Expression(Expression,variables);
 		  
@@ -31,12 +32,7 @@ public class JEvalExpr {
 			  Logger.info("Compilation OK.");
 		  }
 		  
-		  Variable<?>[] variables2 = {new Variable<String>("v1", "18"),
-                  new Variable<Boolean>("v2", true),
-                  new Variable<Double>("v3", 1.23),
-          };
-		 
-		  if ( expression.execExpr(variables2) != 0 ) {
+		  if ( expression.execExpr(variables) != 0 ) {
 			Logger.error("During execution");
 		  } else {
 			Logger.info("Compilation OK.");
