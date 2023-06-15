@@ -1,5 +1,4 @@
 package com.gpsoft.jevalexpr.functions;
-import java.util.regex.Pattern;
 
 import com.gpsoft.jevalexpr.DataValue;
 import com.gpsoft.jevalexpr.ExpBin;
@@ -52,7 +51,7 @@ public class FTrim extends Function{
 
 	public boolean exec(ExpBin<?> expBin, int idxStep) {
 		
-		Logger.debug("In Exec FTo_char");	
+		Logger.debug("In Exec FTrim");	
 		
 		Step<?> step = expBin.getStep().get(idxStep);
 		int idxOpd1;
@@ -61,6 +60,7 @@ public class FTrim extends Function{
 		if ( !expBin.getStep().get(idxOpd1).getFunction().exec(expBin, idxOpd1) ) return false;
 	
 		if ( expBin.getStep().get(idxOpd1).isNull() ) {
+			expBin.getStep().get(idxStep).setData(new DataValue<String>(""));
 			expBin.getStep().get(idxStep).setNull(true);
 			return true;
 		}
@@ -72,11 +72,11 @@ public class FTrim extends Function{
 			String ris = value.trim();
 			
 			expBin.getStep().get(idxStep).setTypeData(TypeData.E_string);
-			if ( ris != null ) {
+			if ( ris != null && ris.length() !=0 ) {
     		   expBin.getStep().get(idxStep).setData(new DataValue<String>(ris));
 			   expBin.getStep().get(idxStep).setNull(false);
 			} else {
-    		   expBin.getStep().get(idxStep).setData(new DataValue<String>(null));
+    		   expBin.getStep().get(idxStep).setData(new DataValue<String>(""));
 			   expBin.getStep().get(idxStep).setNull(true);
 			}
 			

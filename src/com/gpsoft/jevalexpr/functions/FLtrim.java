@@ -1,5 +1,4 @@
 package com.gpsoft.jevalexpr.functions;
-import java.util.regex.Pattern;
 
 import com.gpsoft.jevalexpr.DataValue;
 import com.gpsoft.jevalexpr.ExpBin;
@@ -61,6 +60,7 @@ public class FLtrim extends Function{
 		if ( !expBin.getStep().get(idxOpd1).getFunction().exec(expBin, idxOpd1) ) return false;
 	
 		if ( expBin.getStep().get(idxOpd1).isNull() ) {
+    		expBin.getStep().get(idxStep).setData(new DataValue<String>(""));
 			expBin.getStep().get(idxStep).setNull(true);
 			return true;
 		}
@@ -72,11 +72,11 @@ public class FLtrim extends Function{
 			String ris = value.replaceAll("^\\s+","");
 			
 			expBin.getStep().get(idxStep).setTypeData(TypeData.E_string);
-			if ( ris != null ) {
+			if ( ris != null && ris.length() != 0 ) {
     		   expBin.getStep().get(idxStep).setData(new DataValue<String>(ris));
 			   expBin.getStep().get(idxStep).setNull(false);
 			} else {
-    		   expBin.getStep().get(idxStep).setData(new DataValue<String>(null));
+    		   expBin.getStep().get(idxStep).setData(new DataValue<String>(""));
 			   expBin.getStep().get(idxStep).setNull(true);
 			}
 			

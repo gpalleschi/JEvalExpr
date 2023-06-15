@@ -19,6 +19,22 @@ public class Functions {
 	    put("rtrim", new FRtrim("rtrim"));
 	    put("ltrim", new FLtrim("ltrim"));
 	    put("trim", new FTrim("trim"));
+	    put("to_date", new FTo_date("to_date"));
+	    put("upper", new FUpper("upper"));
+	    put("lower", new FLower("lower"));
+	    put("rpad", new FRpad("rpad"));
+	    put("lpad", new FLpad("lpad"));
+	    put("substr", new FSubstr("substr"));
+	    put("length", new FLength("length"));
+	    put("initcap", new FInitcap("initcap"));
+	    put("nvl", new FNvl("nvl"));
+	    put("is_null", new FIsNull("is_null"));
+	    put("instr", new FInstr("instr"));
+	    put("reverse", new FReverse("reverse"));
+	    put("translate", new FTranslate("translate"));
+	    put("replace", new FReplace("replace"));
+	    put("like", new FLike("like"));
+	    put("decode", new FDecode("decode"));
 	}};
 
 }

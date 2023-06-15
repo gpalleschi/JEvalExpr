@@ -22,7 +22,7 @@ public class JEvalExpr {
 		  
 //		  expression = new Expression("((1 - 2 + to_number(v1)))",variables);
 		  
-		  String Expression = " rtrim('12222     ') ";
+		  String Expression = "decode('pippo','pluto',1,'topolino',2,3)";
 		  
 		  expression = new Expression(Expression,variables);
 		  
@@ -30,13 +30,18 @@ public class JEvalExpr {
 			  Logger.error("During Compilation");
 		  } else {
 			  Logger.info("Compilation OK.");
+			  if ( expression.execExpr(variables) != 0 ) {
+				  Logger.error("During execution");
+			  } else {
+				  Logger.info("Execution OK.");
+				  Logger.always("-----------------------------------------------");
+				  Logger.always("Result : >" + expression.getResult().value + "<");
+				  Logger.always("Type : " + expression.getResult().getTypeData());
+				  Logger.always("IsNull : " + expression.getResult().isNull);
+			  }
 		  }
 		  
-		  if ( expression.execExpr(variables) != 0 ) {
-			Logger.error("During execution");
-		  } else {
-			Logger.info("Compilation OK.");
-		  }
+
 	}
 
 }

@@ -11,9 +11,9 @@ import com.gpsoft.jevalexpr.TypeToken;
 import com.gpsoft.jevalexpr.ValueType;
 import com.gpsoft.jevalexpr.log.Logger;
 
-public class FRtrim extends Function{
+public class FReverse extends Function{
 
-	public FRtrim(String name) {
+	public FReverse(String name) {
 		super();
 		
 		this.name = name;
@@ -22,7 +22,7 @@ public class FRtrim extends Function{
 		this.operatorPriority = OperatorPriority.E_lev0;
 		this.idxPartOpe = 0;
 		this.valueType = ValueType.E_nat;
-		this.typeStep =TypeStep.E_rtrim; 
+		this.typeStep =TypeStep.E_reverse; 
 		this.stepRef = 0;
 		this.typeData = TypeData.E_string;
 		
@@ -33,14 +33,14 @@ public class FRtrim extends Function{
 		Step<?> step = expBin.getStep().get(idxStep);
 		int idxOpd;
 		if (step.getOpnd().size() != 1 ) {
-			Logger.error("Function rtrim work with one argument not with " + step.getOpnd().size() + ".");
+			Logger.error("Function " + name + " work with one argument not with " + step.getOpnd().size() + ".");
 			return false;
 		}
 		
 		idxOpd = step.getOpnd().get(0);
 		
 		if ( expBin.getStep().get(idxOpd).getResType() != TypeData.E_string ) {
-			Logger.error("function rtrim work only with a string argument.");
+			Logger.error("function " + name + " work only with a string argument.");
 			return false;
 		}
 		
@@ -51,7 +51,7 @@ public class FRtrim extends Function{
 
 	public boolean exec(ExpBin<?> expBin, int idxStep) {
 		
-		Logger.debug("In Exec FRTrim");	
+		Logger.debug("In Exec FReverse");	
 		
 		Step<?> step = expBin.getStep().get(idxStep);
 		int idxOpd1;
@@ -69,7 +69,14 @@ public class FRtrim extends Function{
 			
 			String value = (String)expBin.getStep().get(idxOpd1).getData().getValue();
 			
-			String ris = value.replaceAll("\\s+$","");
+			String ris = "";
+			char ch;
+			
+		    for (int i=0; i<value.length(); i++)
+		    {
+		        ch= value.charAt(i); //extracts each character
+		        ris= ch+ris; //adds each character in front of the existing string
+		    }
 			
 			expBin.getStep().get(idxStep).setTypeData(TypeData.E_string);
 			if ( ris != null && ris.length() != 0 ) {

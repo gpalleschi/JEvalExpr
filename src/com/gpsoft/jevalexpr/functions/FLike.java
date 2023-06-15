@@ -12,17 +12,17 @@ import com.gpsoft.jevalexpr.Utility;
 import com.gpsoft.jevalexpr.ValueType;
 import com.gpsoft.jevalexpr.log.Logger;
 
-public class FConc extends Function {
+public class FLike extends Function {
 	
-	public FConc(String name) {
+	public FLike(String name) {
 		super();
 		this.name = name;
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_two;
-		this.operatorPriority = OperatorPriority.E_lev1;
+		this.operatorPriority = OperatorPriority.E_lev4;
 		this.idxPartOpe = 0;
 		this.valueType = ValueType.E_nat;
-		this.typeStep =TypeStep.E_conc; 
+		this.typeStep =TypeStep.E_like; 
 		this.stepRef = 0;
 		this.typeData = TypeData.E_string;
 	}
@@ -69,15 +69,10 @@ public class FConc extends Function {
 			String val1 = (String)expBin.getStep().get(idxOpd1).getData().getValue(); 
 			String val2 = (String)expBin.getStep().get(idxOpd2).getData().getValue(); 
 			
-			String ris = val1 + val2;
+			Boolean ris = Utility.like(val1, val2);
 			
-			if ( ris != null && ris.length() != 0 ) {
-				expBin.getStep().get(idxStep).setData(new DataValue<String>(val1 + val2));
-				expBin.getStep().get(idxStep).setNull(false);
-			} else {
-				expBin.getStep().get(idxStep).setData(new DataValue<String>(""));
-				expBin.getStep().get(idxStep).setNull(true);
-			}
+			expBin.getStep().get(idxStep).setData(new DataValue<Boolean>(ris));
+			expBin.getStep().get(idxStep).setNull(false);
 			
 		} else {
 			Logger.error("Binary Expression corrupted");
@@ -86,6 +81,5 @@ public class FConc extends Function {
 		
 		return true;
 	}
-
 
 }

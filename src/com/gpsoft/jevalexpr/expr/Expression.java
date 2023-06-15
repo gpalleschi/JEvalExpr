@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.gpsoft.jevalexpr.Constants;
+import com.gpsoft.jevalexpr.DataValue;
 import com.gpsoft.jevalexpr.ExpBin;
 import com.gpsoft.jevalexpr.OperatorPriority;
 import com.gpsoft.jevalexpr.OperatorSyntaxType;
@@ -133,7 +134,7 @@ public class Expression  {
 				startPos++;
 			}
 			
-			if ( expPos == startPos )  startPos++;
+    		if ( expPos == startPos )  startPos++;
 			
 // TODO: When in "1.2" don't work			
 			
@@ -144,6 +145,7 @@ public class Expression  {
 			Logger.debug("Numeric Value : " + humanExpr.substring(expPos,startPos));
 			
 		    if ( isDouble ) {
+			    if ( startPos + 1 == humanExpr.length() ) startPos++;
 				tokens.add(new Token<Object>(humanExpr.substring(expPos,startPos), // String tokenName, 
 			             TypeToken.E_value, // TypeToken typeToken, 
 			             OperatorSyntaxType.E_undef, // OperatorSyntaxType opeartorSyntaxType,
@@ -242,20 +244,27 @@ public class Expression  {
 		    		 tokens.get(tokens.size()-1).getTypeToken() == TypeToken.E_rbrc ) {
 		    		op_syn_type = OperatorSyntaxType.E_two;
 		    		op_prio = OperatorPriority.E_lev1;
+		    		if (humanExpr.charAt(expPos) == '+' ) {
+		    			step_type = TypeStep.E_sum;
+		    			funToAdd = new FSum("sum"); 
+		    		} else {
+		    			step_type = TypeStep.E_sub;
+		    			funToAdd = new FSub("sub"); 
+		    		}
 		    		
 		    	} else {
 		    	// Unary 
 		    		op_syn_type = OperatorSyntaxType.E_one;
 		    		op_prio = OperatorPriority.E_lev0;
+		    		if (humanExpr.charAt(expPos) == '+' ) {
+		    			step_type = TypeStep.E_unary_plus;
+		    			funToAdd = new FUnaryPlus("unary_plus"); 
+		    		} else {
+		    			step_type = TypeStep.E_unary_minus;
+		    			funToAdd = new FUnaryMinus("unary_minus"); 
+		    		}
 		    		
 		    	}
-	    		if (humanExpr.charAt(expPos) == '+' ) {
-	    			step_type = TypeStep.E_sum;
-	    			funToAdd = new FSum("sum"); 
-	    		} else {
-	    			step_type = TypeStep.E_sub;
-	    			funToAdd = new FSub("sub"); 
-	    		}
 
 				tokens.add(new Token<Object>(String.valueOf(humanExpr.charAt(expPos)), // String tokenName, 
 				             TypeToken.E_op, // TypeToken typeToken, 
@@ -1067,9 +1076,36 @@ public class Expression  {
 		if ( idx < 0 ) idx = 0;
 		if ( !expBin.getStep().get(idx).getFunction().exec(expBin, idx) ) return -1;
 		
-		Logger.always("Risultato : <" + expBin.getStep().get(idx).getData().getValue() + ">");
+		// Set type result
+		
+		if ( Utility.isBoolean(expBin.getStep().get(idx).getData().getValue()) ) {
+			expBin.getStep().get(idx).getData().setTypeData(TypeData.E_boolean);	
+		} else if ( Utility.isDate(expBin.getStep().get(idx).getData().getValue()) ) {
+			expBin.getStep().get(idx).getData().setTypeData(TypeData.E_date);	
+		} else if ( Utility.isString(expBin.getStep().get(idx).getData().getValue()) ) {
+			expBin.getStep().get(idx).getData().setTypeData(TypeData.E_string);	
+		} else if ( Utility.isInteger(expBin.getStep().get(idx).getData().getValue()) ) {
+			expBin.getStep().get(idx).getData().setTypeData(TypeData.E_int);	
+		} else if ( Utility.isDouble(expBin.getStep().get(idx).getData().getValue()) ) {
+			expBin.getStep().get(idx).getData().setTypeData(TypeData.E_double);	
+		}
+		
+		// Set is null
+		
+		if ( expBin.getStep().get(idx).getData().getValue() == null ||
+			 expBin.getStep().get(idx).getData().getValue() == "" ) {
+		   expBin.getStep().get(idx).getData().setNull(true);	
+		} else {
+		   expBin.getStep().get(idx).getData().setNull(false);	
+		}
 		
 		return 0;
+	}
+	
+	public DataValue<?> getResult() {
+		int idx = expBin.getStep().size()-1;
+		if ( idx < 0 ) idx = 0;
+		return expBin.getStep().get(idx).getData();
 	}
 
 	

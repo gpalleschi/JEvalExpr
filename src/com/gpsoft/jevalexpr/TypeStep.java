@@ -1,64 +1,64 @@
 package com.gpsoft.jevalexpr;
 
 public enum TypeStep {
-	  E_constant,                 /* COSTANTE                     */
-	  E_variable,                 /* VARIABILE                    */
-	  E_unary_plus,               /* + UNARIO                     */
-	  E_unary_minus,              /* - UNARIO                     */
-	  E_not,                      /* not LOGICO                   */
+	  E_constant,                 /* COSTANT                      */
+	  E_variable,                 /* VARIABLE                    */
+	  E_unary_plus,               /* + UNARY                     */
+	  E_unary_minus,              /* - UNARY                     */
+	  E_not,                      /* not LOGIC                   */
 	  E_mul,                      /* * MOLTIPLICAZIONE            */
-	  E_div,                      /* / DIVISIONE                  */
-	  E_mod,                      /* % RESTO DI DIVISIONE         */
-	  E_exp,                      /* ^ ESPONENZIALE               */
-	  E_eq,                       /* = UGUAGLIANZA LOGICA         */
-	  E_ne,                       /* != DIVERSITA LOGICA          */
-	  E_gt,                       /* > MAGGIORE LOGICO            */
-	  E_ge,                       /* >= MAGGIORE UGUALE LOGICO    */
-	  E_lt,                       /* < MINORE LOGICO              */
-	  E_le,                       /* <= MINORE UGUALE LOGICO      */
-	  E_and,                      /* & AND LOGICO                 */
-	  E_sum,                      /* + BINARIO                    */
-	  E_sub,                      /* - BINARIO                    */
-	  E_xor,                      /* xor LOGICO                   */
-	  E_or,                       /* or LOGICO                    */
-	  E_conc,                     /* || CONCATENAZIONE            */
+	  E_div,                      /* / DIVISION                  */
+	  E_mod,                      /* % REST OF DIVISION         */
+	  E_exp,                      /* ^ ESPONENTIAL               */
+	  E_eq,                       /* = EQUAL LOGIC         */
+	  E_ne,                       /* != DIFFERENT LOGIC          */
+	  E_gt,                       /* > MORE LOGIN LOGIC           */
+	  E_ge,                       /* >= MORE EQUAL LOGIC    */
+	  E_lt,                       /* < LESS LOGIC              */
+	  E_le,                       /* <= MINOR EQUAL LOGIC      */
+	  E_and,                      /* & AND LOGIC                 */
+	  E_sum,                      /* + BINARY                    */
+	  E_sub,                      /* - BINARY                    */
+	  E_xor,                      /* xor LOGIC                   */
+	  E_or,                       /* or LOGIC                    */
+	  E_conc,                     /* || CONCATENATION            */
 	  E_in,                       /* in                           */
-	  E_if_then,                  /* L'OPERATORE C ?:             */
-	  E_to_char,                  /* FUNZIONE to_char             */
-	  E_is_number,                /* FUNZIONE is_number           */
-	  E_to_number,                /* FUNZIONE to_number           */
+	  E_if_then,                  /* OPERATOR C ?:             */
+	  E_to_char,                  /* FUNCTION to_char             */
+	  E_is_number,                /* FUNCTION is_number           */
+	  E_to_number,                /* FUNCTION to_number           */
+	  E_to_date,                  /* FUNCTION to_date             */
 	  
-	  E_to_date,                  /* FUNZIONE to_date   TODO      */
-	  E_to_secs,                  /* FUNZIONE to_secs   TODO      */
+	  E_to_secs,                  /* FUNCTION to_secs   TODO      */
 	  
-	  E_rtrim,                    /* FUNZIONE rtrim               */
-	  E_ltrim,                    /* FUNZIONE ltrim               */
-	  E_trim,                     /* FUNZIONE trim                */
+	  E_rtrim,                    /* FUNCTION rtrim               */
+	  E_ltrim,                    /* FUNCTION ltrim               */
+	  E_trim,                     /* FUNCTION trim                */
 	  
-	  E_rpad,                     /* FUNZIONE rpad                */
-	  E_lpad,                     /* FUNZIONE lpad                */
-	  E_decode,                   /* FUNZIONE decode              */
-	  E_translate,                /* FUNZIONE translate           */
-	  E_replace,                  /* FUNZIONE replace             */
-	  E_substr,                   /* FUNZIONE substr              */
-	  E_instr,                    /* FUNZIONE instr               */
-	  E_length,                   /* FUNZIONE length              */
-	  E_nvl,                      /* FUNZIONE nvl                 */
-	  E_is_null,                  /* FUNZIONE is_null             */
-	  E_is_like,                  /* OPERATORE is_like            */
-	  E_upper,                    /* FUNZIONE upper               */
-	  E_lower,                    /* FUNZIONE lower               */
-	  E_initcap,                  /* FUNZIONE initcap             */
-	  E_diffdate,                 /* FUNZIONE diffdate            */
-	  E_reverse,                  /* FUNZIONE reverse             */
-	  E_systime,                  /* FUNZIONE systime             */
-	  E_to_hhmiss,                /* FUNZIONE to_hhmiss           */
-	  E_extr_array,               /* FUNZIONE extr_array          */
-	  E_search_array,             /* FUNZIONE search_array        */
-	  E_is_date,                  /* FUNZIONE is_date             */
-	  E_chk_tab_field,
-	  E_get_tab_field,            /* FUNZIONE get_tab_field       */
-	  E_regexp_like,              /* FUNZIONE regexp_like         */
-	  E_regexp_substr,            /* FUNZIONE regexp_substr       */
-	  E_regexp_instr              /* FUNZIONE regexp_substr       */
+	  E_rpad,                     /* FUNCTION rpad                */
+	  E_lpad,                     /* FUNCTION lpad                */
+	  E_decode,                   /* FUNCTION decode     TODO     */
+	  E_translate,                /* FUNCTION translate           */
+	  E_replace,                  /* FUNCTION replace             */
+	  E_substr,                   /* FUNCTION substr              */
+	  E_instr,                    /* FUNCTION instr               */
+	  E_length,                   /* FUNCTION length              */
+	  E_nvl,                      /* FUNCTION nvl                 */
+	  E_is_null,                  /* FUNCTION is_null             */
+	  E_like,                     /* OPERATOR like               */
+	  E_upper,                    /* FUNCTION upper               */
+	  E_lower,                    /* FUNCTION lower               */
+	  E_initcap,                  /* FUNCTION initcap             */
+	  E_diffdate,                 /* FUNCTION diffdate   TODO     */
+	  E_reverse,                  /* FUNCTION reverse             */
+	  E_systime,                  /* FUNCTION systime    TODO     */
+	  E_to_hhmiss,                /* FUNCTION to_hhmiss  TODO     */
+	  
+	  E_extr_array,               /* FUNCTION extr_array    TODO  */
+	  E_search_array,             /* FUNCTION search_array  TODO  */
+	  
+	  E_is_date,                  /* FUNCTION is_date       TODO  */
+	  E_regexp_like,              /* FUNCTION regexp_like   TODO  */
+	  E_regexp_substr,            /* FUNCTION regexp_substr TODO  */
+	  E_regexp_instr              /* FUNCTION regexp_substr TODO  */
 }

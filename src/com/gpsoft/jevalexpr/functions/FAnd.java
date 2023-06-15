@@ -50,6 +50,7 @@ public class FAnd extends Function {
 			Logger.error("function " + this.name + " (+) work only with number or boolean arguments.");
 			return false;
 		}
+		expBin.getStep().get(idxStep).setResType(TypeData.E_boolean);
 		
 		return true;
 	}
@@ -69,11 +70,13 @@ public class FAnd extends Function {
 		if ( !expBin.getStep().get(idxOpd2).getFunction().exec(expBin, idxOpd2) ) return false;
 		
 		if ( expBin.getStep().get(idxOpd1).isNull() ) {
+		    expBin.getStep().get(idxStep).setData(new DataValue<Boolean>(null));
 			expBin.getStep().get(idxStep).setNull(true);
 			return true;
 		}
 
 		if ( expBin.getStep().get(idxOpd2).isNull() ) {
+		    expBin.getStep().get(idxStep).setData(new DataValue<Boolean>(null));
 			expBin.getStep().get(idxStep).setNull(true);
 			return true;
 		}

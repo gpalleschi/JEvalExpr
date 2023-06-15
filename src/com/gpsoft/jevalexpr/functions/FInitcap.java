@@ -8,12 +8,13 @@ import com.gpsoft.jevalexpr.Step;
 import com.gpsoft.jevalexpr.TypeData;
 import com.gpsoft.jevalexpr.TypeStep;
 import com.gpsoft.jevalexpr.TypeToken;
+import com.gpsoft.jevalexpr.Utility;
 import com.gpsoft.jevalexpr.ValueType;
 import com.gpsoft.jevalexpr.log.Logger;
 
-public class FRtrim extends Function{
+public class FInitcap extends Function{
 
-	public FRtrim(String name) {
+	public FInitcap(String name) {
 		super();
 		
 		this.name = name;
@@ -22,7 +23,7 @@ public class FRtrim extends Function{
 		this.operatorPriority = OperatorPriority.E_lev0;
 		this.idxPartOpe = 0;
 		this.valueType = ValueType.E_nat;
-		this.typeStep =TypeStep.E_rtrim; 
+		this.typeStep =TypeStep.E_initcap; 
 		this.stepRef = 0;
 		this.typeData = TypeData.E_string;
 		
@@ -33,14 +34,14 @@ public class FRtrim extends Function{
 		Step<?> step = expBin.getStep().get(idxStep);
 		int idxOpd;
 		if (step.getOpnd().size() != 1 ) {
-			Logger.error("Function rtrim work with one argument not with " + step.getOpnd().size() + ".");
+			Logger.error("Function " + name + " work with one argument not with " + step.getOpnd().size() + ".");
 			return false;
 		}
 		
 		idxOpd = step.getOpnd().get(0);
 		
 		if ( expBin.getStep().get(idxOpd).getResType() != TypeData.E_string ) {
-			Logger.error("function rtrim work only with a string argument.");
+			Logger.error("function " + name + " work only with a string argument.");
 			return false;
 		}
 		
@@ -51,7 +52,7 @@ public class FRtrim extends Function{
 
 	public boolean exec(ExpBin<?> expBin, int idxStep) {
 		
-		Logger.debug("In Exec FRTrim");	
+		Logger.debug("In Exec FInitcap");	
 		
 		Step<?> step = expBin.getStep().get(idxStep);
 		int idxOpd1;
@@ -60,7 +61,7 @@ public class FRtrim extends Function{
 		if ( !expBin.getStep().get(idxOpd1).getFunction().exec(expBin, idxOpd1) ) return false;
 	
 		if ( expBin.getStep().get(idxOpd1).isNull() ) {
-			expBin.getStep().get(idxStep).setData(new DataValue<String>(""));
+    		expBin.getStep().get(idxStep).setData(new DataValue<String>(""));
 			expBin.getStep().get(idxStep).setNull(true);
 			return true;
 		}
@@ -69,10 +70,10 @@ public class FRtrim extends Function{
 			
 			String value = (String)expBin.getStep().get(idxOpd1).getData().getValue();
 			
-			String ris = value.replaceAll("\\s+$","");
+			String ris = Utility.initCap(value);
 			
 			expBin.getStep().get(idxStep).setTypeData(TypeData.E_string);
-			if ( ris != null && ris.length() != 0 ) {
+			if ( ris != null ) {
     		   expBin.getStep().get(idxStep).setData(new DataValue<String>(ris));
 			   expBin.getStep().get(idxStep).setNull(false);
 			} else {

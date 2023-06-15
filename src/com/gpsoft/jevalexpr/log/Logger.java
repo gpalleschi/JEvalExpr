@@ -33,7 +33,7 @@ public class Logger {
 	}
 	
 	public static <T> void always(T message) {
-		System.out.println("LOG : " + message);
+		System.out.println(message);
 	}
 
 	public static <T> void info(T message) {
