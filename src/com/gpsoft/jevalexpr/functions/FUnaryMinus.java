@@ -13,10 +13,10 @@ import com.gpsoft.jevalexpr.ValueType;
 import com.gpsoft.jevalexpr.log.Logger;
 
 public class FUnaryMinus extends Function {
-	public FUnaryMinus(String name) {
+	public FUnaryMinus() {
 		super();
 		
-		this.name = name;
+		this.name = "-";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;

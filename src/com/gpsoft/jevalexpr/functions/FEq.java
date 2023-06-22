@@ -14,9 +14,9 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FEq extends Function {
 	
-	public FEq(String name) {
+	public FEq() {
 		super();
-		this.name = name;
+		this.name = "=";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_two;
 		this.operatorPriority = OperatorPriority.E_lev2;

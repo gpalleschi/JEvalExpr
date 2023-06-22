@@ -13,10 +13,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FSubstr extends Function{
 
-	public FSubstr(String name) {
+	public FSubstr() {
 		super();
 		
-		this.name = name;
+		this.name = "substr";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;

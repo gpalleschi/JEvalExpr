@@ -11,18 +11,18 @@ import com.gpsoft.jevalexpr.TypeToken;
 import com.gpsoft.jevalexpr.ValueType;
 import com.gpsoft.jevalexpr.log.Logger;
 
-public class FLtrim extends Function{
+public class FCos extends Function{
 
-	public FLtrim() {
+	public FCos() {
 		super();
 		
-		this.name = "ltrim";
+		this.name = "cos";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;
 		this.idxPartOpe = 0;
 		this.valueType = ValueType.E_nat;
-		this.typeStep =TypeStep.E_ltrim; 
+		this.typeStep =TypeStep.E_sin; 
 		this.stepRef = 0;
 		this.typeData = TypeData.E_string;
 		
@@ -33,25 +33,26 @@ public class FLtrim extends Function{
 		Step<?> step = expBin.getStep().get(idxStep);
 		int idxOpd;
 		if (step.getOpnd().size() != 1 ) {
-			Logger.error("Function ltrim work with one argument not with " + step.getOpnd().size() + ".");
+			Logger.error("Function cos work with one argument not with " + step.getOpnd().size() + ".");
 			return false;
 		}
 		
 		idxOpd = step.getOpnd().get(0);
 		
-		if ( expBin.getStep().get(idxOpd).getResType() != TypeData.E_string ) {
-			Logger.error("function ltrim work only with a string argument.");
+		if ( expBin.getStep().get(idxOpd).getResType() != TypeData.E_double &&
+		     expBin.getStep().get(idxOpd).getResType() != TypeData.E_int ) {
+			Logger.error("function cos work only with a numeric argument.");
 			return false;
 		}
 		
-		expBin.getStep().get(idxStep).setResType(TypeData.E_string);
+		expBin.getStep().get(idxStep).setResType(TypeData.E_double);
 		
 		return true;
 	}
 
 	public boolean exec(ExpBin<?> expBin, int idxStep) {
 		
-		Logger.debug("In Exec FTo_char");	
+		Logger.debug("In Exec FCos");	
 		
 		Step<?> step = expBin.getStep().get(idxStep);
 		int idxOpd1;
@@ -60,29 +61,23 @@ public class FLtrim extends Function{
 		if ( !expBin.getStep().get(idxOpd1).getFunction().exec(expBin, idxOpd1) ) return false;
 	
 		if ( expBin.getStep().get(idxOpd1).isNull() ) {
-    		expBin.getStep().get(idxStep).setData(new DataValue<String>(""));
 			expBin.getStep().get(idxStep).setNull(true);
 			return true;
 		}
 		
-		if ( expBin.getStep().get(idxOpd1).getResType() == TypeData.E_string ) {
-			
-			String value = (String)expBin.getStep().get(idxOpd1).getData().getValue();
-			
-			String ris = value.replaceAll("^\\s+","");
-			
-			expBin.getStep().get(idxStep).setTypeData(TypeData.E_string);
-			if ( ris != null && ris.length() != 0 ) {
-    		   expBin.getStep().get(idxStep).setData(new DataValue<String>(ris));
-			   expBin.getStep().get(idxStep).setNull(false);
-			} else {
-    		   expBin.getStep().get(idxStep).setData(new DataValue<String>(""));
-			   expBin.getStep().get(idxStep).setNull(true);
-			}
-			
+		double value = 0.0;
+		
+		if ( expBin.getStep().get(idxOpd1).getResType() == TypeData.E_double ) {
+			value = (Double)expBin.getStep().get(idxOpd1).getData().getValue();
+		} else if ( expBin.getStep().get(idxOpd1).getResType() == TypeData.E_int ) {
+			value = (Integer)expBin.getStep().get(idxOpd1).getData().getValue();
 		} else {
+			Logger.error("Expression corrupted");
 			return false;
 		}
+		expBin.getStep().get(idxStep).setTypeData(TypeData.E_int);
+    	expBin.getStep().get(idxStep).setData(new DataValue<Double>(Math.cos(value)));
+		expBin.getStep().get(idxStep).setNull(false);
 		
 		return true;
 	}

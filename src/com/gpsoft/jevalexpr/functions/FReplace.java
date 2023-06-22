@@ -13,10 +13,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FReplace extends Function{
 
-	public FReplace(String name) {
+	public FReplace() {
 		super();
 		
-		this.name = name;
+		this.name = "replace";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;

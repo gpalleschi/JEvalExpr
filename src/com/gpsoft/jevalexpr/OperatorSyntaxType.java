@@ -1,6 +1,7 @@
 package com.gpsoft.jevalexpr;
 
 public class OperatorSyntaxType {
+	  public static int E_funi = -2;                  /* FUNZIONE INTERNA  - SINTASSI: F */
 	  public static int E_fun = -1;                   /* FUNZIONE GENERICA - SINTASSI: F([.[,.]])  */
 	  public static int E_one = 0;                    /* OPERATORE 1 ARIO  - SINTASSI: O.          */
 	  public static int E_two = 1;                    /* OPERATORE 2 ARIO  - SINTASSI: .O.         */

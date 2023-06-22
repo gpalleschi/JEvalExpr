@@ -13,10 +13,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FLower extends Function{
 
-	public FLower(String name) {
+	public FLower() {
 		super();
 		
-		this.name = name;
+		this.name = "lower";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;

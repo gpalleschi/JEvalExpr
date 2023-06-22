@@ -14,10 +14,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FIfThenElse extends Function{
 
-	public FIfThenElse(String name) {
+	public FIfThenElse() {
 		super();
 		
-		this.name = name;
+		this.name = "ifThenElse";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_three;
 		this.operatorPriority = OperatorPriority.E_lev0;

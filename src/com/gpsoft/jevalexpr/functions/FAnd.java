@@ -14,9 +14,9 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FAnd extends Function {
 	
-	public FAnd(String name) {
+	public FAnd() {
 		super();
-		this.name = name;
+		this.name = "and";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_two;
 		this.operatorPriority = OperatorPriority.E_lev3;

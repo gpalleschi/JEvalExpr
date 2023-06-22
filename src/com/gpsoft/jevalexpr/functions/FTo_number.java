@@ -12,10 +12,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FTo_number extends Function{
 
-	public FTo_number(String name) {
+	public FTo_number() {
 		super();
 		
-		this.name = name;
+		this.name = "to_number";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;

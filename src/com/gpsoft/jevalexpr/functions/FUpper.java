@@ -13,10 +13,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FUpper extends Function{
 
-	public FUpper(String name) {
+	public FUpper() {
 		super();
 		
-		this.name = name;
+		this.name = "upper";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;

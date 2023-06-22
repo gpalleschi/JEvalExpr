@@ -104,7 +104,7 @@ public class Expression  {
 					             TypeData.E_string,
 					             humanExpr.substring(expPos+1,retIdx), // T value, 
 					             0,
-					             new FConstant(humanExpr.substring(expPos+1,retIdx)))); // int nativeIdx
+					             new FConstant())); // int nativeIdx
 			return retIdx+1;
 			
 		}
@@ -145,7 +145,9 @@ public class Expression  {
 			Logger.debug("Numeric Value : " + humanExpr.substring(expPos,startPos));
 			
 		    if ( isDouble ) {
-			    if ( startPos + 1 == humanExpr.length() ) startPos++;
+			    if ( startPos + 1 == humanExpr.length() && (Character.isDigit(humanExpr.charAt(startPos)) || humanExpr.charAt(startPos) == '.') ) startPos++;
+			    
+			    Logger.debug("Numeric Value : " + humanExpr.substring(expPos,startPos));
 				tokens.add(new Token<Object>(humanExpr.substring(expPos,startPos), // String tokenName, 
 			             TypeToken.E_value, // TypeToken typeToken, 
 			             OperatorSyntaxType.E_undef, // OperatorSyntaxType opeartorSyntaxType,
@@ -157,8 +159,9 @@ public class Expression  {
 			             TypeData.E_double,
 			             Double.valueOf(humanExpr.substring(expPos,startPos)), // T value, 
 			             0,
-			             new FConstant(humanExpr.substring(expPos,startPos)))); // int nativeIdx
+			             new FConstant())); // int nativeIdx
 		    } else {
+		    	if ( startPos + 1 == humanExpr.length() && Character.isDigit(humanExpr.charAt(startPos)) ) startPos++;
 				tokens.add(new Token<Object>(humanExpr.substring(expPos,startPos), // String tokenName, 
 			             TypeToken.E_value, // TypeToken typeToken, 
 			             OperatorSyntaxType.E_undef, // OperatorSyntaxType opeartorSyntaxType,
@@ -170,7 +173,7 @@ public class Expression  {
 			             TypeData.E_int,
 			             Integer.valueOf(humanExpr.substring(expPos,startPos)), // T value, 
 			             0,
-			             new FConstant(humanExpr.substring(expPos,startPos)))); // int nativeIdx
+			             new FConstant())); // int nativeIdx
 		    }
 		
 			return startPos;
@@ -246,10 +249,10 @@ public class Expression  {
 		    		op_prio = OperatorPriority.E_lev1;
 		    		if (humanExpr.charAt(expPos) == '+' ) {
 		    			step_type = TypeStep.E_sum;
-		    			funToAdd = new FSum("sum"); 
+		    			funToAdd = new FSum(); 
 		    		} else {
 		    			step_type = TypeStep.E_sub;
-		    			funToAdd = new FSub("sub"); 
+		    			funToAdd = new FSub(); 
 		    		}
 		    		
 		    	} else {
@@ -258,10 +261,10 @@ public class Expression  {
 		    		op_prio = OperatorPriority.E_lev0;
 		    		if (humanExpr.charAt(expPos) == '+' ) {
 		    			step_type = TypeStep.E_unary_plus;
-		    			funToAdd = new FUnaryPlus("unary_plus"); 
+		    			funToAdd = new FUnaryPlus(); 
 		    		} else {
 		    			step_type = TypeStep.E_unary_minus;
-		    			funToAdd = new FUnaryMinus("unary_minus"); 
+		    			funToAdd = new FUnaryMinus(); 
 		    		}
 		    		
 		    	}
@@ -283,7 +286,7 @@ public class Expression  {
 		      }
 		      case '^':
 		      {
-		    	funToAdd = new FExp("exp"); 		    	  
+		    	funToAdd = new FExp(); 		    	  
 				tokens.add(new Token<Object>(String.valueOf(humanExpr.charAt(expPos)), // String tokenName, 
 				             TypeToken.E_op, // TypeToken typeToken, 
 				             OperatorSyntaxType.E_two, // OperatorSyntaxType opeartorSyntaxType,
@@ -301,7 +304,7 @@ public class Expression  {
 		      case '?':
 		      case ':':
 		      {
-		        funToAdd = new FIfThenElse("IfThenElse"); 		  
+		        funToAdd = new FIfThenElse(); 		  
 		    	if ( '?' == humanExpr.charAt(expPos) ) {
 		    		idx_part_op = 0;
 		    	}
@@ -332,33 +335,33 @@ public class Expression  {
 		    	if ( '*' == humanExpr.charAt(expPos) ) {
 		    	  step_type = TypeStep.E_mul;
 		    	  op_prio = OperatorPriority.E_lev0;
-		    	  funToAdd = new FMul("mul"); 
+		    	  funToAdd = new FMul(); 
 		    	 }
 
 		    	if ( '/' == humanExpr.charAt(expPos) ) {
 		    	  step_type = TypeStep.E_div;
 		    	  op_prio = OperatorPriority.E_lev0;
-		    	  funToAdd = new FDiv("div"); 
+		    	  funToAdd = new FDiv(); 
 		    	}
 
 		    	if ( '%' == humanExpr.charAt(expPos) ) {
 		    	  step_type = TypeStep.E_mod;
 		    	  op_prio = OperatorPriority.E_lev0;
-		    	  funToAdd = new FMod("mod"); 
+		    	  funToAdd = new FMod(); 
 		    	 }
 
 		    	if ( '&' == humanExpr.charAt(expPos) )
 		    	{
 		    	  step_type = TypeStep.E_and;
 		    	  op_prio = OperatorPriority.E_lev3;
-		    	  funToAdd = new FAnd("and"); 
+		    	  funToAdd = new FAnd(); 
 		    	}
 
 		    	if ( '=' == humanExpr.charAt(expPos) )
 		    	{
 		    	  step_type = TypeStep.E_eq;
 		    	  op_prio = OperatorPriority.E_lev2;
-		    	  funToAdd = new FEq("eq"); 
+		    	  funToAdd = new FEq(); 
 		    	}
 
 				tokens.add(new Token<Object>(String.valueOf(humanExpr.charAt(expPos)), // String tokenName, 
@@ -388,17 +391,17 @@ public class Expression  {
 		    		  
 		    		  if ( '<' == humanExpr.charAt(expPos) ) {
 		    			  step_type = TypeStep.E_le;
-		    			  funToAdd = new FLe("le");
+		    			  funToAdd = new FLe();
 		    		  }
 
 		    		  if ( '>' == humanExpr.charAt(expPos) ) {
 		    			  step_type = TypeStep.E_ge;
-		    			  funToAdd = new FGe("ge");
+		    			  funToAdd = new FGe();
 		    		  }
 
 		    		  if ( '!' == humanExpr.charAt(expPos) ) {
 		    			  step_type = TypeStep.E_ne;
-		    			  funToAdd = new FNe("ge");
+		    			  funToAdd = new FNe();
 		    		  }
 
 					  tokens.add(new Token<Object>(String.valueOf(humanExpr.charAt(expPos)) + "=", // String tokenName, 
@@ -422,17 +425,17 @@ public class Expression  {
 		    		  op_prio = OperatorPriority.E_lev2;
 		    		  
 		    		  if ( '<' == humanExpr.charAt(expPos) ) {
-		    			  funToAdd = new FLt("lt");
+		    			  funToAdd = new FLt();
 		    			  step_type = TypeStep.E_lt;
 		    		  } else {
-		    			  funToAdd = new FGt("gt");
+		    			  funToAdd = new FGt();
 		    			  step_type = TypeStep.E_gt;
 		    		  }
 		    	  } else {
 		    		  op_syn_type = OperatorSyntaxType.E_one;
 		    		  op_prio = OperatorPriority.E_lev0;
 		    		  step_type = TypeStep.E_not;
-		    		  funToAdd = new FNot("not");
+		    		  funToAdd = new FNot();
 		    	  }
 
 				  tokens.add(new Token<Object>(String.valueOf(humanExpr.charAt(expPos)), // String tokenName, 
@@ -452,7 +455,7 @@ public class Expression  {
 		      case '|':
 		      {
 		    	  if ( expPos + 1 < humanExpr.length() && '|' == humanExpr.charAt(expPos + 1) ) {
-		    		  funToAdd = new FConc("conc");
+		    		  funToAdd = new FConc();
 					  tokens.add(new Token<Object>(String.valueOf(humanExpr.charAt(expPos) + "|"), // String tokenName, 
 					             TypeToken.E_op, // TypeToken typeToken, 
 					             OperatorSyntaxType.E_two, // OperatorSyntaxType opeartorSyntaxType,
@@ -467,7 +470,7 @@ public class Expression  {
 					             funToAdd)); // int nativeIdx				    		  
 					  expPos++;
 		    	  } else {
-		    		  funToAdd = new FOr("or"); 
+		    		  funToAdd = new FOr(); 
 					  tokens.add(new Token<Object>(String.valueOf(humanExpr.charAt(expPos)), // String tokenName, 
 					             TypeToken.E_op, // TypeToken typeToken, 
 					             OperatorSyntaxType.E_two, // OperatorSyntaxType opeartorSyntaxType,
@@ -650,7 +653,7 @@ public class Expression  {
 						   false,
 						   new ArrayList<Integer>(),
 						   tokens.get(idx).getNativeIdx(),
-						   new FConstant(tokens.get(idx).getTokenName())
+						   new FConstant()
 						   ));
 				} else {
 					   expBin.getStep().add( new Step<Object>(  
@@ -660,7 +663,8 @@ public class Expression  {
 							   false,
 							   new ArrayList<Integer>(),
 							   tokens.get(idx).getNativeIdx(),
-							   new FVariable(tokens.get(idx).getTokenName())
+							   tokens.get(idx).getOperatorSyntaxType() == OperatorSyntaxType.E_funi ? 
+							   tokens.get(idx).getFunction() : new FVariable(tokens.get(idx).getTokenName())
 							   ));					
 					   expBin.getStep().get(expBin.getStep().size()-1).getOpnd().add(tokens.get(idx).getStepRef());
 				}
@@ -737,7 +741,7 @@ public class Expression  {
 					flag_continue = true;
 					break;
 				}
-			
+				
 				// TODO: Change MAX_NMB_OPND impostare da 255 a altro valore, parametrizzare
 				if ( newStep.getOpnd().size() == 255 ) {
 					Logger.error("Too operand for function (" + tokens.get(idx).getTokenName() + ") " +

@@ -14,9 +14,9 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FOr extends Function {
 	
-	public FOr(String name) {
+	public FOr() {
 		super();
-		this.name = name;
+		this.name = "or";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_two;
 		this.operatorPriority = OperatorPriority.E_lev4;

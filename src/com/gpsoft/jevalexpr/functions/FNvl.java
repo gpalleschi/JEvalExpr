@@ -12,10 +12,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FNvl extends Function{
 
-	public FNvl(String name) {
+	public FNvl() {
 		super();
 		
-		this.name = name;
+		this.name = "nvl";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;

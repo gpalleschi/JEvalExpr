@@ -16,9 +16,9 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FNe extends Function {
 	
-	public FNe(String name) {
+	public FNe() {
 		super();
-		this.name = name;
+		this.name = "!=";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_two;
 		this.operatorPriority = OperatorPriority.E_lev2;

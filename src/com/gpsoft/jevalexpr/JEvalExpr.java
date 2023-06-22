@@ -15,14 +15,17 @@ public class JEvalExpr {
                                      new Variable<Integer>("v4", 2),
 				  };
 		  
-		  Logger.setLevel(8);
+		  Logger.setLevel(15);
 		  
 		  Logger.debug(variables[0].getValue());
 		  Logger.debug(variables[1].getValue());
 		  
 //		  expression = new Expression("((1 - 2 + to_number(v1)))",variables);
 		  
-		  String Expression = "decode('pippo','pluto',1,'topolino',2,3)";
+//		  String Expression = "to_number(v1) + 19 + decode(to_date('20210101','yyyyMMdd'), to_date('20210102','yyyyMMdd'),1,18)";
+//		  String Expression = "to_date('20210101 000000','yyyyMMdd HHmmss') - to_date('010000','HHmmss')";
+//		  String Expression = "to_hhmiss(10.0)";
+		  String Expression = "tan(1)";
 		  
 		  expression = new Expression(Expression,variables);
 		  

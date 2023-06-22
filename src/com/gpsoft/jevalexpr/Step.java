@@ -34,6 +34,19 @@ public class Step<T> {
 
 	public void setData(DataValue<?> data) {
 		this.data = data;
+		if ( Utility.isString(data.value) ) {
+			data.typeData = TypeData.E_string;
+		} else if ( Utility.isInteger(data.value) ) {
+			data.typeData = TypeData.E_int;
+		} else if ( Utility.isDouble(data.value) ) {
+			data.typeData = TypeData.E_double;
+		} else if ( Utility.isBoolean(data.value) ) {
+			data.typeData = TypeData.E_boolean;
+		} else if ( Utility.isDate(data.value) ) {
+			data.typeData = TypeData.E_date;
+		} else {
+			data.typeData = null;
+		}
 	}
 
 	public boolean isNull() {
@@ -53,6 +66,7 @@ public class Step<T> {
 		super();
 		this.typeStep = typeStep;
 		this.resType = resType;
+		this.typeData = resType;
 		
 		if ( Utility.isBoolean(value) ) {
 			data = new DataValue<Boolean>((Boolean)value);
@@ -76,20 +90,25 @@ public class Step<T> {
 		super();
 		this.typeStep = typeStep;
 		this.resType = resType;
+		this.typeData = resType;
 		this.isNull = isNull;
 		
 		if ( typeStep == TypeStep.E_constant ) {
 			if ( Utility.isBoolean(value) ) {
 				this.data = new DataValue<Boolean>((Boolean)value);
+				this.data.typeData = TypeData.E_boolean;
 			} else
 			if ( Utility.isString(value) ) {
 				this.data = new DataValue<String>((String)value);
+				this.data.typeData = TypeData.E_string;
 			} else
 			if ( Utility.isInteger(value) ) {
 				this.data = new DataValue<Integer>((Integer)value);
+				this.data.typeData = TypeData.E_int;
 			} else
 			if ( Utility.isDouble(value) ) {
 				this.data = new DataValue<Double>((Double)value);
+				this.data.typeData = TypeData.E_double;
 			}	
 		} else {
 			data = null;

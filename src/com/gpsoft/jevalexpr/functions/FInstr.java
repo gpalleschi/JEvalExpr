@@ -14,10 +14,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FInstr extends Function{
 
-	public FInstr(String name) {
+	public FInstr() {
 		super();
 		
-		this.name = name;
+		this.name = "instr";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;

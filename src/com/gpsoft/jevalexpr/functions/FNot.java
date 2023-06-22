@@ -14,10 +14,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FNot extends Function{
 
-	public FNot(String name) {
+	public FNot() {
 		super();
 		
-		this.name = name;
+		this.name = "not";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_one;
 		this.operatorPriority = OperatorPriority.E_lev0;

@@ -13,10 +13,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FRtrim extends Function{
 
-	public FRtrim(String name) {
+	public FRtrim() {
 		super();
 		
-		this.name = name;
+		this.name = "rtrim";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;

@@ -12,10 +12,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FIs_number extends Function{
 
-	public FIs_number(String name) {
+	public FIs_number() {
 		super();
 		
-		this.name = name;
+		this.name = "is_number";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;

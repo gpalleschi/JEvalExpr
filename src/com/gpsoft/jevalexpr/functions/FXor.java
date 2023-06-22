@@ -14,9 +14,9 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FXor extends Function {
 	
-	public FXor(String name) {
+	public FXor() {
 		super();
-		this.name = name;
+		this.name = "xor";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_two;
 		this.operatorPriority = OperatorPriority.E_lev4;

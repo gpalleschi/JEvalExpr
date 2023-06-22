@@ -28,16 +28,12 @@ public enum TypeStep {
 	  E_is_number,                /* FUNCTION is_number           */
 	  E_to_number,                /* FUNCTION to_number           */
 	  E_to_date,                  /* FUNCTION to_date             */
-	  
-	  E_to_secs,                  /* FUNCTION to_secs   TODO      */
-	  
 	  E_rtrim,                    /* FUNCTION rtrim               */
 	  E_ltrim,                    /* FUNCTION ltrim               */
 	  E_trim,                     /* FUNCTION trim                */
-	  
 	  E_rpad,                     /* FUNCTION rpad                */
 	  E_lpad,                     /* FUNCTION lpad                */
-	  E_decode,                   /* FUNCTION decode     TODO     */
+	  E_decode,                   /* FUNCTION decode              */
 	  E_translate,                /* FUNCTION translate           */
 	  E_replace,                  /* FUNCTION replace             */
 	  E_substr,                   /* FUNCTION substr              */
@@ -45,20 +41,34 @@ public enum TypeStep {
 	  E_length,                   /* FUNCTION length              */
 	  E_nvl,                      /* FUNCTION nvl                 */
 	  E_is_null,                  /* FUNCTION is_null             */
-	  E_like,                     /* OPERATOR like               */
+	  E_is_date,                  /* FUNCTION is_date             */
+	  E_like,                     /* OPERATOR like                */
 	  E_upper,                    /* FUNCTION upper               */
 	  E_lower,                    /* FUNCTION lower               */
 	  E_initcap,                  /* FUNCTION initcap             */
-	  E_diffdate,                 /* FUNCTION diffdate   TODO     */
 	  E_reverse,                  /* FUNCTION reverse             */
-	  E_systime,                  /* FUNCTION systime    TODO     */
-	  E_to_hhmiss,                /* FUNCTION to_hhmiss  TODO     */
-	  
-	  E_extr_array,               /* FUNCTION extr_array    TODO  */
-	  E_search_array,             /* FUNCTION search_array  TODO  */
-	  
-	  E_is_date,                  /* FUNCTION is_date       TODO  */
+	  E_sysdate,                  /* FUNCTION sysdate             */
+	  E_to_hhmiss,                /* FUNCTION to_hhmiss           */
+	  E_extr_array,               /* FUNCTION extr_array          */
+	  E_PI,                       /* FUNCTION PI                  */
+	  E_E,                        /* FUNCTION E (mathematical constant) */
+	  E_sin,                      /* FUNCTION Sin                 */
+	  E_cos,                      /* FUNCTION Cos                 */
+	  E_tan,                      /* FUNCTION Tan                 */
+	  E_asin,                     /* FUNCTION ASin TODO           */
+	  E_acos,                     /* FUNCTION ACos TODO           */
+	  E_atan,                     /* FUNCTION ATan TODO           */
+	  E_abs,                      /* FUNCTION abs TODO            */
+	  E_round,                    /* FUNCTION round TODO          */
+	  E_ceil,                     /* FUNCTION ceil TODO           */
+	  E_trunc,                    /* FUNCTION trunc TODO          */
+	  E_floor,                    /* FUNCTION floor TODO          */
+	  E_min,                      /* FUNCTION min TODO            */
+	  E_max,                      /* FUNCTION max TODO            */
 	  E_regexp_like,              /* FUNCTION regexp_like   TODO  */
 	  E_regexp_substr,            /* FUNCTION regexp_substr TODO  */
 	  E_regexp_instr              /* FUNCTION regexp_substr TODO  */
+	  
+	  /* ******************************************************** */
+	  /* Add below new Functions                                  */
 }

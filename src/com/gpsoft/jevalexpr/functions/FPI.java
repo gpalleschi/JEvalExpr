@@ -1,4 +1,6 @@
 package com.gpsoft.jevalexpr.functions;
+
+import com.gpsoft.jevalexpr.DataValue;
 import com.gpsoft.jevalexpr.ExpBin;
 import com.gpsoft.jevalexpr.OperatorPriority;
 import com.gpsoft.jevalexpr.OperatorSyntaxType;
@@ -8,30 +10,37 @@ import com.gpsoft.jevalexpr.TypeToken;
 import com.gpsoft.jevalexpr.ValueType;
 import com.gpsoft.jevalexpr.log.Logger;
 
-public class FConstant extends Function {
+public class FPI extends Function {
 
-	public FConstant() {
+	public FPI() {
+	
 		super();
-		this.name = "constant";
+		
+		this.name = "PI";
 		this.typeToken = TypeToken.E_value;
-		this.operatorSyntaxType = OperatorSyntaxType.E_undef;
+		this.operatorSyntaxType = OperatorSyntaxType.E_funi;
 		this.operatorPriority = OperatorPriority.E_lev0;
 		this.idxPartOpe = 0;
 		this.valueType = ValueType.E_nat;
-		this.typeStep =TypeStep.E_constant; 
+		this.typeStep =TypeStep.E_PI; 
 		this.stepRef = 0;
-		this.typeData = TypeData.E_string;
+		this.typeData = TypeData.E_date;
+		
 	}
 
 	public boolean check(ExpBin<?> expBin, int idxStep) {
-		
+		expBin.getStep().get(idxStep).setResType(TypeData.E_double);
 		return true;
 	}
 
 	public boolean exec(ExpBin<?> expBin, int idxStep) {
 		
-		Logger.debug("In Exec FConstant");	
+		Logger.debug("In Exec FPI");	
+		
+		expBin.getStep().get(idxStep).setTypeData(TypeData.E_double);
+		expBin.getStep().get(idxStep).setData(new DataValue<Double>(Math.PI));
+		expBin.getStep().get(idxStep).setNull(false);
+			
 		return true;
 	}
-
 }

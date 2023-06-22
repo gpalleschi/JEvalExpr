@@ -14,10 +14,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FLpad extends Function{
 
-	public FLpad(String name) {
+	public FLpad() {
 		super();
 		
-		this.name = name;
+		this.name = "lpad";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;

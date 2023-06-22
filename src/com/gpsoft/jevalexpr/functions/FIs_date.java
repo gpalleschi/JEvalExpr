@@ -16,46 +16,47 @@ import com.gpsoft.jevalexpr.TypeToken;
 import com.gpsoft.jevalexpr.ValueType;
 import com.gpsoft.jevalexpr.log.Logger;
 
-public class FTo_date extends Function {
+public class FIs_date extends Function {
 
-	public FTo_date() {
+	public FIs_date() {
 	
 		super();
 		
-		this.name = "to_date";
+		this.name = "is_date";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;
 		this.idxPartOpe = 0;
 		this.valueType = ValueType.E_nat;
-		this.typeStep =TypeStep.E_to_date; 
+		this.typeStep =TypeStep.E_is_date; 
 		this.stepRef = 0;
 		this.typeData = TypeData.E_string;
 		
 	}
 
 	public boolean check(ExpBin<?> expBin, int idxStep) {
+		
+		DateTimeFormatter formatter = null;
 
 		Step<?> step = expBin.getStep().get(idxStep);
-		DateTimeFormatter formatter = null;
 		int idxOpd;
 		int idxOpd2;
 		if (step.getOpnd().size() != 1 && step.getOpnd().size() != 2) {
-			Logger.error("Function to_date work with one or two arguments instead of " + step.getOpnd().size() + ".");
+			Logger.error("Function is_date work with one or two arguments instead of " + step.getOpnd().size() + ".");
 			return false;
 		}
 		
 		idxOpd = step.getOpnd().get(0);
 		
 		if ( expBin.getStep().get(idxOpd).getResType() != TypeData.E_string ) {
-			Logger.error("function to_date first argument is only a string.");
+			Logger.error("function is_date first argument is only a string.");
 			return false;
 		}
 		
 		if ( step.getOpnd().size() == 2 ) {
      		idxOpd2 = step.getOpnd().get(1);
      		if ( expBin.getStep().get(idxOpd2).getResType() != TypeData.E_string ) {
-     			Logger.error("function to_date second argument is only a string.");
+     			Logger.error("function is_date second argument is only a string.");
      			return false;
      		}
      		
@@ -69,7 +70,7 @@ public class FTo_date extends Function {
 			
 		}
 		
-		expBin.getStep().get(idxStep).setResType(TypeData.E_date);
+		expBin.getStep().get(idxStep).setResType(TypeData.E_boolean);
 		
 		return true;
 	}
@@ -106,30 +107,28 @@ public class FTo_date extends Function {
 		try {
 			formatter = DateTimeFormatter.ofPattern(formatDate);
 		} catch( Exception e) {
-			Logger.error("to_date error wrong format string '" + formatDate + "'");
+			Logger.error("is_date error wrong format string '" + formatDate + "'");
 			return false;
 		}
 		
 		try {
-			Logger.error("Convert LocalDateTime");
 			LocalDateTime dateTime = LocalDateTime.parse((String)expBin.getStep().get(idxOpd1).getData().getValue(), formatter);
-			Logger.error("Convert OK");
 			
-			expBin.getStep().get(idxStep).setTypeData(TypeData.E_date);
-			expBin.getStep().get(idxStep).setData(new DataValue<LocalDateTime>(dateTime));
+			expBin.getStep().get(idxStep).setTypeData(TypeData.E_boolean);
+			expBin.getStep().get(idxStep).setData(new DataValue<Boolean>(true));
 		} catch( Exception e) {
 			try {
 				LocalDate date = LocalDate.parse((String)expBin.getStep().get(idxOpd1).getData().getValue(), formatter);
-				expBin.getStep().get(idxStep).setTypeData(TypeData.E_date);
-				expBin.getStep().get(idxStep).setData(new DataValue<LocalDate>(date));
+				expBin.getStep().get(idxStep).setTypeData(TypeData.E_boolean);
+				expBin.getStep().get(idxStep).setData(new DataValue<Boolean>(true));
 			} catch( Exception er) {
 				try {
 					LocalTime time = LocalTime.parse((String)expBin.getStep().get(idxOpd1).getData().getValue(), formatter);
-					expBin.getStep().get(idxStep).setTypeData(TypeData.E_date);
-					expBin.getStep().get(idxStep).setData(new DataValue<LocalTime>(time));
+					expBin.getStep().get(idxStep).setTypeData(TypeData.E_boolean);
+					expBin.getStep().get(idxStep).setData(new DataValue<Boolean>(true));
 				} catch( Exception err) {
-					Logger.error("to_date error with string '" + (String)expBin.getStep().get(idxOpd1).getData().getValue() + " and format : '" + formatDate + "'");
-					return false;
+        			expBin.getStep().get(idxStep).setTypeData(TypeData.E_boolean);
+        			expBin.getStep().get(idxStep).setData(new DataValue<Boolean>(false));
 				}
 			}
 			

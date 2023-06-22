@@ -14,10 +14,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FRpad extends Function{
 
-	public FRpad(String name) {
+	public FRpad() {
 		super();
 		
-		this.name = name;
+		this.name = "rpad";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;

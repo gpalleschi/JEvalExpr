@@ -13,10 +13,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FTrim extends Function{
 
-	public FTrim(String name) {
+	public FTrim() {
 		super();
 		
-		this.name = name;
+		this.name = "trim";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;

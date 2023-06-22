@@ -12,15 +12,16 @@ import com.gpsoft.jevalexpr.Step;
 import com.gpsoft.jevalexpr.TypeData;
 import com.gpsoft.jevalexpr.TypeStep;
 import com.gpsoft.jevalexpr.TypeToken;
+import com.gpsoft.jevalexpr.Utility;
 import com.gpsoft.jevalexpr.ValueType;
 import com.gpsoft.jevalexpr.log.Logger;
 
 public class FTo_char extends Function{
 
-	public FTo_char(String name) {
+	public FTo_char() {
 		super();
 		
-		this.name = name;
+		this.name = "to_char";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;
@@ -127,13 +128,13 @@ public class FTo_char extends Function{
 				return false;
 			}
 			
-			if ( expBin.getStep().get(idxOpd1).getData().getValue().getClass().getName().compareTo("java.time.LocalDateTime") == 0 ) {
+			if ( Utility.isLocalDateTime( expBin.getStep().get(idxOpd1).getData().getValue()) ) {
 				LocalDateTime localDateTime = (LocalDateTime)expBin.getStep().get(idxOpd1).getData().getValue();
 				ris = localDateTime.format(formatter);
-			} else if ( expBin.getStep().get(idxOpd1).getData().getValue().getClass().getName().compareTo("java.time.LocalDate") == 0 ) {
+			} else if ( Utility.isLocalDate( expBin.getStep().get(idxOpd1).getData().getValue()) ) {
 				LocalDate localDate = (LocalDate)expBin.getStep().get(idxOpd1).getData().getValue();
 				ris = localDate.format(formatter);
-			} else if ( expBin.getStep().get(idxOpd1).getData().getValue().getClass().getName().compareTo("java.time.LocalTime") == 0 ) {
+			} else if ( Utility.isLocalTime( expBin.getStep().get(idxOpd1).getData().getValue()) ) {
 				LocalTime localTime = (LocalTime)expBin.getStep().get(idxOpd1).getData().getValue();
 				ris = localTime.format(formatter);
 			} else {

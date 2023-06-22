@@ -1,4 +1,9 @@
 package com.gpsoft.jevalexpr.functions;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import com.gpsoft.jevalexpr.DataValue;
 import com.gpsoft.jevalexpr.ExpBin;
 import com.gpsoft.jevalexpr.OperatorPriority;
@@ -13,10 +18,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FSub extends Function{
 
-	public FSub(String name) {
+	public FSub() {
 		super();
 		
-		this.name = name;
+		this.name = "sub";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;
@@ -33,7 +38,7 @@ public class FSub extends Function{
 		int idxOpd1;
 		int idxOpd2;
 		if (step.getOpnd().size() != 2 ) {
-			Logger.error("Function sub (+) work with two argument not with " + step.getOpnd().size() + ".");
+			Logger.error("Function sub (-) work with two argument not with " + step.getOpnd().size() + ".");
 			return false;
 		}
 		
@@ -41,20 +46,31 @@ public class FSub extends Function{
 		idxOpd2 = step.getOpnd().get(1);
 		
 		if ( expBin.getStep().get(idxOpd1).getResType() != TypeData.E_int &&
-		     expBin.getStep().get(idxOpd1).getResType() != TypeData.E_double ) {
-			Logger.error("function sub (+) work only with number arguments.");
+		     expBin.getStep().get(idxOpd1).getResType() != TypeData.E_double &&
+		     expBin.getStep().get(idxOpd1).getResType() != TypeData.E_date ) {
+			Logger.error("function sub (-) work only with number or date arguments.");
 			return false;
 		}
 
 		if ( expBin.getStep().get(idxOpd2).getResType() != TypeData.E_int &&
-		     expBin.getStep().get(idxOpd2).getResType() != TypeData.E_double ) {
-			Logger.error("function sub (+) work only with number arguments.");
+		     expBin.getStep().get(idxOpd2).getResType() != TypeData.E_double && 
+		     expBin.getStep().get(idxOpd2).getResType() != TypeData.E_date 
+		     ) {
+			Logger.error("function sub (-) work only with number or date arguments.");
 			return false;
 		}
-			
+		
+		if ( (expBin.getStep().get(idxOpd1).getResType() == TypeData.E_date && 
+              expBin.getStep().get(idxOpd2).getResType() != TypeData.E_date ) ||
+             (expBin.getStep().get(idxOpd2).getResType() == TypeData.E_date && 
+              expBin.getStep().get(idxOpd1).getResType() != TypeData.E_date ) ) {
+			Logger.error("function sub (-) permits difference only between two dates.");
+			return false;
+		}
 		
 		if ( expBin.getStep().get(idxOpd1).getResType() == TypeData.E_double ||
-			 expBin.getStep().get(idxOpd2).getResType() == TypeData.E_double ) {
+			 expBin.getStep().get(idxOpd2).getResType() == TypeData.E_double ||
+			 expBin.getStep().get(idxOpd1).getResType() == TypeData.E_date ) {
 			expBin.getStep().get(idxStep).setResType(TypeData.E_double);	
 		} else {
 			expBin.getStep().get(idxStep).setResType(TypeData.E_int);	
@@ -148,14 +164,50 @@ public class FSub extends Function{
 		    expBin.getStep().get(idxStep).setNull(false);
 		}
 		
-//		Logger.debug("Type 1 : " + expBin.getStep().get(idxOpd1).getResType());
-//		Logger.debug("Type 2 : " + expBin.getStep().get(idxOpd2).getResType());
-//		
-//		Logger.debug("Class name 1 : " + expBin.getStep().get(idxOpd1).getData().getClass().getName());
-//		Logger.debug("Class name 2 : " + expBin.getStep().get(idxOpd2).getData().getClass().getName());
-//
-//		Logger.debug("Value 1 : " + expBin.getStep().get(idxOpd1).getData());
-//		Logger.debug("Value 2 : " + expBin.getStep().get(idxOpd2).getData());
+		if ( Utility.isDate(expBin.getStep().get(idxOpd1).getData().getValue()) &&
+		     Utility.isDate(expBin.getStep().get(idxOpd2).getData().getValue()) ) {
+			
+			 LocalDateTime localDateTime1 = null;
+			 LocalDateTime localDateTime2 = null;
+			 
+			 LocalTime localTime1 = null;
+			 LocalTime localTime2 = null;
+			 
+			 if ( Utility.isLocalDate(expBin.getStep().get(idxOpd1).getData().getValue()) ) {
+				 localDateTime1 = ((LocalDate)expBin.getStep().get(idxOpd1).getData().getValue()).atStartOfDay();
+				 localTime1 = ((LocalDate)expBin.getStep().get(idxOpd1).getData().getValue()).atStartOfDay().toLocalTime();
+			 } else if ( Utility.isLocalTime(expBin.getStep().get(idxOpd1).getData().getValue()) ) {
+				 localTime1 = (LocalTime)expBin.getStep().get(idxOpd1).getData().getValue();
+			 } else {
+				 localDateTime1 = (LocalDateTime)expBin.getStep().get(idxOpd1).getData().getValue();
+				 localTime1 = ((LocalDateTime)expBin.getStep().get(idxOpd1).getData().getValue()).toLocalTime();
+			 }
+
+			 if ( Utility.isLocalDate(expBin.getStep().get(idxOpd2).getData().getValue()) ) {
+				 localDateTime2 = ((LocalDate)expBin.getStep().get(idxOpd2).getData().getValue()).atStartOfDay();
+				 localTime2 = ((LocalDate)expBin.getStep().get(idxOpd2).getData().getValue()).atStartOfDay().toLocalTime();
+			 } else if ( Utility.isLocalTime(expBin.getStep().get(idxOpd2).getData().getValue()) ) {
+				 localTime2 = (LocalTime)expBin.getStep().get(idxOpd2).getData().getValue();
+			 } else {
+				 localDateTime2 = (LocalDateTime)expBin.getStep().get(idxOpd2).getData().getValue();
+				 localTime2 = ((LocalDateTime)expBin.getStep().get(idxOpd1).getData().getValue()).toLocalTime();
+			 }
+			 
+			 if ( localDateTime1 != null && localDateTime2 != null ) {
+				double daysBetween = Duration.between(localDateTime1, localDateTime2).toDays();	
+			    expBin.getStep().get(idxStep).setData(new DataValue<Double>(daysBetween));
+			   	expBin.getStep().get(idxStep).setResType(TypeData.E_double);
+			    expBin.getStep().get(idxStep).setNull(false);
+			 } else if ( localTime1 != null && localTime2 != null ) {
+				   	   double secondsBetween = Duration.between(localTime1, localTime2).getSeconds();	
+			           expBin.getStep().get(idxStep).setData(new DataValue<Double>(secondsBetween));
+		    	       expBin.getStep().get(idxStep).setResType(TypeData.E_double);
+			           expBin.getStep().get(idxStep).setNull(false);				 
+			 } else {
+					Logger.error("function sub (-) different types impossible substract date from time or vice versa.");
+					return false;
+			 }
+		}
 		
 		return true;
 	}

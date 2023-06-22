@@ -14,9 +14,9 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FConc extends Function {
 	
-	public FConc(String name) {
+	public FConc() {
 		super();
-		this.name = name;
+		this.name = "conc";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_two;
 		this.operatorPriority = OperatorPriority.E_lev1;

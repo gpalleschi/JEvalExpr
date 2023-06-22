@@ -16,9 +16,9 @@ public class FIn extends Function {
 	
 	//TODO: Do not work
 	
-	public FIn(String name) {
+	public FIn() {
 		super();
-		this.name = name;
+		this.name = "in";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_undef;
 		this.operatorPriority = OperatorPriority.E_lev0;

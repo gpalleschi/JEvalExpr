@@ -54,6 +54,30 @@ public class Utility {
 		}
 	}
 
+	public static boolean isLocalDateTime(Object obj) {
+		if ( obj.getClass().getName().compareTo("java.time.LocalDateTime") == 0 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public static boolean isLocalDate(Object obj) {
+		if ( obj.getClass().getName().compareTo("java.time.LocalDate") == 0 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public static boolean isLocalTime(Object obj) {
+		if ( obj.getClass().getName().compareTo("java.time.LocalTime") == 0 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
     public static String rpad(String input, int length, String paddingString) {
         StringBuilder result = new StringBuilder(input);
         

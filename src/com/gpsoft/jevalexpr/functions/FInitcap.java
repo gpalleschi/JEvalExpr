@@ -14,10 +14,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FInitcap extends Function{
 
-	public FInitcap(String name) {
+	public FInitcap() {
 		super();
 		
-		this.name = name;
+		this.name = "initcap";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;

@@ -18,10 +18,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FDecode extends Function{
 
-	public FDecode(String name) {
+	public FDecode() {
 		super();
 		
-		this.name = name;
+		this.name = "decode";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;
@@ -63,20 +63,18 @@ public class FDecode extends Function{
 		for(i=3;i<step.getOpnd().size();i++) {
 			
 			if ( i%2 != 0 && i != step.getOpnd().size()-1 ) {
-				if ( firstArgTD != expBin.getStep().get(i).getResType() ) {
+				if ( firstArgTD != expBin.getStep().get(step.getOpnd().get(i)).getResType() ) {
 					Logger.error("function decode first argument and odd indexed arguments must be of same type.");
 					return false;		   	
 				}
 			} else {
-				if ( decodeType != expBin.getStep().get(i).getResType() ) {
+				if ( decodeType != expBin.getStep().get(step.getOpnd().get(i)).getResType() ) {
 					Logger.error("function decode even indexed arguments must be of same type.");
 					return false;		   	
 				}
 			}
 		}
 		
-		if ( i%2 == 0 )
-
 		expBin.getStep().get(idxStep).setResType(decodeType);
 		
 		return true;
@@ -107,6 +105,8 @@ public class FDecode extends Function{
 	
 	private boolean compareData(DataValue<?> data1, DataValue<?> data2 ) {
 	
+		// Logger.error("In Compare typeData 1 : " + data1.getTypeData());
+		// Logger.error("In Compare typeData 2 : " + data2.getTypeData());
 		// Impossible because was checked 
 		if ( data1.getTypeData() != data2.getTypeData() ) return false;
 		
@@ -114,12 +114,14 @@ public class FDecode extends Function{
 			String value1 = (String)data1.getValue();
 			String value2 = (String)data2.getValue();
 			
+			//Logger.error("Compare String '" + value1 + "' with '" + value2 + "'");
+			
 			if ( value1.compareTo(value2) == 0 ) {
 				return true;
 			} else {
 				return false;
 			}
-		} else if ( data1.getTypeData() == TypeData.E_string ) {
+		} else if ( data1.getTypeData() == TypeData.E_int ) {
 			int value1 = (Integer)data1.getValue();
 			int value2 = (Integer)data2.getValue();
 			
@@ -147,6 +149,8 @@ public class FDecode extends Function{
 				return false;
 			}
 		} else if ( data1.getTypeData() == TypeData.E_date ) {
+			
+			//Logger.error("Compare Date");
 			
 			if ( data1.getValue().getClass().getName().compareTo("java.time.LocalDateTime") == 0 &&
 			     data2.getValue().getClass().getName().compareTo("java.time.LocalDateTime") == 0 ) {
@@ -176,13 +180,18 @@ public class FDecode extends Function{
 		
 		if ( Utility.isString(data.getValue()) ) {
 			expBin.getStep().get(idxStep).setData(new DataValue<String>((String)data.getValue()));
+			expBin.getStep().get(idxStep).setTypeData(TypeData.E_string);
 		} else if ( Utility.isInteger(data.getValue()) ) {
 			expBin.getStep().get(idxStep).setData(new DataValue<Integer>((Integer)data.getValue()));
+			expBin.getStep().get(idxStep).setTypeData(TypeData.E_int);
 		} else if ( Utility.isDouble(data.getValue()) ) {
 			expBin.getStep().get(idxStep).setData(new DataValue<Double>((Double)data.getValue()));
+			expBin.getStep().get(idxStep).setTypeData(TypeData.E_double);
 		} else if ( Utility.isBoolean(data.getValue()) ) {
 			expBin.getStep().get(idxStep).setData(new DataValue<Boolean>((Boolean)data.getValue()));
+			expBin.getStep().get(idxStep).setTypeData(TypeData.E_boolean);
 		} else if ( Utility.isDate(data.getValue()) ) {
+			expBin.getStep().get(idxStep).setTypeData(TypeData.E_date);
 			if ( data.getValue().getClass().getName().compareTo("java.time.LocalDateTime") == 0 ) {
 				expBin.getStep().get(idxStep).setData(new DataValue<LocalDateTime>((LocalDateTime)data.getValue()));
 			} else if ( data.getValue().getClass().getName().compareTo("java.time.LocalDate") == 0 ) {
@@ -221,78 +230,68 @@ public class FDecode extends Function{
 				Logger.error("Binary Expression Corrupted");
 				return false;
 			}
+			//Logger.error("Return null 1");
 			return true;
 		}
 
 		int i=1;
-		for(i=1;i<step.getOpnd().size();i++) {
+		int endPair = (step.getOpnd().size()%2 == 0) ? step.getOpnd().size()-1 : step.getOpnd().size();
+		for(i=1;i<endPair;i++) {
 			
-			if ( i%2 != 0 && i != step.getOpnd().size()-1 ) {
+			if ( i+1 >= endPair ) break;
+			//Logger.error("Ciclo i " + i);
+			
+			idxOpdOdd = step.getOpnd().get(i);
+		    idxOpdEven = step.getOpnd().get(++i);
 				
-				idxOpdOdd = i;
-		        idxOpdEven = ++i;
-				
-				if ( !expBin.getStep().get(idxOpdOdd).getFunction().exec(expBin, idxOpdOdd) ) return false;
-				if ( !expBin.getStep().get(idxOpdEven).getFunction().exec(expBin, idxOpdOdd) ) return false;
+			if ( !expBin.getStep().get(idxOpdOdd).getFunction().exec(expBin, idxOpdOdd) ) return false;
+			if ( !expBin.getStep().get(idxOpdEven).getFunction().exec(expBin, idxOpdEven) ) return false;
 
-				if ( expBin.getStep().get(idxOpdOdd).isNull() ) {
-					if ( !setDefault(decodeType,expBin, idxStep) ) {
-						Logger.error("Binary Expression Corrupted");
-						return false;
-					}
-					return true;
-				} else {
-					if ( expBin.getStep().get(idxOpdEven).isNull() ) {
+			if ( expBin.getStep().get(idxOpdOdd).isNull() ) {
+				if ( !setDefault(decodeType,expBin, idxStep) ) {
+					Logger.error("Binary Expression Corrupted");
+					return false;
+				}
+				return true;
+			} else {
+				   if ( expBin.getStep().get(idxOpdEven).isNull() ) {
 						continue;
 					}
 					
-					if ( compareData(expBin.getStep().get(idxOpdOdd).getData(), expBin.getStep().get(idxOpdEven).getData()) ) {
+					if ( compareData(expBin.getStep().get(idxOpd1).getData(), expBin.getStep().get(idxOpdOdd).getData()) ) {
 						
 						if ( !setResult(expBin, idxStep, expBin.getStep().get(idxOpdEven).getData()) ) return false;
-						break;
+						return true;
 						
 					} else {
 						continue;
 					}
 				}
 				
-			} else {
+		} 
 				
-				// Default value last argument in decode function
-				if ( i == step.getOpnd().size()-1 ) {
-				
-					if ( !expBin.getStep().get(i).getFunction().exec(expBin, i) ) return false;
+		// Default value last argument in decode function
+		if ( endPair == step.getOpnd().size()-1 ) {
+			
+			if ( !expBin.getStep().get(endPair).getFunction().exec(expBin, endPair) ) return false;
 
-					if ( expBin.getStep().get(i).isNull() ) {
-						if ( !setDefault(decodeType,expBin, idxStep) ) {
-							Logger.error("Binary Expression Corrupted");
-							return false;
-						}
-					}
-					break;
+			if ( expBin.getStep().get(endPair).isNull() ) {
+				if ( !setDefault(decodeType,expBin, idxStep) ) {
+					Logger.error("Binary Expression Corrupted");
+					return false;
 				}
-				
+				return true;
 			}
-			
+		} 
+		
+		if ( step.getOpnd().size()%2 == 0 ) {
+			//Logger.error(" Argomenti Pari : " + (step.getOpnd().size()-1));
+			if ( !setResult(expBin, idxStep, expBin.getStep().get(step.getOpnd().get(step.getOpnd().size()-1)).getData()) ) return false;	
+		} else {
+			//Logger.error(" Argomenti Dispari");
+			if ( !setResult(expBin, idxStep, expBin.getStep().get(step.getOpnd().get(0)).getData()) ) return false;	
 		}
 		
-		
-		// If don't match
-		if ( i == step.getOpnd().size() ) {
-			
-			int idxOpd;
-			
-			// Check if there is a default 
-			if ( step.getOpnd().size()%2 == 0 ) {
-				idxOpd = step.getOpnd().get(step.getOpnd().size()-1);
-			} else {
-				idxOpd = step.getOpnd().get(0);
-			}
-			Logger.error("idxOpd : " + idxOpd);
-			if ( !setResult(expBin, idxStep, expBin.getStep().get(idxOpd).getData()) ) return false;	
-			
-		}
-
 		return true;
 	}
 }

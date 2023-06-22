@@ -13,10 +13,10 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 public class FMul extends Function{
 
-	public FMul(String name) {
+	public FMul() {
 		super();
 		
-		this.name = name;
+		this.name = "*";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;
