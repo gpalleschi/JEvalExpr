@@ -44,6 +44,18 @@ public class Functions {
 	    put("sin", new FSin());
 	    put("cos", new FCos());
 	    put("tan", new FTan());
+	    put("asin", new FAsin());
+	    put("acos", new FAcos());
+	    put("atan", new FAtan());
+	    put("abs", new FAbs());
+	    put("round", new FRound());
+	    put("ceil", new FCeil());
+	    put("trunc", new FTrunc());
+	    put("min", new FMin());
+	    put("max", new FMax());
+	    put("regexp_like", new FRegexp_like());
+	    put("regexp_substr", new FRegexp_substr());
+	    put("regexp_instr", new FRegexp_instr());
 	  /* ******************************************************** */
 	  /* Add below new Functions                                  */	    
 	}};

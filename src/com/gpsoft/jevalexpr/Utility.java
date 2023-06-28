@@ -28,6 +28,18 @@ public class Utility {
 		return ret;
 	}
 	
+	public static boolean isNumeric(String strNum) {
+	    if (strNum == null) {
+	        return false;
+	    }
+	    try {
+	        double d = Double.parseDouble(strNum);
+	    } catch (NumberFormatException nfe) {
+	        return false;
+	    }
+	    return true;
+	}
+	
 	public static boolean isDouble(Object obj) {
 		return obj.getClass().getName().compareTo("java.lang.Double") == 0 ? true : false;
 	}

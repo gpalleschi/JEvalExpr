@@ -16,13 +16,13 @@ public class FTan extends Function{
 	public FTan() {
 		super();
 		
-		this.name = "cos";
+		this.name = "tan";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;
 		this.idxPartOpe = 0;
 		this.valueType = ValueType.E_nat;
-		this.typeStep =TypeStep.E_sin; 
+		this.typeStep =TypeStep.E_tan; 
 		this.stepRef = 0;
 		this.typeData = TypeData.E_string;
 		

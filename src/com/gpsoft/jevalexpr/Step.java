@@ -1,5 +1,6 @@
 package com.gpsoft.jevalexpr;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import com.gpsoft.jevalexpr.functions.Function;
@@ -150,7 +151,33 @@ public class Step<T> {
 
 
 	public void setNull(boolean isNull) {
+		DataValue<?>  dataToSet;
 		this.isNull = isNull;
+		
+		if ( isNull ) {
+			if ( this.resType == TypeData.E_string ) {
+				dataToSet = new DataValue<String>("");
+				dataToSet.typeData = TypeData.E_string;
+				this.setData(dataToSet);
+			} else if ( this.resType == TypeData.E_int ) {
+				dataToSet = new DataValue<Integer>(0);
+				dataToSet.typeData = TypeData.E_int;
+				this.setData(dataToSet);
+			} else if ( this.resType == TypeData.E_double ) {
+				dataToSet = new DataValue<Double>(0.0);
+				dataToSet.typeData = TypeData.E_double;
+				this.setData(dataToSet);
+			} else if ( this.resType == TypeData.E_boolean ) {
+				dataToSet = new DataValue<Boolean>(false);
+				dataToSet.typeData = TypeData.E_boolean;
+				this.setData(dataToSet);
+			} else if ( this.resType == TypeData.E_date ) {
+				LocalDateTime dateTime = LocalDateTime.now();
+				dataToSet = new DataValue<LocalDateTime>(dateTime);
+				dataToSet.typeData = TypeData.E_date;
+				this.setData(dataToSet);
+			}
+		}
 	}
 
 

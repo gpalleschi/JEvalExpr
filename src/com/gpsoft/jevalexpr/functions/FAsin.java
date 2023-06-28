@@ -11,18 +11,18 @@ import com.gpsoft.jevalexpr.TypeToken;
 import com.gpsoft.jevalexpr.ValueType;
 import com.gpsoft.jevalexpr.log.Logger;
 
-public class FCos extends Function{
+public class FAsin extends Function{
 
-	public FCos() {
+	public FAsin() {
 		super();
 		
-		this.name = "cos";
+		this.name = "asin";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
 		this.operatorPriority = OperatorPriority.E_lev0;
 		this.idxPartOpe = 0;
 		this.valueType = ValueType.E_nat;
-		this.typeStep =TypeStep.E_cos; 
+		this.typeStep =TypeStep.E_asin; 
 		this.stepRef = 0;
 		this.typeData = TypeData.E_string;
 		
@@ -33,7 +33,7 @@ public class FCos extends Function{
 		Step<?> step = expBin.getStep().get(idxStep);
 		int idxOpd;
 		if (step.getOpnd().size() != 1 ) {
-			Logger.error("Function cos work with one argument not with " + step.getOpnd().size() + ".");
+			Logger.error("Function asin work with one argument not with " + step.getOpnd().size() + ".");
 			return false;
 		}
 		
@@ -41,7 +41,7 @@ public class FCos extends Function{
 		
 		if ( expBin.getStep().get(idxOpd).getResType() != TypeData.E_double &&
 		     expBin.getStep().get(idxOpd).getResType() != TypeData.E_int ) {
-			Logger.error("function cos work only with a numeric argument.");
+			Logger.error("function asin work only with a numeric argument.");
 			return false;
 		}
 		
@@ -52,7 +52,7 @@ public class FCos extends Function{
 
 	public boolean exec(ExpBin<?> expBin, int idxStep) {
 		
-		Logger.debug("In Exec FCos");	
+		Logger.debug("In Exec FAsin");	
 		
 		Step<?> step = expBin.getStep().get(idxStep);
 		int idxOpd1;
@@ -76,7 +76,7 @@ public class FCos extends Function{
 			return false;
 		}
 		expBin.getStep().get(idxStep).setTypeData(TypeData.E_int);
-    	expBin.getStep().get(idxStep).setData(new DataValue<Double>(Math.cos(value)));
+    	expBin.getStep().get(idxStep).setData(new DataValue<Double>(Math.asin(value)));
 		expBin.getStep().get(idxStep).setNull(false);
 		
 		return true;

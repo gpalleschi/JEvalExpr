@@ -23,7 +23,7 @@ public enum TypeStep {
 	  E_or,                       /* or LOGIC                    */
 	  E_conc,                     /* || CONCATENATION            */
 	  E_in,                       /* in                           */
-	  E_if_then,                  /* OPERATOR C ?:             */
+	  E_if_then,                  /* OPERATOR C ?:                */
 	  E_to_char,                  /* FUNCTION to_char             */
 	  E_is_number,                /* FUNCTION is_number           */
 	  E_to_number,                /* FUNCTION to_number           */
@@ -55,20 +55,18 @@ public enum TypeStep {
 	  E_sin,                      /* FUNCTION Sin                 */
 	  E_cos,                      /* FUNCTION Cos                 */
 	  E_tan,                      /* FUNCTION Tan                 */
-	  E_asin,                     /* FUNCTION ASin TODO           */
-	  E_acos,                     /* FUNCTION ACos TODO           */
-	  E_atan,                     /* FUNCTION ATan TODO           */
-	  E_abs,                      /* FUNCTION abs TODO            */
-	  E_round,                    /* FUNCTION round TODO          */
-	  E_ceil,                     /* FUNCTION ceil TODO           */
-	  E_trunc,                    /* FUNCTION trunc TODO          */
-	  E_floor,                    /* FUNCTION floor TODO          */
-	  E_min,                      /* FUNCTION min TODO            */
-	  E_max,                      /* FUNCTION max TODO            */
-	  E_regexp_like,              /* FUNCTION regexp_like   TODO  */
-	  E_regexp_substr,            /* FUNCTION regexp_substr TODO  */
-	  E_regexp_instr              /* FUNCTION regexp_substr TODO  */
-	  
+	  E_asin,                     /* FUNCTION ASin                */
+	  E_acos,                     /* FUNCTION ACos                */
+	  E_atan,                     /* FUNCTION ATan                */
+	  E_abs,                      /* FUNCTION abs                 */
+	  E_round,                    /* FUNCTION round               */
+	  E_ceil,                     /* FUNCTION ceil                */
+	  E_trunc,                    /* FUNCTION trunc               */
+	  E_min,                      /* FUNCTION min                 */
+	  E_max,                      /* FUNCTION max                 */
+	  E_regexp_like,              /* FUNCTION regexp_like         */
+	  E_regexp_substr,            /* FUNCTION regexp_substr       */
+	  E_regexp_instr              /* FUNCTION regexp_instr        */
 	  /* ******************************************************** */
 	  /* Add below new Functions                                  */
 }
