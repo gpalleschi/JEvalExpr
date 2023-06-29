@@ -44,7 +44,7 @@ public class FLength extends Function{
 			return false;
 		}
 		
-		expBin.getStep().get(idxStep).setResType(TypeData.E_string);
+		expBin.getStep().get(idxStep).setResType(TypeData.E_int);
 		
 		return true;
 	}

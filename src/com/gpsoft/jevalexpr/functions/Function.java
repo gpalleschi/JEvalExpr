@@ -61,4 +61,7 @@ public abstract class Function {
 	public TypeData getTypeData() {
 		return typeData;
 	}
+	
+	public void checkBefore(String substring, int expPos) {
+	}
 }

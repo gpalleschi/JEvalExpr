@@ -66,7 +66,8 @@ public enum TypeStep {
 	  E_max,                      /* FUNCTION max                 */
 	  E_regexp_like,              /* FUNCTION regexp_like         */
 	  E_regexp_substr,            /* FUNCTION regexp_substr       */
-	  E_regexp_instr              /* FUNCTION regexp_instr        */
+	  E_regexp_instr,             /* FUNCTION regexp_instr        */
+	  E_between_and               /* FUNCTION between_and TODO    */
 	  /* ******************************************************** */
 	  /* Add below new Functions                                  */
 }

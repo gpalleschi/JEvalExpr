@@ -518,6 +518,11 @@ public class Expression  {
 			if ( Functions.names.containsKey(funOpeFunction) ) {
 				
 				Function function = Functions.names.get(funOpeFunction);
+				
+				if ( function.getOperatorSyntaxType() == OperatorSyntaxType.E_three ||
+					 function.getOperatorSyntaxType() == OperatorSyntaxType.E_four ) {
+					function.checkBefore(humanExpr.substring(0,expPos+humanExpr.substring(expPos, idx).length()),expPos);
+				}
 				tokens.add(new Token<Object>(function.getName(),
 						                     function.getTypeToken(),
 						                     function.getOperatorSyntaxType(),

@@ -18,13 +18,46 @@ public class FAnd extends Function {
 		super();
 		this.name = "and";
 		this.typeToken = TypeToken.E_op;
-		this.operatorSyntaxType = OperatorSyntaxType.E_two;
-		this.operatorPriority = OperatorPriority.E_lev3;
-		this.idxPartOpe = 0;
+		this.operatorSyntaxType = OperatorSyntaxType.E_three;
+		this.operatorPriority = OperatorPriority.E_lev1;
+		this.idxPartOpe = 1;
 		this.valueType = ValueType.E_nat;
-		this.typeStep =TypeStep.E_and; 
+		this.typeStep =TypeStep.E_between_and; 
 		this.stepRef = 0;
 		this.typeData = TypeData.E_string;
+	}
+	
+	public void checkBefore( String expr, int pos ) {
+		
+		String toSearch = "between";
+		boolean found = false;
+		int posStart = 0;
+		int posFound = -1;
+		
+		while( true ) {
+		     posFound = expr.indexOf(toSearch, posStart);
+		     
+		     if ( posFound == -1 ) break; 
+		     if ( posFound > pos ) break;
+		     
+		     if ( expr.indexOf(this.name, posFound+1) == pos ) {
+		    	 this.operatorSyntaxType = OperatorSyntaxType.E_three;
+		    	 this.typeStep = TypeStep.E_between_and;
+		    	 this.idxPartOpe = 1;
+		         found = true;
+		    	 break;
+		     }
+		     posStart = posFound+1;
+		}
+		
+		if ( !found ) {
+	    	 this.operatorSyntaxType = OperatorSyntaxType.E_two;
+	    	 this.typeStep = TypeStep.E_and;
+	    	 this.operatorPriority = OperatorPriority.E_lev3;
+	    	 this.idxPartOpe = 0;			
+		}
+		
+		return;
 	}
 
 	public boolean check(ExpBin<?> expBin, int idxStep) {
@@ -38,6 +71,9 @@ public class FAnd extends Function {
 		
 		idxOpd1 = step.getOpnd().get(0);
 		idxOpd2 = step.getOpnd().get(1);
+		
+		Logger.error("Type 1 : " + expBin.getStep().get(idxOpd1).getResType() );
+		Logger.error("Type 2 : " + expBin.getStep().get(idxOpd2).getResType() );
 		
 		if ( expBin.getStep().get(idxOpd1).getResType() != TypeData.E_int &&
 		     expBin.getStep().get(idxOpd1).getResType() != TypeData.E_boolean ) {

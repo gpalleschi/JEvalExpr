@@ -82,7 +82,7 @@ public class FTo_number extends Function{
 					Logger.error("String <" + (String) expBin.getStep().get(idxOpd1).getData().getValue() + "> not a number.");
 					return false;
 				}
-				expBin.getStep().get(idxStep).setTypeData(TypeData.E_int);
+				expBin.getStep().get(idxStep).setTypeData(TypeData.E_double);
 				expBin.getStep().get(idxStep).setData(new DataValue<Double>(ris));
 				expBin.getStep().get(idxStep).setNull(false);
 				

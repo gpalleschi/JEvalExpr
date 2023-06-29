@@ -25,7 +25,7 @@ public class JEvalExpr {
 //		  String Expression = "to_number(v1) + 19 + decode(to_date('20210101','yyyyMMdd'), to_date('20210102','yyyyMMdd'),1,18)";
 //		  String Expression = "to_date('20210101 000000','yyyyMMdd HHmmss') - to_date('010000','HHmmss')";
 //		  String Expression = "to_hhmiss(10.0)";
-		  String Expression = "regexp_instr('Hello 123 World 456', '\\d+',0,2)";
+		  String Expression = "(1 between 1 and 2) and (1=1)";
 		  
 		  expression = new Expression(Expression,variables);
 		  

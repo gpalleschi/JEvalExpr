@@ -44,6 +44,8 @@ public class FIn extends Function {
 				return false;
 			}
 		}
+		
+		expBin.getStep().get(idxStep).setResType(TypeData.E_boolean);
 
 		return true;
 	}

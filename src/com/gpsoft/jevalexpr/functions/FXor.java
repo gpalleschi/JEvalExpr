@@ -51,6 +51,8 @@ public class FXor extends Function {
 			return false;
 		}
 		
+		expBin.getStep().get(idxStep).setResType(TypeData.E_boolean);
+		
 		return true;
 	}
 

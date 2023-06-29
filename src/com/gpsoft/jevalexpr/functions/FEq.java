@@ -43,6 +43,8 @@ public class FEq extends Function {
 			Logger.error("function " + this.name + " (+) work only with same types of arguments.");
 			return false;
 		}
+		
+    	expBin.getStep().get(idxStep).setResType(TypeData.E_boolean);
 
 		return true;
 	}

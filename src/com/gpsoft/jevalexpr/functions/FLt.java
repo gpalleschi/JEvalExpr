@@ -49,6 +49,8 @@ public class FLt extends Function {
 			Logger.error("function " + this.name + " (+) don't work with boolean arguments.");
 			return false;
 		}
+		
+		expBin.getStep().get(idxStep).setResType(TypeData.E_boolean);
 
 		return true;
 	}

@@ -56,6 +56,7 @@ public class Functions {
 	    put("regexp_like", new FRegexp_like());
 	    put("regexp_substr", new FRegexp_substr());
 	    put("regexp_instr", new FRegexp_instr());
+	    put("between", new FBetween_and());
 	  /* ******************************************************** */
 	  /* Add below new Functions                                  */	    
 	}};
