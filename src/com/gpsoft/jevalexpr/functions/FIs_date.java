@@ -36,8 +36,6 @@ public class FIs_date extends Function {
 
 	public boolean check(ExpBin<?> expBin, int idxStep) {
 		
-		DateTimeFormatter formatter = null;
-
 		Step<?> step = expBin.getStep().get(idxStep);
 		int idxOpd;
 		int idxOpd2;
@@ -62,7 +60,6 @@ public class FIs_date extends Function {
      		
      		String formatDate = (String)expBin.getStep().get(idxOpd2).getData().getValue();
     		try {
-    			formatter = DateTimeFormatter.ofPattern(formatDate);
     		} catch( Exception e) {
     			Logger.error("to_date error wrong format string '" + formatDate + "'");
     			return false;
@@ -112,18 +109,18 @@ public class FIs_date extends Function {
 		}
 		
 		try {
-			LocalDateTime dateTime = LocalDateTime.parse((String)expBin.getStep().get(idxOpd1).getData().getValue(), formatter);
+			LocalDateTime.parse((String)expBin.getStep().get(idxOpd1).getData().getValue(), formatter);
 			
 			expBin.getStep().get(idxStep).setTypeData(TypeData.E_boolean);
 			expBin.getStep().get(idxStep).setData(new DataValue<Boolean>(true));
 		} catch( Exception e) {
 			try {
-				LocalDate date = LocalDate.parse((String)expBin.getStep().get(idxOpd1).getData().getValue(), formatter);
+				LocalDate.parse((String)expBin.getStep().get(idxOpd1).getData().getValue(), formatter);
 				expBin.getStep().get(idxStep).setTypeData(TypeData.E_boolean);
 				expBin.getStep().get(idxStep).setData(new DataValue<Boolean>(true));
 			} catch( Exception er) {
 				try {
-					LocalTime time = LocalTime.parse((String)expBin.getStep().get(idxOpd1).getData().getValue(), formatter);
+					LocalTime.parse((String)expBin.getStep().get(idxOpd1).getData().getValue(), formatter);
 					expBin.getStep().get(idxStep).setTypeData(TypeData.E_boolean);
 					expBin.getStep().get(idxStep).setData(new DataValue<Boolean>(true));
 				} catch( Exception err) {

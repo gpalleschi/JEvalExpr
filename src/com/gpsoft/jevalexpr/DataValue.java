@@ -1,5 +1,13 @@
 package com.gpsoft.jevalexpr;
 
+/**
+ * This class represents data value of functions
+ * 
+ * @author Giovanni Palleschi
+ * @version 1.0.0
+ *
+ */
+
 public class DataValue<T> {
 
 	TypeData typeData;

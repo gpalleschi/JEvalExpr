@@ -1,10 +1,5 @@
 package com.gpsoft.jevalexpr.functions;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 import com.gpsoft.jevalexpr.DataValue;
 import com.gpsoft.jevalexpr.ExpBin;
 import com.gpsoft.jevalexpr.OperatorPriority;
@@ -37,9 +32,7 @@ public class FTo_hhmiss extends Function {
 	public boolean check(ExpBin<?> expBin, int idxStep) {
 
 		Step<?> step = expBin.getStep().get(idxStep);
-		DateTimeFormatter formatter = null;
 		int idxOpd;
-		int idxOpd2;
 		if (step.getOpnd().size() != 1 ) {
 			Logger.error("Function to_hhmiss work with one argument instead of " + step.getOpnd().size() + ".");
 			return false;

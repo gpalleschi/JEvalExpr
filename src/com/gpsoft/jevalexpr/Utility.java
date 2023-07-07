@@ -5,6 +5,14 @@ import com.gpsoft.jevalexpr.log.Logger;
 
 import java.util.regex.Matcher;
 
+/**
+ * This class contains some utilities used in the library
+ * 
+ * @author Giovanni Palleschi
+ * @version 1.0.0
+ *
+ */
+
 public class Utility {
 	
 	public static int getString(String string, int start_idx, char sep) {
@@ -33,7 +41,7 @@ public class Utility {
 	        return false;
 	    }
 	    try {
-	        double d = Double.parseDouble(strNum);
+	        Double.parseDouble(strNum);
 	    } catch (NumberFormatException nfe) {
 	        return false;
 	    }

@@ -4,6 +4,16 @@ import java.util.ArrayList;
 
 import com.gpsoft.jevalexpr.Token;
 
+/**
+ * This class represents log class actually all logs are printed in stdout <br>
+ * Are permitted 4 levels of Logs (ERROR, WARNING, DEBUG and INFO) <br>
+ * This log can be replaced by log4j utility.
+ * 
+ * @author Giovanni Palleschi
+ * @version 1.0.0
+ *
+ */
+
 public class Logger {
 	
 	// Level 

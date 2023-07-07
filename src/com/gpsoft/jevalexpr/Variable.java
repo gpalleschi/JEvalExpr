@@ -1,5 +1,14 @@
 package com.gpsoft.jevalexpr;
 
+/**
+ * This class represents expression input variable <br>
+ * Type of input variable permitted are : Boolean, String, Integer or Double <br>
+ * 
+ * @author Giovanni Palleschi
+ * @version 1.0.0
+ *
+ */
+
 public class Variable<T> {
 	private String name;
 	private TypeData typeVariable;

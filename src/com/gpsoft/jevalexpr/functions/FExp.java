@@ -19,10 +19,10 @@ public class FExp extends Function{
 		this.name = "^";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
-		this.operatorPriority = OperatorPriority.E_lev0;
+		this.operatorPriority = OperatorPriority.E_lev3;
 		this.idxPartOpe = 0;
 		this.valueType = ValueType.E_nat;
-		this.typeStep =TypeStep.E_sum; 
+		this.typeStep =TypeStep.E_exp; 
 		this.stepRef = 0;
 		this.typeData = TypeData.E_string;
 		
@@ -80,7 +80,7 @@ public class FExp extends Function{
 	}
 	
 	public boolean exec(ExpBin<?> expBin, int idxStep) {
-		Logger.debug("In Exec FSum");	
+		Logger.debug("In Exec FExp");	
 		Step<?> step = expBin.getStep().get(idxStep);
 		
 		int idxOpd1;
@@ -103,8 +103,8 @@ public class FExp extends Function{
 			return true;
 		}
 		
-		Logger.debug("In FSum index Opd1 : " + idxOpd1);
-		Logger.debug("In FSum index Opd2 : " + idxOpd2);
+		Logger.debug("In FExp index Opd1 : " + idxOpd1);
+		Logger.debug("In FExp index Opd2 : " + idxOpd2);
 		
 		if ( Utility.isDouble(expBin.getStep().get(idxOpd1).getData().getValue()) &&
 		     Utility.isDouble(expBin.getStep().get(idxOpd2).getData().getValue()) ) {

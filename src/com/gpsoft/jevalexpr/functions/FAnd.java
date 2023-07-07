@@ -72,9 +72,6 @@ public class FAnd extends Function {
 		idxOpd1 = step.getOpnd().get(0);
 		idxOpd2 = step.getOpnd().get(1);
 		
-		Logger.error("Type 1 : " + expBin.getStep().get(idxOpd1).getResType() );
-		Logger.error("Type 2 : " + expBin.getStep().get(idxOpd2).getResType() );
-		
 		if ( expBin.getStep().get(idxOpd1).getResType() != TypeData.E_int &&
 		     expBin.getStep().get(idxOpd1).getResType() != TypeData.E_boolean ) {
 			Logger.error("function " + this.name + " (+) work only with number or boolean arguments.");

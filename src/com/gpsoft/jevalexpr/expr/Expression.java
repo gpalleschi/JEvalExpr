@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.gpsoft.jevalexpr.Constants;
 import com.gpsoft.jevalexpr.DataValue;
 import com.gpsoft.jevalexpr.ExpBin;
 import com.gpsoft.jevalexpr.OperatorPriority;
@@ -21,9 +20,17 @@ import com.gpsoft.jevalexpr.Variable;
 import com.gpsoft.jevalexpr.functions.*;
 import com.gpsoft.jevalexpr.log.Logger;
 
+/**
+ * This class is the heart of this library and permits to parse, check and execute an input expression
+ * 
+ * @author Giovanni Palleschi
+ * @version 1.0.0
+ *
+ */
+
 public class Expression  { 
 	private String humanExpr;
-	private Variable<?>[] variables;
+	private ArrayList<Variable<?>> variables;
 	
 	ArrayList<Token<?>> tokens = new ArrayList<Token<?>>();
 	ArrayList<Token<?>> natTokens;
@@ -34,19 +41,26 @@ public class Expression  {
 		return expBin;
 	}
 
-	public Expression(String expr, Variable<?>[] var) {
+	public Expression(String expr, ArrayList<Variable<?>> var) {
 		super();
 		this.humanExpr = expr;
 		this.variables = var;
 	}
 	
-	private boolean initCompiling() throws Exception {
+	/**
+	 * This function check if input variables are duplicated or the name of variable is a key word.<br>
+	 * 
+	 * @return result of check (true if is all ok or false if is nok)
+	 * 
+	 */
+	
+	private boolean initCompiling() {
 		boolean ret = true;
 		int iTotVariableName = 0;
 	
 		// Check if variables not presents in key words
 		for(Variable<?> variable : variables ) {
-			if ( Constants.KEY_WORDS.contains(variable.getName()) ) {
+			if ( Functions.names.containsKey(variable.getName()) ) {
 				ret = false;
 				Logger.error("Variable '" + variable.getName() + "' is a key word." );
 				break;
@@ -69,6 +83,13 @@ public class Expression  {
 		
 		return ret;
 	}	
+	
+	/**
+	 * This method analyzes expression to divide it in tokens 
+	 * 
+	 * @param expPos : current position
+	 * @return current position of character analyzed in expression
+	 */
 	
 	private int getToken(int expPos) {
 		
@@ -235,7 +256,6 @@ public class Expression  {
 			int op_prio = OperatorPriority.E_lev0;
 			TypeStep step_type = TypeStep.E_ge;
 			int idx_part_op = 0;
-			boolean equalChar = false;
 			Function funToAdd = null;
 			
 			switch(humanExpr.charAt(expPos)) {
@@ -290,7 +310,7 @@ public class Expression  {
 				tokens.add(new Token<Object>(String.valueOf(humanExpr.charAt(expPos)), // String tokenName, 
 				             TypeToken.E_op, // TypeToken typeToken, 
 				             OperatorSyntaxType.E_two, // OperatorSyntaxType opeartorSyntaxType,
-				             OperatorPriority.E_lev4, // OperatorPriority operatorPriority, 
+				             OperatorPriority.E_lev0, // OperatorPriority operatorPriority, 
 				             0, // int idxPartOpe, 
 				             ValueType.E_nat, // ValueType valueType,
 				             TypeStep.E_exp, // TypeStep typeStep, 
@@ -383,10 +403,7 @@ public class Expression  {
 		      case '>':
 		      case '!':
 		      {
-		    	  equalChar = false;
 		    	  if ( expPos + 1 < humanExpr.length() && '=' == humanExpr.charAt(expPos + 1) ) {
-		    		  equalChar = true;
-		    		  
 		    		  op_prio = OperatorPriority.E_lev2;
 		    		  
 		    		  if ( '<' == humanExpr.charAt(expPos) ) {
@@ -537,14 +554,15 @@ public class Expression  {
 						                     function));
 			} else {
 				  int idxV = 0;
-				  for(idxV=0;idxV<variables.length;idxV++) {
-					  if ( variables[idxV].getName().compareTo(funOpeFunction) == 0 ) break;
+				  for(idxV=0;idxV<variables.size();idxV++) {
+					  if ( variables.get(idxV).getName().compareTo(funOpeFunction) == 0 ) break;
 				  }
 				  
-				  if ( idxV == variables.length ) {
+				  if ( idxV == variables.size() ) {
 					  Logger.error("Key Word [" + funOpeFunction + "] isn't a variable or a function.");
 					  idx = -1;
 				  } else {
+					  
 				      tokens.add(new Token<Object>(funOpeFunction, // String tokenName, 
 				             TypeToken.E_value, // TypeToken typeToken, 
 				             OperatorSyntaxType.E_fun, // OperatorSyntaxType opeartorSyntaxType,
@@ -553,7 +571,7 @@ public class Expression  {
 				             ValueType.E_nat, // ValueType valueType,
 				             TypeStep.E_variable, // TypeStep typeStep, 
 				             idxV, // int stepRef,
-				             variables[idxV].getTypeVariable(),
+				             variables.get(idxV).getTypeVariable(),
 				             null,
 				             tokens.size(),
 				             new FVariable(funOpeFunction)
@@ -566,6 +584,12 @@ public class Expression  {
 		
 		return 1;
 	}
+	
+	/**
+	 * Function to tokenize expression
+	 * 
+	 * @return boolean (true if is ok or false if is nok)
+	 */
 	
 	private boolean tokenize() {
 		boolean ret = true;
@@ -597,6 +621,12 @@ public class Expression  {
 		return ret;
 	}
 	
+	/**
+	 * Function to simplify expression divided in tokens 
+	 * 
+	 * @return boolean (true if is ok or false if is nok)
+	 */
+	
 	private boolean initSimplify() {
 		boolean ret = true;
 		
@@ -612,11 +642,11 @@ public class Expression  {
 				   // If step type different jump to next step
 				   if ( tokens.get(idx).getTypeStep() != expBin.getStep().get(idy).getTypeStep() ) continue;
 				   // If data type is different jump to next step
-				   if ( tokens.get(idx).getTypeData() != expBin.getStep().get(idy).getTypeData() ) continue;
+				   if ( tokens.get(idx).getTypeData() != expBin.getStep().get(idy).getResType() ) continue;
 				   // If constant
 				   if ( tokens.get(idx).getTypeStep() == TypeStep.E_constant ) {
 					   // If value is different jump to next step
-					   if ( tokens.get(idx).getData().getValue() != expBin.getStep().get(idy).getData() ) continue;
+					   if ( tokens.get(idx).getData().getValue() != expBin.getStep().get(idy).getData().getValue() ) continue;
 					   
 					   // I found it prev
 					   
@@ -640,6 +670,9 @@ public class Expression  {
 					   tokens.get(idx).setTypeToken(TypeToken.E_value);
 					   tokens.get(idx).setValueType(ValueType.E_res);
 					   tokens.get(idx).setStepRef(idy);
+//					   Logger.error("DEBUG setto variabile step ref a " + tokens.get(idx).getStepRef() );
+//					   tokens.get(idx).setStepRef(tokens.get(idy).getStepRef());
+					   flag_found = true;
 					   break;
 					   
 				   }
@@ -684,6 +717,12 @@ public class Expression  {
 		return ret;
 	}
 	
+	/**
+	 * Function to simplify brackets if it is possible 
+	 * 
+	 * @return 0 if it was simplified or 1 if not
+	 */
+	
 	private int brcSimplify() {
 		int idx = 0;
 		
@@ -711,6 +750,12 @@ public class Expression  {
 		}
 	    return 1;
 	}
+	
+	/**
+	 * Function to simplify functions if it is possible 
+	 * 
+	 * @return 0 if it was simplified or 1 if not
+	 */
 	
 	private int funSimplify() {
         int idx = 0;
@@ -788,6 +833,12 @@ public class Expression  {
 		
 		return 1;
 	}
+	
+	/**
+	 * Function to simplify chain functions if it is possible 
+	 * 
+	 * @return 0 if it was simplified or 1 if not
+	 */
 	
 	private int chainSimplify(int chain_syn) {
 		int idx;
@@ -914,6 +965,11 @@ public class Expression  {
 	    return 1;	
 	}
 
+	/**
+	 * Function to simplify undef functions if it is possible 
+	 * 
+	 * @return 0 if it was simplified or 1 if not
+	 */
 	
 	private int undefSimplify() {
 		int  idx;
@@ -1014,7 +1070,11 @@ public class Expression  {
 		return 1;
 	}
 	
-	
+	/**
+	 * Function to call all simplify methods 
+	 * 
+	 * @return 0 if it was simplified or 1 if not
+	 */	
 
 	private int simplify() {
 		int rs = 0;
@@ -1078,7 +1138,13 @@ public class Expression  {
 		return 1;
 	}
 	
-	public int execExpr(Variable<?>[] variables) {
+	/**
+	 * Function to execute compiled Expression 
+	 * 
+	 * @return always 0 
+	 */	
+	
+	public int execExpr(ArrayList<Variable<?>> variables) {
 		
 		expBin.setVariables(variables);
 		int idx = expBin.getStep().size()-1;
@@ -1111,12 +1177,23 @@ public class Expression  {
 		return 0;
 	}
 	
+	/**
+	 * Function to get result execution of a compiled Expression 
+	 * 
+	 * @return DataValue element
+	 */	
+	
 	public DataValue<?> getResult() {
 		int idx = expBin.getStep().size()-1;
 		if ( idx < 0 ) idx = 0;
 		return expBin.getStep().get(idx).getData();
 	}
 
+	/**
+	 * Method to check tokens generated
+	 * 
+	 * @return 0 if it's ok different value if nok
+	 */
 	
 	private int checkExpr() {
 		if ( tokens.size() != 3 ) {
@@ -1137,6 +1214,12 @@ public class Expression  {
 		
 		return 0;
 	}
+	
+	/**
+	 * This method permits to show in what token there is a problem
+	 * 
+	 * @return 0 if it's ok different value if nok
+	 */
 	
 	private int resDataTypeDefinition() {	
 		  int idx;
@@ -1168,9 +1251,13 @@ public class Expression  {
 		  return 0;
 	}
 	
+	/**
+	 * This method check, parse and compile expression
+	 * 
+	 * @return true if if ok false if nok
+	 */
 	
-	
-    public boolean compExpr() throws Exception	{
+    public boolean compExpr() {
 
     	 boolean rs = true;
     	 int codRit = 0;
@@ -1247,36 +1334,5 @@ public class Expression  {
     	 }
     	 
     	 return rs;
-
-//    	  /* Controllo che sia la massima semplificazione possibile */
-//    	  if ( i_CheckExp () )
-//    	  {
-//    	    strcpy ( log_msg, "This is not a valid expression." );
-//    	    log_err();
-//    	    return -7;
-//    	  }
-//
-//    	  /* Devo valorizzare i tipi di dati in uscita da ogni step che non sia un valore */
-//    	  if ( i_ResDataTypeDefinition ( ) )
-//    	  {
-//    	    strcpy ( log_msg, "i_ResTypeDefinition() fail." );
-//    	    log_err();
-//    	    return -8;
-//    	  }
-//
-//    	  /* Devo preparare l'output */
-//    	  *exp_bin_p = (function_t *) calloc ( 1, sizeof (function_t) + (exp_bin.nmb_step - 1) * sizeof ( step_t ) );
-//    	  if ( ! ( * exp_bin_p ) )
-//    	  {
-//    	    sprintf ( log_msg, "calloc() fail ( errno <%d> - message <%s> ).", errno, strerror ( errno ) );
-//    	    log_err();
-//    	    return -9;
-//    	  }
-//    	  ((function_t *)(*exp_bin_p))->nmb_step = exp_bin.nmb_step;
-//    	  memcpy ( ((function_t *)(*exp_bin_p))->step, exp_bin.step, exp_bin.nmb_step * sizeof ( step_t ) );
-//
-//    	  sprintf( log_msg, "Total size Expression <%f> bytes.",(double)(sizeof (function_t) + (exp_bin.nmb_step - 1) * sizeof ( step_t )));
-//    	  log_inf();
-//    	  return 0;
     	}
  }

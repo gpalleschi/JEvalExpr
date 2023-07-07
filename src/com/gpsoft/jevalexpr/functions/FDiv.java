@@ -19,7 +19,7 @@ public class FDiv extends Function{
 		this.name = "/";
 		this.typeToken = TypeToken.E_op;
 		this.operatorSyntaxType = OperatorSyntaxType.E_fun;
-		this.operatorPriority = OperatorPriority.E_lev0;
+		this.operatorPriority = OperatorPriority.E_lev1;
 		this.idxPartOpe = 0;
 		this.valueType = ValueType.E_nat;
 		this.typeStep =TypeStep.E_div; 

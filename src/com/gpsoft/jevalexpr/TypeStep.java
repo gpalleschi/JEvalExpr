@@ -1,5 +1,13 @@
 package com.gpsoft.jevalexpr;
 
+/**
+ * This enum represents all functions configurated in the library
+ * 
+ * @author Giovanni Palleschi
+ * @version 1.0.0
+ *
+ */
+
 public enum TypeStep {
 	  E_constant,                 /* COSTANT                      */
 	  E_variable,                 /* VARIABLE                    */
@@ -67,7 +75,7 @@ public enum TypeStep {
 	  E_regexp_like,              /* FUNCTION regexp_like         */
 	  E_regexp_substr,            /* FUNCTION regexp_substr       */
 	  E_regexp_instr,             /* FUNCTION regexp_instr        */
-	  E_between_and               /* FUNCTION between_and TODO    */
+	  E_between_and               /* FUNCTION between_and         */
 	  /* ******************************************************** */
 	  /* Add below new Functions                                  */
 }

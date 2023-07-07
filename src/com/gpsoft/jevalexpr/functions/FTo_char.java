@@ -113,7 +113,7 @@ public class FTo_char extends Function{
 			expBin.getStep().get(idxStep).setTypeData(TypeData.E_string);
     		expBin.getStep().get(idxStep).setData(new DataValue<String>(String.valueOf(valInt)));
 		} else if ( expBin.getStep().get(idxOpd1).getResType() == TypeData.E_double ) {
-			double valDouble = (Integer)expBin.getStep().get(idxOpd1).getData().getValue();
+			double valDouble = (Double)expBin.getStep().get(idxOpd1).getData().getValue();
 			expBin.getStep().get(idxStep).setTypeData(TypeData.E_string);
     		expBin.getStep().get(idxStep).setData(new DataValue<String>(String.valueOf(valDouble)));
 		} else if ( expBin.getStep().get(idxOpd1).getResType() == TypeData.E_date ) {

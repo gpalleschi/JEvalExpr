@@ -3,19 +3,28 @@ package com.gpsoft.jevalexpr;
 import com.gpsoft.jevalexpr.functions.Function;
 import com.gpsoft.jevalexpr.log.Logger;
 
+/**
+ * Class Token is single token of an expression
+ * 
+ * @author Giovanni Palleschi
+ * @version 1.0.0
+ *
+ * @param <T>
+ */
+
 public class Token<T> {
 	String                tokenName;           /* TOKEN                                           */
 
-	TypeToken             typeToken;           /* TIPO DI TOKEN                                   */
-	int                   operatorSyntaxType;  /* TIPO DI SINTASSI - OPERATORE                    */
-	int                   operatorPriority;    /* PRIORITA - OPERATORE                            */
-	int                   idxPartOpe;          /* INDICE DELLA PARTE DI OPERATORE - OPERATORE     */
-	ValueType             valueType;           /* TIPO DI VALORE - VALORE                         */
-	TypeStep              typeStep;            /* TIPO DI STEP CHE VERRA' GENERATO - NO RISULTATO */
-	int                   stepRef;             /* STEP A CUI SI RIFERISCE - VALORE - RISULTATO    */
+	TypeToken             typeToken;           /* TYPE TOKEN                                   */
+	int                   operatorSyntaxType;  /* TYPE SYNTAX OPERATOR                    */
+	int                   operatorPriority;    /* PRIORITY - OPERATOR                            */
+	int                   idxPartOpe;          /* INDEX OPERATOR      */
+	ValueType             valueType;           /* TYPE OF VALUE                          */
+	TypeStep              typeStep;            /* STEP TYPE GENERATED - NO RISULT */
+	int                   stepRef;             /* RIF STEP - VALOR - RESULT    */
 	TypeData              typeData;        
-	DataValue<?>          data;               /* VALORE TOKEN                   */
-	int                   nativeIdx;           /* INDICE DEL TOKEN NATIVO                         */
+	DataValue<?>          data;                /* TOKEN VALUE                   */
+	int                   nativeIdx;           /* NATIVE TOKEN INDEX                         */
 	Function              function;            /* FUNCTION */
 	
 	public Token(TypeToken typeToken, int nativeIdx) {

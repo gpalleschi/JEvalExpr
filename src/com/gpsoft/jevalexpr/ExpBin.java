@@ -2,9 +2,17 @@ package com.gpsoft.jevalexpr;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents expression compiled
+ * 
+ * @author Giovanni Palleschi
+ * @version 1.0.0
+ *
+ */
+
 public class ExpBin<T> {
 	ArrayList<Step<?>> step;
-	private Variable<?>[] variables;
+	private ArrayList<Variable<?>> variables;
 
 	public ExpBin() {
 		super();
@@ -15,11 +23,11 @@ public class ExpBin<T> {
 		return step;
 	}
 
-	public void setVariables(Variable<?>[] variables) {
+	public void setVariables(ArrayList<Variable<?>> variables) {
 		this.variables = variables;
 	}
 
-	public Variable<?>[] getVariables() {
+	public ArrayList<Variable<?>> getVariables() {
 		return variables;
 	}
 

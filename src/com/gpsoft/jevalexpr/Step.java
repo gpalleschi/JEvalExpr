@@ -5,8 +5,17 @@ import java.util.ArrayList;
 
 import com.gpsoft.jevalexpr.functions.Function;
 
+/**
+ * Class Step is single step of a function
+ * 
+ * @author Giovanni Palleschi
+ * @version 1.0.0
+ *
+ * @param <T>
+ */
+
 public class Step<T> {
-	
+
 	TypeStep      typeStep;
 	TypeData      resType;
 	TypeData      typeData;
@@ -16,7 +25,7 @@ public class Step<T> {
 	Function      function;
 	
 	ArrayList<Integer> opnd = new ArrayList<Integer>();
-	
+
 	public Object getValue() {
 		return data.getValue();
 	}
@@ -195,6 +204,4 @@ public class Step<T> {
 		this.function = function;
 	}
 
-	//TODO: Aggiungere comp_exp
-	
 }

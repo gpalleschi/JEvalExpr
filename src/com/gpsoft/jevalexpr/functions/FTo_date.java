@@ -37,7 +37,6 @@ public class FTo_date extends Function {
 	public boolean check(ExpBin<?> expBin, int idxStep) {
 
 		Step<?> step = expBin.getStep().get(idxStep);
-		DateTimeFormatter formatter = null;
 		int idxOpd;
 		int idxOpd2;
 		if (step.getOpnd().size() != 1 && step.getOpnd().size() != 2) {
@@ -61,7 +60,7 @@ public class FTo_date extends Function {
      		
      		String formatDate = (String)expBin.getStep().get(idxOpd2).getData().getValue();
     		try {
-    			formatter = DateTimeFormatter.ofPattern(formatDate);
+    			DateTimeFormatter.ofPattern(formatDate);
     		} catch( Exception e) {
     			Logger.error("to_date error wrong format string '" + formatDate + "'");
     			return false;

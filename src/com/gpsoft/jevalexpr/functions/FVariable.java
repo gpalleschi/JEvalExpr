@@ -35,27 +35,29 @@ public class FVariable extends Function {
 			
 			int indVar = expBin.getStep().get(idxStep).getOpnd().get(0);
 			
-		    if ( expBin.getVariables()[indVar].getValue() == null ) {
+		    if ( expBin.getVariables().get(indVar).getValue() == null ) {
    			   expBin.getStep().get(idxStep).setNull(true);
 		    } else {
    			   expBin.getStep().get(idxStep).setNull(false);
 		    }
+		    
+			Logger.debug("In FVariable type : " + expBin.getVariables().get(indVar).getTypeVariable());
 			
-			if ( expBin.getVariables()[indVar].getTypeVariable() == TypeData.E_string ) {
-				String value = expBin.getVariables()[indVar].getValue().toString();
+			if ( expBin.getVariables().get(indVar).getTypeVariable() == TypeData.E_string ) {
+				String value = expBin.getVariables().get(indVar).getValue().toString();
 				Logger.debug("E_string : " + value);
 				expBin.getStep().get(idxStep).setData(new DataValue<String>(value));
 			    expBin.getStep().get(idxStep).setTypeData(TypeData.E_string);
-			} else if ( expBin.getVariables()[indVar].getTypeVariable() == TypeData.E_int ) {
-				Integer value = (Integer) expBin.getVariables()[indVar].getValue();
+			} else if ( expBin.getVariables().get(indVar).getTypeVariable() == TypeData.E_int ) {
+				Integer value = (Integer) expBin.getVariables().get(indVar).getValue();
 				expBin.getStep().get(idxStep).setData(new DataValue<Integer>(value));
 			    expBin.getStep().get(idxStep).setTypeData(TypeData.E_int);
-			} else if ( expBin.getVariables()[indVar].getTypeVariable() == TypeData.E_double ) {
-				Double value = (Double) expBin.getVariables()[indVar].getValue();
+			} else if ( expBin.getVariables().get(indVar).getTypeVariable() == TypeData.E_double ) {
+				Double value = (Double) expBin.getVariables().get(indVar).getValue();
 				expBin.getStep().get(idxStep).setData(new DataValue<Double>(value));
 			    expBin.getStep().get(idxStep).setTypeData(TypeData.E_double);
-			} else if ( expBin.getVariables()[indVar].getTypeVariable() == TypeData.E_boolean ) {
-				Boolean value = (Boolean) expBin.getVariables()[indVar].getValue();
+			} else if ( expBin.getVariables().get(indVar).getTypeVariable() == TypeData.E_boolean ) {
+				Boolean value = (Boolean) expBin.getVariables().get(indVar).getValue();
 				expBin.getStep().get(idxStep).setData(new DataValue<Boolean>(value));
 			    expBin.getStep().get(idxStep).setTypeData(TypeData.E_boolean);
 			} else {
