@@ -63,9 +63,9 @@ public class FNvl extends Function{
 		if ( !expBin.getStep().get(idxOpd1).getFunction().exec(expBin, idxOpd1) ) return false;
 		if ( !expBin.getStep().get(idxOpd2).getFunction().exec(expBin, idxOpd2) ) return false;
 		
-		if ( expBin.getStep().get(idxOpd1).isNull() ) {
+		if ( expBin.getStep().get(idxOpd1).getData().isNull() ) {
 			
-			if ( expBin.getStep().get(idxOpd2).isNull() ) {
+			if ( expBin.getStep().get(idxOpd2).getData().isNull() ) {
 				expBin.getStep().get(idxStep).setTypeData(expBin.getStep().get(idxOpd2).getTypeData());
 				expBin.getStep().get(idxStep).setNull(true);
 			} else {

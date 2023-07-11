@@ -122,7 +122,7 @@ public class FRegexp_substr extends Function{
 		
 		if ( !expBin.getStep().get(idxOpd1).getFunction().exec(expBin, idxOpd1) ) return false;
 	
-		if ( expBin.getStep().get(idxOpd1).isNull() ) {
+		if ( expBin.getStep().get(idxOpd1).getData().isNull() ) {
 			expBin.getStep().get(idxStep).setNull(true);
 			return true;
 		}
@@ -136,7 +136,7 @@ public class FRegexp_substr extends Function{
 
 		if ( !expBin.getStep().get(idxOpd2).getFunction().exec(expBin, idxOpd2) ) return false;
 		
-		if ( expBin.getStep().get(idxOpd2).isNull() ) {
+		if ( expBin.getStep().get(idxOpd2).getData().isNull() ) {
 			expBin.getStep().get(idxStep).setNull(true);
 			return true;
 		}
@@ -153,7 +153,7 @@ public class FRegexp_substr extends Function{
 			
 			if ( !expBin.getStep().get(idxOpd3).getFunction().exec(expBin, idxOpd3) ) return false;
 			
-			if ( expBin.getStep().get(idxOpd3).isNull() ) {
+			if ( expBin.getStep().get(idxOpd3).getData().isNull() ) {
 				expBin.getStep().get(idxStep).setNull(true);
 				return true;
 			}			
@@ -175,7 +175,7 @@ public class FRegexp_substr extends Function{
 				
 				if ( !expBin.getStep().get(idxOpd4).getFunction().exec(expBin, idxOpd4) ) return false;
 				
-				if ( expBin.getStep().get(idxOpd4).isNull() ) {
+				if ( expBin.getStep().get(idxOpd4).getData().isNull() ) {
 					expBin.getStep().get(idxStep).setNull(true);
 					return true;
 				}			

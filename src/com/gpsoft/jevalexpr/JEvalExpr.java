@@ -76,7 +76,7 @@ public class JEvalExpr {
 			//                1       1         0       1      = 13
 			//                1       1         1       0      = 14
 			//                1       1         1       1      = 15
-		  Logger.setLevel(8);
+		  Logger.setLevel(15);
 		  String Expression = "";
 
 		  Expression expression = null;
@@ -103,7 +103,7 @@ public class JEvalExpr {
 			    Expression = br.readLine();
 			    System.out.print("\n\n");
 			    
-			    if ( Expression.length() != 1 && (Expression.compareTo("x") != 0) && (Expression.compareTo("X") != 0)) {
+			    if ( Expression.length() > 0 && (Expression.compareTo("x") != 0) && (Expression.compareTo("X") != 0)) {
 					  expression = new Expression(Expression,variables);
 					  
 					  if ( !expression.compExpr() ) {

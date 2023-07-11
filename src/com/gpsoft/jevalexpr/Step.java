@@ -20,7 +20,6 @@ public class Step<T> {
 	TypeData      resType;
 	TypeData      typeData;
 	DataValue<?>  data;
-	boolean       isNull;
 	int util_area;
 	Function      function;
 	
@@ -59,11 +58,6 @@ public class Step<T> {
 		}
 	}
 
-	public boolean isNull() {
-		return isNull;
-	}
-
-
 	public ArrayList<Integer> getOpnd() {
 		return opnd;
 	}
@@ -91,7 +85,6 @@ public class Step<T> {
 			data = new DataValue<Double>((Double)value);
 		}	
 		
-		this.isNull = isNull;
 		this.opnd = opnd;
 		this.util_area = util_area;
 	}
@@ -101,7 +94,6 @@ public class Step<T> {
 		this.typeStep = typeStep;
 		this.resType = resType;
 		this.typeData = resType;
-		this.isNull = isNull;
 		
 		if ( typeStep == TypeStep.E_constant ) {
 			if ( Utility.isBoolean(value) ) {
@@ -161,29 +153,33 @@ public class Step<T> {
 
 	public void setNull(boolean isNull) {
 		DataValue<?>  dataToSet;
-		this.isNull = isNull;
 		
 		if ( isNull ) {
 			if ( this.resType == TypeData.E_string ) {
 				dataToSet = new DataValue<String>("");
 				dataToSet.typeData = TypeData.E_string;
+				dataToSet.setNull(true);
 				this.setData(dataToSet);
 			} else if ( this.resType == TypeData.E_int ) {
 				dataToSet = new DataValue<Integer>(0);
 				dataToSet.typeData = TypeData.E_int;
+				dataToSet.setNull(true);
 				this.setData(dataToSet);
 			} else if ( this.resType == TypeData.E_double ) {
 				dataToSet = new DataValue<Double>(0.0);
 				dataToSet.typeData = TypeData.E_double;
+				dataToSet.setNull(true);
 				this.setData(dataToSet);
 			} else if ( this.resType == TypeData.E_boolean ) {
 				dataToSet = new DataValue<Boolean>(false);
 				dataToSet.typeData = TypeData.E_boolean;
+				dataToSet.setNull(true);
 				this.setData(dataToSet);
 			} else if ( this.resType == TypeData.E_date ) {
 				LocalDateTime dateTime = LocalDateTime.now();
 				dataToSet = new DataValue<LocalDateTime>(dateTime);
 				dataToSet.typeData = TypeData.E_date;
+				dataToSet.setNull(true);
 				this.setData(dataToSet);
 			}
 		}

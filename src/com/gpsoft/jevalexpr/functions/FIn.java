@@ -38,8 +38,9 @@ public class FIn extends Function {
 		idxOpd1 = step.getOpnd().get(0);
 		
 		for ( int idx=1;idx<step.getOpnd().size();idx++ ) {
-			Logger.debug("Type 1 : " + expBin.getStep().get(idxOpd1).getResType() + " Type " + idx + " " + expBin.getStep().get(idx).getResType());
-			if ( expBin.getStep().get(idxOpd1).getResType() != expBin.getStep().get(idx).getResType() ) {
+			int idxOpdn = step.getOpnd().get(idx);
+			Logger.debug("Type 1 : " + expBin.getStep().get(idxOpd1).getResType() + " Type " + idx + " " + expBin.getStep().get(idxOpdn).getResType());
+			if ( expBin.getStep().get(idxOpd1).getResType() != expBin.getStep().get(idxOpdn).getResType() ) {
 				Logger.error("function " + this.name + " (+) work only with same types of arguments.");
 				return false;
 			}
@@ -54,14 +55,15 @@ public class FIn extends Function {
 		
 		Logger.debug("In Exec FEq");	
 		Step<?> step = expBin.getStep().get(idxStep);
+		int idxOpd1 = step.getOpnd().get(0);
+		int idxOpdn = -1;
 		
 		for ( int idx=0;idx<step.getOpnd().size();idx++ ) {
-			if ( !expBin.getStep().get(idx).getFunction().exec(expBin, idx) ) return false;
+			idxOpdn = step.getOpnd().get(idx);
+			if ( !expBin.getStep().get(idxOpdn).getFunction().exec(expBin, idxOpdn) ) return false;
 		}
-
-		int idxOpd1 = step.getOpnd().get(0);
 		
-		if ( expBin.getStep().get(idxOpd1).isNull() ) {
+		if ( expBin.getStep().get(idxOpd1).getData().isNull() ) {
 			expBin.getStep().get(idxStep).setNull(true);
 			return true;
 		}
@@ -74,12 +76,14 @@ public class FIn extends Function {
 			
 			for ( idx=1;idx<step.getOpnd().size();idx++ ) {
 				
-				 if ( !Utility.isString(expBin.getStep().get(idx).getData().getValue()) ) {
+				idxOpdn = step.getOpnd().get(idx);
+				
+				 if ( !Utility.isString(expBin.getStep().get(idxOpdn).getData().getValue()) ) {
 					Logger.error("Binary Expression corrupted");
 					return false;
 				 }
 				
-				 String value2 = (String)(expBin.getStep().get(idx).getData().getValue());
+				 String value2 = (String)(expBin.getStep().get(idxOpdn).getData().getValue());
 				 
 				 if ( value1.compareTo(value2) == 0 ) break;
 			}
@@ -95,13 +99,14 @@ public class FIn extends Function {
 	     	int idx=1;
 			
 			for ( idx=1;idx<step.getOpnd().size();idx++ ) {
+				idxOpdn = step.getOpnd().get(idx);
 				
-				 if ( !Utility.isInteger(expBin.getStep().get(idx).getData().getValue()) ) {
+				 if ( !Utility.isInteger(expBin.getStep().get(idxOpdn).getData().getValue()) ) {
 					Logger.error("Binary Expression corrupted");
 					return false;
 				 }
 				
-				 int value2 = (Integer)(expBin.getStep().get(idx).getData().getValue());
+				 int value2 = (Integer)(expBin.getStep().get(idxOpdn).getData().getValue());
 				 
 				 if ( value1 == value2 ) break;
 			}
@@ -117,13 +122,14 @@ public class FIn extends Function {
 	     	int idx=1;
 			
 			for ( idx=1;idx<step.getOpnd().size();idx++ ) {
+				 idxOpdn = step.getOpnd().get(idx);
 				
-				 if ( !Utility.isBoolean(expBin.getStep().get(idx).getData().getValue()) ) {
+				 if ( !Utility.isBoolean(expBin.getStep().get(idxOpdn).getData().getValue()) ) {
 					Logger.error("Binary Expression corrupted");
 					return false;
 				 }
 				
-				 boolean value2 = (Boolean)(expBin.getStep().get(idx).getData().getValue());
+				 boolean value2 = (Boolean)(expBin.getStep().get(idxOpdn).getData().getValue());
 				 
 				 if ( value1 == value2 ) break;
 			}
@@ -139,13 +145,14 @@ public class FIn extends Function {
 	     	int idx=1;
 			
 			for ( idx=1;idx<step.getOpnd().size();idx++ ) {
+				 idxOpdn = step.getOpnd().get(idx);
 				
-				 if ( !Utility.isDouble(expBin.getStep().get(idx).getData().getValue()) ) {
+				 if ( !Utility.isDouble(expBin.getStep().get(idxOpdn).getData().getValue()) ) {
 					Logger.error("Binary Expression corrupted");
 					return false;
 				 }
 				
-				 double value2 = (Double)(expBin.getStep().get(idx).getData().getValue());
+				 double value2 = (Double)(expBin.getStep().get(idxOpdn).getData().getValue());
 				 
 				 if ( value1 == value2 ) break;
 			}

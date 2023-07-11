@@ -127,7 +127,7 @@ public class FMin extends Function{
 		int idxOpdn = 0;
 		if ( !expBin.getStep().get(idxOpd1).getFunction().exec(expBin, idxOpd1) ) return false;
 	
-		if ( expBin.getStep().get(idxOpd1).isNull() ) {
+		if ( expBin.getStep().get(idxOpd1).getData().isNull() ) {
 			expBin.getStep().get(idxStep).setNull(true);
 			return true;
 		}
@@ -138,7 +138,7 @@ public class FMin extends Function{
 				
 			if ( !expBin.getStep().get(idxOpdn).getFunction().exec(expBin, idxOpdn) ) return false;
 
-			if ( expBin.getStep().get(idxOpdn).isNull() ) {
+			if ( expBin.getStep().get(idxOpdn).getData().isNull() ) {
 				//Logger.error("continua");
 				continue;
 			} else {

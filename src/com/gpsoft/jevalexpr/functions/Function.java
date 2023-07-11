@@ -6,6 +6,13 @@ import com.gpsoft.jevalexpr.TypeStep;
 import com.gpsoft.jevalexpr.TypeToken;
 import com.gpsoft.jevalexpr.ValueType;
 
+/**
+ * This abstract class represents prototype of functions
+ * 
+ * @author Giovanni palleschi
+ * @version 1.0.0
+ *
+ */
 public abstract class Function {
 
 	String name;
@@ -19,10 +26,27 @@ public abstract class Function {
 	TypeStep typeStep;
 	int stepRef;
 	TypeData typeData;
+
+	/**
+	 * This method checks function, number of arguments, types, ...
+	 * 
+	 * @param expBin
+	 * @param stepIdx
+	 * @return boolean (true if it's ok false is nok)
+	 */
 	
 	public boolean check(ExpBin<?> expBin, int stepIdx) {
 		return false;
 	}
+	
+	/**
+	 * This method execute function
+	 * 
+	 * @param expBin
+	 * @param stepIdx
+	 * @return boolean (true if it's ok false is nok)
+	 */
+	
 	public boolean exec(ExpBin<?> expBin, int stepIdx) {
 		return false;
 	}

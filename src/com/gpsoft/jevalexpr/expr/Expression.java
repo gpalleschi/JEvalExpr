@@ -536,7 +536,8 @@ public class Expression  {
 				
 				Function function = Functions.names.get(funOpeFunction);
 				
-				if ( function.getOperatorSyntaxType() == OperatorSyntaxType.E_three ||
+				if ( function.getOperatorSyntaxType() == OperatorSyntaxType.E_two ||
+				     function.getOperatorSyntaxType() == OperatorSyntaxType.E_three ||
 					 function.getOperatorSyntaxType() == OperatorSyntaxType.E_four ) {
 					function.checkBefore(humanExpr.substring(0,expPos+humanExpr.substring(expPos, idx).length()),expPos);
 				}
@@ -1196,6 +1197,7 @@ public class Expression  {
 	 */
 	
 	private int checkExpr() {
+		
 		if ( tokens.size() != 3 ) {
 			return -1;
 		}

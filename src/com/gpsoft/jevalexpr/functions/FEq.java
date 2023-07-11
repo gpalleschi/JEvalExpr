@@ -51,7 +51,6 @@ public class FEq extends Function {
 
 	public boolean exec(ExpBin<?> expBin, int idxStep) {
 		
-		Logger.debug("In Exec FEq");	
 		Step<?> step = expBin.getStep().get(idxStep);
 		
 		int idxOpd1;
@@ -63,12 +62,12 @@ public class FEq extends Function {
 		if ( !expBin.getStep().get(idxOpd1).getFunction().exec(expBin, idxOpd1) ) return false;
 		if ( !expBin.getStep().get(idxOpd2).getFunction().exec(expBin, idxOpd2) ) return false;
 		
-		if ( expBin.getStep().get(idxOpd1).isNull() ) {
+		if ( expBin.getStep().get(idxOpd1).getData().isNull() ) {
 			expBin.getStep().get(idxStep).setNull(true);
 			return true;
 		}
 
-		if ( expBin.getStep().get(idxOpd2).isNull() ) {
+		if ( expBin.getStep().get(idxOpd2).getData().isNull() ) {
 			expBin.getStep().get(idxStep).setNull(true);
 			return true;
 		}
@@ -87,13 +86,11 @@ public class FEq extends Function {
 		}
 		if ( Utility.isDouble(expBin.getStep().get(idxOpd1).getData().getValue()) &&
 		     Utility.isDouble(expBin.getStep().get(idxOpd2).getData().getValue()) ) {
-				
-			if ( (Double)expBin.getStep().get(idxOpd1).getData().getValue() == 
-			     (Double)expBin.getStep().get(idxOpd2).getData().getValue() ) {
-				ris = true;
-			} else {
-				ris = false;
-			}
+			
+			Double value1 = (Double)expBin.getStep().get(idxOpd1).getData().getValue();
+			Double value2 = (Double)expBin.getStep().get(idxOpd2).getData().getValue();
+			
+			ris = value1.equals(value2);
 		}
 		if ( Utility.isString(expBin.getStep().get(idxOpd1).getData().getValue()) &&
 			 Utility.isString(expBin.getStep().get(idxOpd2).getData().getValue()) ) {

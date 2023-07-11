@@ -18,7 +18,7 @@ public class Logger {
 	
 	// Level 
 	
-	private static int level = 15;
+	private static int level = 0;
 	
 	// Binary flags : ERROR - WARNING - DEBUG - INFO
 	//                0       0         0       1      = 1 
@@ -42,7 +42,10 @@ public class Logger {
 		Logger.level = level;
 	}
 	
+	
+	
 	public static <T> void always(T message) {
+		if ( level == 0 ) return;
 		System.out.println(message);
 	}
 
@@ -67,6 +70,7 @@ public class Logger {
 	}
 	
 	public static void printExpAscii(ArrayList<Token<?>> tokens) {
+		  if ( level == 0 ) return;
 		  int idx;
 
 		  System.out.print(tokens.get(1).getTokenName());

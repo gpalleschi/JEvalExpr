@@ -143,7 +143,7 @@ public class FDecode extends Function{
 		} else if ( data1.getTypeData() == TypeData.E_double ) {
 			Double value1 = (Double)data1.getValue();
 			Double value2 = (Double)data2.getValue();
-			if ( value1 == value2 ) {
+			if ( value1.equals(value2) ) {
 				return true;
 			} else {
 				return false;
@@ -225,7 +225,7 @@ public class FDecode extends Function{
 		
 		if ( !expBin.getStep().get(idxOpd1).getFunction().exec(expBin, idxOpd1) ) return false;
 	
-		if ( expBin.getStep().get(idxOpd1).isNull() ) {
+		if ( expBin.getStep().get(idxOpd1).getData().isNull() ) {
 			if ( !setDefault(decodeType,expBin, idxStep) ) {
 				Logger.error("Binary Expression Corrupted");
 				return false;
@@ -247,14 +247,14 @@ public class FDecode extends Function{
 			if ( !expBin.getStep().get(idxOpdOdd).getFunction().exec(expBin, idxOpdOdd) ) return false;
 			if ( !expBin.getStep().get(idxOpdEven).getFunction().exec(expBin, idxOpdEven) ) return false;
 
-			if ( expBin.getStep().get(idxOpdOdd).isNull() ) {
+			if ( expBin.getStep().get(idxOpdOdd).getData().isNull() ) {
 				if ( !setDefault(decodeType,expBin, idxStep) ) {
 					Logger.error("Binary Expression Corrupted");
 					return false;
 				}
 				return true;
 			} else {
-				   if ( expBin.getStep().get(idxOpdEven).isNull() ) {
+				   if ( expBin.getStep().get(idxOpdEven).getData().isNull() ) {
 						continue;
 					}
 					
@@ -275,7 +275,7 @@ public class FDecode extends Function{
 			
 			if ( !expBin.getStep().get(endPair).getFunction().exec(expBin, endPair) ) return false;
 
-			if ( expBin.getStep().get(endPair).isNull() ) {
+			if ( expBin.getStep().get(endPair).getData().isNull() ) {
 				if ( !setDefault(decodeType,expBin, idxStep) ) {
 					Logger.error("Binary Expression Corrupted");
 					return false;

@@ -32,8 +32,6 @@ public class FIfThenElse extends Function{
 		Step<?> step = expBin.getStep().get(idxStep);
 
 		int idxOpd1;
-		int idxOpd2;
-		int idxOpd3;
 		
 		if (step.getOpnd().size() != 3 ) {
 			Logger.error("Function " + this.name + " (+) work with three arguments not with " + step.getOpnd().size() + ".");
@@ -42,14 +40,12 @@ public class FIfThenElse extends Function{
 		
 		idxOpd1 = step.getOpnd().get(0);
 
-		/* TODO: CHeck Arguments
-		if ( expBin.getStep().get(idxOpd1).getResType() != TypeData.E_boolean ||
+		if ( expBin.getStep().get(idxOpd1).getResType() != TypeData.E_boolean && 
 		     expBin.getStep().get(idxOpd1).getResType() != TypeData.E_int
 		   ) {
 			Logger.error("function " + this.name + " (+) first operand may be boolean or integer.");
 			return false;
 		}
-		*/
 		
 		return true;
 	}
@@ -68,7 +64,7 @@ public class FIfThenElse extends Function{
 
 		if ( !expBin.getStep().get(idxOpd1).getFunction().exec(expBin, idxOpd1) ) return false;
 		
-		if ( expBin.getStep().get(idxOpd1).isNull() ) {
+		if ( expBin.getStep().get(idxOpd1).getData().isNull() ) {
 			expBin.getStep().get(idxStep).setNull(true);
 			return true;
 		}
@@ -82,15 +78,16 @@ public class FIfThenElse extends Function{
 		   } else {
 			   ris = false;
 		   }
-		}
-		
-		if ( Utility.isBoolean(expBin.getStep().get(idxOpd1).getData().getValue()) ) {
-			
-		   if ( (Boolean)expBin.getStep().get(idxOpd1).getData().getValue() ) {
-			   ris = true;
-		   } else {
-			   ris = false;
-		   }
+		} else if ( Utility.isBoolean(expBin.getStep().get(idxOpd1).getData().getValue()) ) {
+				
+			   if ( (Boolean)expBin.getStep().get(idxOpd1).getData().getValue() ) {
+				   ris = true;
+			   } else {
+				   ris = false;
+			   }
+		} else {
+			Logger.error("Binary expression corrupted.");
+			return false;
 		}
 		
 		int opdToExecute;
