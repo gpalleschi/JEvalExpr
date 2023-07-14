@@ -42,8 +42,13 @@ public class FLe extends Function {
 		idxOpd2 = step.getOpnd().get(1);
 		
 		if ( expBin.getStep().get(idxOpd1).getResType() != expBin.getStep().get(idxOpd2).getResType() ) {
-			Logger.error("function " + this.name + " (+) work only with same types of arguments.");
-			return false;
+			if ( !((expBin.getStep().get(idxOpd1).getResType() == TypeData.E_int && 
+				    expBin.getStep().get(idxOpd2).getResType() == TypeData.E_double ) ||
+			       (expBin.getStep().get(idxOpd2).getResType() == TypeData.E_int && 
+				    expBin.getStep().get(idxOpd1).getResType() == TypeData.E_double )) ) {
+				Logger.error("function " + this.name + " (+) work only with same types of arguments.");
+				return false;
+			}
 		}
 		if ( expBin.getStep().get(idxOpd1).getResType() == TypeData.E_boolean ) {
 			Logger.error("function " + this.name + " (+) don't work with boolean arguments.");
@@ -91,6 +96,35 @@ public class FLe extends Function {
 				ris = false;
 			}
 		}
+		if ( Utility.isInteger(expBin.getStep().get(idxOpd1).getData().getValue()) &&
+			     Utility.isDouble(expBin.getStep().get(idxOpd2).getData().getValue()) ) {
+
+				Integer value1 = (Integer)expBin.getStep().get(idxOpd1).getData().getValue();
+				Double value2 = (Double)expBin.getStep().get(idxOpd2).getData().getValue();
+						
+			    double valuet = value1;	
+			    
+			    if ( valuet <= value2 ) {
+					ris = true;
+				} else {
+					ris = false;
+				}
+
+			}
+			if ( Utility.isInteger(expBin.getStep().get(idxOpd2).getData().getValue()) &&
+			     Utility.isDouble(expBin.getStep().get(idxOpd1).getData().getValue()) ) {
+
+				Integer value2 = (Integer)expBin.getStep().get(idxOpd2).getData().getValue();
+				Double value1 = (Double)expBin.getStep().get(idxOpd1).getData().getValue();
+
+			    double valuet = value2;	
+
+			    if ( value1 <= valuet ) {
+					ris = true;
+				} else {
+					ris = false;
+				}
+			}
 		if ( Utility.isDouble(expBin.getStep().get(idxOpd1).getData().getValue()) &&
 		     Utility.isDouble(expBin.getStep().get(idxOpd2).getData().getValue()) ) {
 				

@@ -36,12 +36,21 @@ public class FEq extends Function {
 			return false;
 		}
 		
+		
 		idxOpd1 = step.getOpnd().get(0);
 		idxOpd2 = step.getOpnd().get(1);
 		
 		if ( expBin.getStep().get(idxOpd1).getResType() != expBin.getStep().get(idxOpd2).getResType() ) {
+			if ( !((expBin.getStep().get(idxOpd1).getResType() == TypeData.E_int && 
+			     expBin.getStep().get(idxOpd2).getResType() == TypeData.E_double ) ||
+			     (expBin.getStep().get(idxOpd2).getResType() == TypeData.E_int && 
+			     expBin.getStep().get(idxOpd1).getResType() == TypeData.E_double )) ) {
+
 			Logger.error("function " + this.name + " (+) work only with same types of arguments.");
 			return false;
+				
+			}
+				
 		}
 		
     	expBin.getStep().get(idxStep).setResType(TypeData.E_boolean);
@@ -52,6 +61,8 @@ public class FEq extends Function {
 	public boolean exec(ExpBin<?> expBin, int idxStep) {
 		
 		Step<?> step = expBin.getStep().get(idxStep);
+
+		Logger.error("Entro in Exec E_eq");
 		
 		int idxOpd1;
 		int idxOpd2;
@@ -84,6 +95,27 @@ public class FEq extends Function {
 				ris = false;
 			}
 		}
+		if ( Utility.isInteger(expBin.getStep().get(idxOpd1).getData().getValue()) &&
+		     Utility.isDouble(expBin.getStep().get(idxOpd2).getData().getValue()) ) {
+
+			Integer value1 = (Integer)expBin.getStep().get(idxOpd1).getData().getValue();
+			Double value2 = (Double)expBin.getStep().get(idxOpd2).getData().getValue();
+			
+		    double valuet = value1;	
+
+			ris = value2.equals(valuet);
+		}
+		if ( Utility.isInteger(expBin.getStep().get(idxOpd2).getData().getValue()) &&
+		     Utility.isDouble(expBin.getStep().get(idxOpd1).getData().getValue()) ) {
+
+			Integer value1 = (Integer)expBin.getStep().get(idxOpd2).getData().getValue();
+			Double value2 = (Double)expBin.getStep().get(idxOpd1).getData().getValue();
+
+		    double valuet = value1;	
+
+			ris = value2.equals(valuet);
+		}
+
 		if ( Utility.isDouble(expBin.getStep().get(idxOpd1).getData().getValue()) &&
 		     Utility.isDouble(expBin.getStep().get(idxOpd2).getData().getValue()) ) {
 			

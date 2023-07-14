@@ -164,6 +164,73 @@ public class JEvalExprTest {
 		 tests.add(new TestData<Boolean>("not 1"," 1 != 3", false, TypeData.E_boolean, true));
 		 tests.add(new TestData<Boolean>("not 2"," !(1 = 1)", false, TypeData.E_boolean, false));
 		 tests.add(new TestData<Integer>("not 3"," !1", false, TypeData.E_int, 0));
+		 tests.add(new TestData<String>("nvl 1"," nvl('pippo','pluto')", false, TypeData.E_string, "pippo"));
+		 tests.add(new TestData<String>("nvl 2"," nvl(trim(' '),'pluto')", false, TypeData.E_string, "pluto"));
+		 tests.add(new TestData<Boolean>("or 1"," 1 or 0", false, TypeData.E_boolean, true));
+		 tests.add(new TestData<Boolean>("or 2"," (1 = 0) or (0 = 1)", false, TypeData.E_boolean, false));
+		 tests.add(new TestData<Boolean>("or 3"," (1 = 0) or (1 = 1)", false, TypeData.E_boolean, true));
+		 tests.add(new TestData<Boolean>("or 4"," (1 = 1) or (1 = 1)", false, TypeData.E_boolean, true));
+		 tests.add(new TestData<Double>("PI 1"," PI ", false, TypeData.E_double, 3.141592653589793));
+		 tests.add(new TestData<Integer>("regexp_instr 1","regexp_instr('If you have any question please call 123-456-7890 or (123)-456-7891','(\\+?( |-|\\.)?\\d{1,2}( |-|\\.)?)?(\\(?\\d{3}\\)?|\\d{3})( |-|\\.)?(\\d{3}( |-|\\.)?\\d{4})')", false, TypeData.E_int, 38));
+		 tests.add(new TestData<Integer>("regexp_instr 2","regexp_instr('If you have any question please call 123-456-7890 or (123)-456-7891','(\\+?( |-|\\.)?\\d{1,2}( |-|\\.)?)?(\\(?\\d{3}\\)?|\\d{3})( |-|\\.)?(\\d{3}( |-|\\.)?\\d{4})',1,2)", false, TypeData.E_int, 54));
+		 tests.add(new TestData<Integer>("regexp_instr 3","regexp_instr('xxAxxAxxxAxxxxAxxxxxAxxxxxxxA','A',10)", false, TypeData.E_int, 15));
+		 tests.add(new TestData<Boolean>("regexp_like 1","regexp_like('John','^[A-Z]o')", false, TypeData.E_boolean, true));
+		 tests.add(new TestData<Boolean>("regexp_like 2","regexp_like('ANNA','.P.')", false, TypeData.E_boolean, false));
+		 tests.add(new TestData<Boolean>("regexp_like 3","regexp_like('ANPA','.P.')", false, TypeData.E_boolean, true));
+		 tests.add(new TestData<String>("regexp_substr 1","regexp_substr('AMICIZIA','[A-Z]{6}')", false, TypeData.E_string, "AMICIZ"));
+		 tests.add(new TestData<String>("regexp_substr 2","regexp_substr('xxABxxABCxxxABCD','[A-C]{3}')", false, TypeData.E_string, "ABC"));
+		 tests.add(new TestData<String>("regexp_substr 3","regexp_substr('xxABxxADxxxACxxxxAExxxxxBCxxxxxxBBxxxx','[A-C]{2}',14)", false, TypeData.E_string, "BC"));
+		 tests.add(new TestData<String>("regexp_substr 4","regexp_substr('xxABxxADxxxACxxxxAExxxxxBCxxxxxxBBxxxx','[A-C]{2}',14,2)", false, TypeData.E_string, "BB"));
+		 tests.add(new TestData<String>("replace 1","replace('xxxxYxxxYxxxx','Y','Z')", false, TypeData.E_string, "xxxxZxxxZxxxx"));
+		 tests.add(new TestData<String>("replace 2","replace('1234a56a78','a')", false, TypeData.E_string, "12345678"));
+		 tests.add(new TestData<String>("reverse 1","reverse('AMICO')", false, TypeData.E_string, "OCIMA"));
+		 tests.add(new TestData<Integer>("round 1"," round(1.32) ", false, TypeData.E_int,1));
+		 tests.add(new TestData<Integer>("round 2"," round(9) ", false, TypeData.E_int,9));
+		 tests.add(new TestData<Integer>("round 3"," round(6.5) ", false, TypeData.E_int,7));
+		 tests.add(new TestData<String>("rpad 1","rpad('12345',7)", false, TypeData.E_string, "12345  "));
+		 tests.add(new TestData<String>("rpad 2","rpad('12345',10,'_')", false, TypeData.E_string, "12345_____"));
+		 tests.add(new TestData<String>("rpad 3","rpad('12345',10,'xyz')", false, TypeData.E_string, "12345xyzxy"));
+		 tests.add(new TestData<String>("rtrim 1","rtrim('12345   ')", false, TypeData.E_string, "12345"));
+		 tests.add(new TestData<Double>("sin 1","sin(90)", false, TypeData.E_double, 0.8939966636005579));
+		 tests.add(new TestData<Integer>("sub 1","3-1", false, TypeData.E_int, 2));
+		 tests.add(new TestData<Double>("sub 2","3.7-1.2", false, TypeData.E_double, 2.5));
+		 tests.add(new TestData<Double>("sub 3","4.178-2", false, TypeData.E_double, 2.178));
+		 tests.add(new TestData<String>("substr 1","substr('1234567890',2,4)", false, TypeData.E_string, "2345"));
+		 tests.add(new TestData<String>("substr 2","substr('1234567890',7)", false, TypeData.E_string, "7890"));
+		 tests.add(new TestData<Integer>("sum 1","3+1", false, TypeData.E_int, 4));
+		 tests.add(new TestData<Double>("sum 2","3.7+1.2", false, TypeData.E_double, 4.9));
+		 tests.add(new TestData<Double>("sum 3","4.178+2", false, TypeData.E_double, 6.178));
+		 tests.add(new TestData<Double>("tan 1","tan(180)", false, TypeData.E_double, 1.3386902103511544));
+		 tests.add(new TestData<String>("to_char 1","to_char(12.562)", false, TypeData.E_string, "12.562"));
+		 tests.add(new TestData<String>("to_char 2","to_char(287)", false, TypeData.E_string, "287"));
+		 tests.add(new TestData<String>("to_char 3","to_char((1=1))", false, TypeData.E_string, "true"));
+		 tests.add(new TestData<String>("to_char 4","to_char((0=1))", false, TypeData.E_string, "false"));
+		 tests.add(new TestData<String>("to_char 5","to_char(to_date('20210101'),'yyyyMMdd')", false, TypeData.E_string, "20210101"));
+		 tests.add(new TestData<String>("to_date 1","to_char(to_date('20051214','yyyyMMdd'),'yyyyMMdd')", false, TypeData.E_string, "20051214"));
+		 tests.add(new TestData<String>("to_hhmiss 1","to_hhmiss(1234)", false, TypeData.E_string, "0:20:34"));
+		 tests.add(new TestData<String>("to_hhmiss 2","to_hhmiss(3456278.98)", false, TypeData.E_string, "960:4:38"));
+		 tests.add(new TestData<Integer>("to_number 1","to_number('11')", false, TypeData.E_int, 11));
+		 tests.add(new TestData<Double>("to_number 2","to_number('7765.34')", false, TypeData.E_double, 7765.34));
+		 tests.add(new TestData<String>("translate 1","translate('xxxxYxxxYxxxx','Y','ZX')", false, TypeData.E_string, "xxxxZXxxxZXxxxx"));
+		 tests.add(new TestData<String>("trim 1","trim('   xxxx  ')", false, TypeData.E_string, "xxxx"));
+		 tests.add(new TestData<Integer>("trunc 1","trunc(12.56)", false, TypeData.E_int, 12));
+		 tests.add(new TestData<Integer>("trunc 2","trunc(99.99)", false, TypeData.E_int, 99));
+		 tests.add(new TestData<Integer>("trunc 3","trunc(710.00)", false, TypeData.E_int, 710));
+		 tests.add(new TestData<Integer>("unaryMinus 1","-563", false, TypeData.E_int, -563));
+		 tests.add(new TestData<Double>("unaryMinus 2","-31.89", false, TypeData.E_double, -31.89));
+		 tests.add(new TestData<Integer>("unaryPlus 1","+563", false, TypeData.E_int, 563));
+		 tests.add(new TestData<Double>("unaryPlus 2","+31.89", false, TypeData.E_double, 31.89));
+		 tests.add(new TestData<String>("upper 1","upper('minus')", false, TypeData.E_string, "MINUS"));
+		 tests.add(new TestData<String>("upper 2","upper('MUUUU')", false, TypeData.E_string, "MUUUU"));
+		 tests.add(new TestData<Boolean>("Xor 1","(1=1) xor (1=1)", false, TypeData.E_boolean, false));
+		 tests.add(new TestData<Boolean>("Xor 2","(1=0) xor (1=1)", false, TypeData.E_boolean, true));
+		 tests.add(new TestData<Boolean>("Xor 3","(1=1) xor (1=0)", false, TypeData.E_boolean, true));
+		 tests.add(new TestData<Boolean>("Xor 4","(1=0) xor (1=0)", false, TypeData.E_boolean, false));
+		 // Function with variable
+		 tests.add(new TestData<String>("fun with variable 1","reverse(v1 || v5) || v1", false, TypeData.E_string, "IHGFEDCBA!!!dlroW olleHHello World!!!"));
+		 tests.add(new TestData<Boolean>("fun with variable 2","(v2 or v6) and (v8 > v3)", false, TypeData.E_boolean, true));
+
+		 
 		 // Add New Tests
 		 // Name Test, Expression, Bool is Null, TypeData, value 
 		 
