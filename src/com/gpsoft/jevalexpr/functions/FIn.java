@@ -39,12 +39,13 @@ public class FIn extends Function {
 		
 		for ( int idx=1;idx<step.getOpnd().size();idx++ ) {
 			int idxOpdn = step.getOpnd().get(idx);
-			Logger.debug("Type 1 : " + expBin.getStep().get(idxOpd1).getResType() + " Type " + idx + " " + expBin.getStep().get(idxOpdn).getResType());
+			Logger.debug("Type " + idx + " : " + expBin.getStep().get(idxOpd1).getResType() + " Type " + idx + " " + expBin.getStep().get(idxOpdn).getResType());
 			if ( expBin.getStep().get(idxOpd1).getResType() != expBin.getStep().get(idxOpdn).getResType() ) {
 				Logger.error("function " + this.name + " (+) work only with same types of arguments.");
 				return false;
 			}
 		}
+		Logger.debug("Set boolean for idxStep  : " + idxStep );
 		
 		expBin.getStep().get(idxStep).setResType(TypeData.E_boolean);
 

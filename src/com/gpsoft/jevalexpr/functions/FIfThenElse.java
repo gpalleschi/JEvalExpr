@@ -39,10 +39,12 @@ public class FIfThenElse extends Function{
 		}
 		
 		idxOpd1 = step.getOpnd().get(0);
-
+		
+		Logger.debug("Type Opd1 : " + expBin.getStep().get(idxOpd1).getResType() + " index Opd1 : " + idxOpd1);
 		if ( expBin.getStep().get(idxOpd1).getResType() != TypeData.E_boolean && 
 		     expBin.getStep().get(idxOpd1).getResType() != TypeData.E_int
 		   ) {
+			
 			Logger.error("function " + this.name + " (+) first operand may be boolean or integer.");
 			return false;
 		}
@@ -98,7 +100,7 @@ public class FIfThenElse extends Function{
 			opdToExecute = idxOpd3;
 		}
 
-		// Operand 2
+		// Operand 2 or 3
 		if ( !expBin.getStep().get(opdToExecute).getFunction().exec(expBin, opdToExecute) ) return false;
 		
 		if ( Utility.isString(expBin.getStep().get(opdToExecute).getData().getValue()) ) {

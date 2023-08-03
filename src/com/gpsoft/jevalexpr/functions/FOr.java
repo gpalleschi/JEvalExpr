@@ -39,6 +39,12 @@ public class FOr extends Function {
 		idxOpd1 = step.getOpnd().get(0);
 		idxOpd2 = step.getOpnd().get(1);
 		
+		Logger.debug("idxOpd1 : " + idxOpd1);
+		Logger.debug("idxOpd2 : " + idxOpd2);
+
+		Logger.debug("ResType idxOpd1 : " + expBin.getStep().get(idxOpd1).getResType());
+		Logger.debug("ResType idxOpd2 : " + expBin.getStep().get(idxOpd2).getResType());
+		
 		if ( expBin.getStep().get(idxOpd1).getResType() != TypeData.E_int &&
 		     expBin.getStep().get(idxOpd1).getResType() != TypeData.E_boolean ) {
 			Logger.error("function or (+) work only with number or boolean arguments.");

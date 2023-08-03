@@ -50,6 +50,7 @@ public class JEvalExprTest {
 	
 	public static void init() {
 		
+		 //Logger.setLevel(15);
 		 Logger.setLevel(0);
 		 // Create variables to test
 		 variables.add(new Variable<String>("v1", "Hello World!!!"));
@@ -227,9 +228,14 @@ public class JEvalExprTest {
 		 tests.add(new TestData<Boolean>("Xor 3","(1=1) xor (1=0)", false, TypeData.E_boolean, true));
 		 tests.add(new TestData<Boolean>("Xor 4","(1=0) xor (1=0)", false, TypeData.E_boolean, false));
 		 // Function with variable
-		 tests.add(new TestData<String>("fun with variable 1","reverse(v1 || v5) || v1", false, TypeData.E_string, "IHGFEDCBA!!!dlroW olleHHello World!!!"));
-		 tests.add(new TestData<Boolean>("fun with variable 2","(v2 or v6) and (v8 > v3)", false, TypeData.E_boolean, true));
-
+		 tests.add(new TestData<String>("fun with variables 1","reverse(v1 || v5) || v1", false, TypeData.E_string, "IHGFEDCBA!!!dlroW olleHHello World!!!"));
+		 tests.add(new TestData<Boolean>("fun with variables 2","(v2 or v6) and (v8 > v3)", false, TypeData.E_boolean, true));
+		 tests.add(new TestData<String>("fun with variables 3","(v3 + v4 + v8 - v7) > 10 ? 'Max' : 'Min' ", false, TypeData.E_string, "Max"));
+		 // Complex Functions
+		 tests.add(new TestData<String>("Complex Fun 1","v5 = 'NODEF' ? (( v1 = 'NODEF') ? '1' : ('P' in ('P','I') ? '0' : '1' )) : ( ('P' in ('P','I') & ( v1 = '000000000')) ? '0' : ( v5 = 'NODEF' ? '1' : ( 'P' in ('P','I') or (('000000000' != '000000000') & (substr(v1,1,3) in ('0GR')) & ( 'C' in ('B')))? '0' : '1' ))) ", false, TypeData.E_string, "0"));
+		 tests.add(new TestData<String>("Complex Fun 2","(('P' in ('P','I')) ? '0' : '1' )", false, TypeData.E_string, "0"));
+		 tests.add(new TestData<String>("Complex Fun 3","((max('V','C','M','Y') = min('Z','Y') ? 'Y' : 'Z'))", false, TypeData.E_string, "Z"));
+		 tests.add(new TestData<String>("Complex Fun 4","is_null(rtrim(v5)) ? '-' : ((substr(v1,1,7) in ('TE0GLFI','TE0CGHI','CTUCASI','CTUCLII') ) ? 'I' : ( (substr(v1,1,2)||substr(v1,(length(rtrim(v1))),1) in ('CAI','CTI','TAI','TEI','TLI','GTI')) & !(substr(v1,1,3)||substr(v1,(length(rtrim(v1))),1) in ('CA1I','CALI','CTMI')) & (rtrim(v1)!= 'TEPRUEI') & !(rtrim(v1) ='CACCATI') ? 'P' : (((substr(v1,(length(rtrim(v1)))-2,3) in ('CDI','DDI','GSI')) or (substr(v1,1,3) in ('GQX','GPX','GSX'))) ? 'C' : ((substr(v1,1,2) in ('AI','AO','IT','OT','BA','CF','CM','C1','C2','C3','C4','B1','B2','B3')) ? 'B' : ((substr(v1,1,3) in ('HCN','HCR','HL1','HL2','HLB','HLJ','HLP','HLR','HRS','HTC','HTP','TEL')) ? 'H' :'-')))))", false, TypeData.E_string, "-"));
 		 
 		 // Add New Tests
 		 // Name Test, Expression, Bool is Null, TypeData, value 

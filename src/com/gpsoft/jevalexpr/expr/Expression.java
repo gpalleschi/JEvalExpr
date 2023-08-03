@@ -635,6 +635,8 @@ public class Expression  {
 		int idy;
 		boolean flag_found = false;
 		
+		//Logger.debug("YYYYY initSimplify");
+		
 		for(idx=0;idx<tokens.size();idx++) {
 			flag_found = false;
 			// If type token is a value
@@ -764,6 +766,8 @@ public class Expression  {
         boolean flag_continue = false;
         int nmb_tok_to_del = 0;
         Step<?> newStep = new Step<Object>();
+        
+        //Logger.debug("YYYYY funSimplify");
 		
 		for(idx=0;idx<tokens.size();idx++) {		
 			is_void = false;
@@ -801,6 +805,8 @@ public class Expression  {
 					return -1;
 				}
 				
+				//Logger.error("XXXXX 1 Function " + newStep.getFunction() + " set Opnd number : " + newStep.getOpnd().size() + " value : " + tokens.get(idx+nmb_tok_to_del+1).getStepRef());
+				
 				newStep.getOpnd().add(tokens.get(idx+nmb_tok_to_del+1).getStepRef());
 				nmb_tok_to_del++;
 
@@ -824,14 +830,20 @@ public class Expression  {
 			tokens.get(idx).setTokenName("R");
 			tokens.get(idx).setTypeToken(TypeToken.E_value);
 			tokens.get(idx).setValueType(ValueType.E_res);;
+			// Mod size() -1 in size()
 			tokens.get(idx).setStepRef(expBin.getStep().size()-1);
+			//tokens.get(idx).setStepRef(expBin.getStep().size());
 			
 			for(int i=0;i<nmb_tok_to_del;i++) tokens.remove(idx+1);
-			
+			//for(int i=0;i<idx+nmb_tok_to_del+1;i++) {
+			//	if ( i >= tokens.size() ) break;
+			//	tokens.remove(i);
+		//	}
+
 			return 0;
 			
 		}
-		
+	
 		return 1;
 	}
 	
@@ -851,6 +863,9 @@ public class Expression  {
 		boolean flag_continue = false;
 		Step<?> newStep = new Step<Object>();
 		int rs;
+        //Logger.debug("YYYYY chainSimplify");
+		
+		this.printTokens();
 		
 		for(idx=0;idx<tokens.size();idx++) {		
 		   flag_continue = false;
@@ -870,6 +885,7 @@ public class Expression  {
 			   
 			   if ( idx > 0 && tokens.get(idx-1).getTypeToken() != TypeToken.E_value ) continue;
 			   
+			   //Logger.error("XXXXX 2 Analize token " + idx + " Function " + newStep.getFunction() + " set Opnd number : " + newStep.getOpnd().size() + " value : " + tokens.get(idx-1).getStepRef());
 			   newStep.getOpnd().add(tokens.get(idx-1).getStepRef());
 			   
 			   if ( idx > 1 && tokens.get(idx-2).getTypeToken() == TypeToken.E_op ) {
@@ -903,6 +919,7 @@ public class Expression  {
 		    		 flag_continue = true;
 		    		 break;
 		    	 }
+			     //Logger.error("XXXXX 3 Function " + newStep.getFunction() + " set Opnd number : " + newStep.getOpnd().size() + " value : " + tokens.get(idx+idy).getStepRef());
 		    	 newStep.getOpnd().add(tokens.get(idx+idy).getStepRef());
 		      } else {
 		    	  // If is not an operator continue
@@ -1001,6 +1018,7 @@ public class Expression  {
 			if ( (idx - 1) >= 0 && tokens.get(idx-1).getTypeToken() != TypeToken.E_value ) continue;
 		
 			if ( (idx - 1) >= 0 ) {
+		       //Logger.error("XXXXX 4 Function " + newStep.getFunction() + " set Opnd number : " + newStep.getOpnd().size() + " value : " + tokens.get(idx-1).getStepRef());
    			   newStep.getOpnd().add(tokens.get(idx-1).getStepRef());
 			}
 			
@@ -1034,6 +1052,7 @@ public class Expression  {
 					return -1;
 				}
 				
+		        //Logger.error("XXXXX 5 Function " + newStep.getFunction() + " set Opnd number : " + newStep.getOpnd().size() + " value : " + tokens.get(idx+nmb_tok_to_del).getStepRef());
 				newStep.getOpnd().add(tokens.get(idx+nmb_tok_to_del).getStepRef());
 				
 				nmb_tok_to_del++;
@@ -1058,7 +1077,7 @@ public class Expression  {
 				tokens.get(idx-1).setTokenName("R");
 				tokens.get(idx-1).setTypeToken(TypeToken.E_value);
 				tokens.get(idx-1).setValueType(ValueType.E_res);
-				tokens.get(idx-1).setStepRef(expBin.getStep().size());
+				tokens.get(idx-1).setStepRef(expBin.getStep().size()-1);
 			}
 			
 			//Logger.debug("nmb_tok_to_del : " + nmb_tok_to_del);
@@ -1337,4 +1356,21 @@ public class Expression  {
     	 
     	 return rs;
     	}
+    
+    
+        void printTokens() {
+        	Logger.debug("*****************************************************\nTokens");
+        	for(int i=0; i < tokens.size();i++) {
+    		   Logger.debug("Token        : " + i);
+    		   Logger.debug("Token Name   : " + tokens.get(i).getTokenName());
+    		   Logger.debug("Token Type   : " + tokens.get(i).getTypeToken());
+    		   Logger.debug("Token Syntax : " + tokens.get(i).getOperatorSyntaxType());
+    		   Logger.debug("Value Type   : " + tokens.get(i).getValueType());
+    		   Logger.debug("Step Ref     : " + tokens.get(i).getStepRef());
+    		   Logger.debug("Function     : " + tokens.get(i).getFunction());
+    		   Logger.debug("Value        : " + tokens.get(i).getData() != null ? tokens.get(i).getData() : "");
+         	   Logger.debug("------------------------------------------------------------------");
+        	}
+        	
+        }
  }
