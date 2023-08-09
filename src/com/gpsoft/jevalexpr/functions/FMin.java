@@ -122,8 +122,8 @@ public class FMin extends Function{
 		
 		Step<?> step = expBin.getStep().get(idxStep);
 		
-		int minArg = 0;
 		int idxOpd1 = step.getOpnd().get(0);
+		int minArg = idxOpd1;
 		int idxOpdn = 0;
 		if ( !expBin.getStep().get(idxOpd1).getFunction().exec(expBin, idxOpd1) ) return false;
 	
@@ -146,7 +146,7 @@ public class FMin extends Function{
 //						                  expBin.getStep().get(idxOpdn).getData().getValue());
 				if ( compareData(expBin.getStep().get(minArg).getData(), expBin.getStep().get(idxOpdn).getData()) ) {
 					Logger.error("true");
-					minArg = i;	
+					minArg = idxOpdn;	
 				} else {
 					Logger.error("false");
 					

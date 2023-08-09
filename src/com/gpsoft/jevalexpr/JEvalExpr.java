@@ -76,7 +76,7 @@ public class JEvalExpr {
 			//                1       1         0       1      = 13
 			//                1       1         1       0      = 14
 			//                1       1         1       1      = 15
-		  Logger.setLevel(15);
+		  Logger.setLevel(8);
 		  String Expression = "";
 
 		  Expression expression = null;
@@ -91,9 +91,11 @@ public class JEvalExpr {
 		  variables.add(new Variable<Boolean>("v6", false));
 		  variables.add(new Variable<Double>("v7", 4567.34566));
 		  variables.add(new Variable<Integer>("v8", 7513));
-		  
-		  Logger.debug(variables.get(0).getValue());
-		  Logger.debug(variables.get(1).getValue());
+
+		  for(int i=0;i<variables.size();i++) {
+			     Logger.debug("v" + (i + 1) + " : " + variables.get(i).getValue());
+		  }
+		  Logger.debug("");
 		  
 		  while((Expression.compareTo("x") != 0) && (Expression.compareTo("X") != 0)) {
 			    clearConsole();

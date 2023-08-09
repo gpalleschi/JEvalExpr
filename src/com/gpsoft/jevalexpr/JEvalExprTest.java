@@ -234,8 +234,9 @@ public class JEvalExprTest {
 		 // Complex Functions
 		 tests.add(new TestData<String>("Complex Fun 1","v5 = 'NODEF' ? (( v1 = 'NODEF') ? '1' : ('P' in ('P','I') ? '0' : '1' )) : ( ('P' in ('P','I') & ( v1 = '000000000')) ? '0' : ( v5 = 'NODEF' ? '1' : ( 'P' in ('P','I') or (('000000000' != '000000000') & (substr(v1,1,3) in ('0GR')) & ( 'C' in ('B')))? '0' : '1' ))) ", false, TypeData.E_string, "0"));
 		 tests.add(new TestData<String>("Complex Fun 2","(('P' in ('P','I')) ? '0' : '1' )", false, TypeData.E_string, "0"));
-		 tests.add(new TestData<String>("Complex Fun 3","((max('V','C','M','Y') = min('Z','Y') ? 'Y' : 'Z'))", false, TypeData.E_string, "Z"));
+		 tests.add(new TestData<String>("Complex Fun 3","((max('V','C','M','Y') = min('Z','Y') ? 'Y' : 'Z'))", false, TypeData.E_string, "Y"));
 		 tests.add(new TestData<String>("Complex Fun 4","is_null(rtrim(v5)) ? '-' : ((substr(v1,1,7) in ('TE0GLFI','TE0CGHI','CTUCASI','CTUCLII') ) ? 'I' : ( (substr(v1,1,2)||substr(v1,(length(rtrim(v1))),1) in ('CAI','CTI','TAI','TEI','TLI','GTI')) & !(substr(v1,1,3)||substr(v1,(length(rtrim(v1))),1) in ('CA1I','CALI','CTMI')) & (rtrim(v1)!= 'TEPRUEI') & !(rtrim(v1) ='CACCATI') ? 'P' : (((substr(v1,(length(rtrim(v1)))-2,3) in ('CDI','DDI','GSI')) or (substr(v1,1,3) in ('GQX','GPX','GSX'))) ? 'C' : ((substr(v1,1,2) in ('AI','AO','IT','OT','BA','CF','CM','C1','C2','C3','C4','B1','B2','B3')) ? 'B' : ((substr(v1,1,3) in ('HCN','HCR','HL1','HL2','HLB','HLJ','HLP','HLR','HRS','HTC','HTP','TEL')) ? 'H' :'-')))))", false, TypeData.E_string, "-"));
+		 tests.add(new TestData<String>("Complex Fun 5","substr(v5,3,1) || min('P','I','N')", false, TypeData.E_string, "CI"));
 		 
 		 // Add New Tests
 		 // Name Test, Expression, Bool is Null, TypeData, value 

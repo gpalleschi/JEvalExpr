@@ -122,8 +122,8 @@ public class FMax extends Function{
 		
 		Step<?> step = expBin.getStep().get(idxStep);
 		
-		int maxArg = 0;
 		int idxOpd1 = step.getOpnd().get(0);
+		int maxArg = idxOpd1;
 		int idxOpdn = 0;
 		if ( !expBin.getStep().get(idxOpd1).getFunction().exec(expBin, idxOpd1) ) return false;
 	
@@ -145,10 +145,10 @@ public class FMax extends Function{
 //				Logger.error("Compare " + expBin.getStep().get(maxArg).getData().getValue() + " with " + 
 //						                  expBin.getStep().get(idxOpdn).getData().getValue());
 				if ( compareData(expBin.getStep().get(maxArg).getData(), expBin.getStep().get(idxOpdn).getData()) ) {
-					Logger.error("true");
-					maxArg = i;	
+					//Logger.error("true");
+					maxArg = idxOpdn;	
 				} else {
-					Logger.error("false");
+					//Logger.error("false");
 					
 				}
 			}
