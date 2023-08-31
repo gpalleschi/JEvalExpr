@@ -266,7 +266,8 @@ public class JTestEvalExpr {
 
 <h2 id="List-Functions">List Functions</h2>
 
- ADD LINK TO ANOTHER .MD FILE
+[Functions and examples](./src/com/gpsoft/jevalexpr/functions/ListFunctions.md)
+
 <hr/>
 
 
@@ -303,17 +304,69 @@ Actually are loaded more than 170 tests, once executed you can check results on 
 
 <h2 id="Addnewfunction">Add New Function</h2>
 
-To add a new function you have to execute these steps :  
+To add a new function you have to execute these three steps :  
 
-1. Create a new function in functions directory **JEvalExpr\src\com\gpsoft\jevalexpr\functions**  
+1. Create a new file function java in functions directory **JEvalExpr\src\com\gpsoft\jevalexpr\functions**  
 
 > Syntax is F + function name with uppercase first letter. ( ex. FDecode ).
 > New Function has to extend abstract class [Function](./src/com/gpsoft/jevalexpr/functions/Function.java).
 > It's important implement the Constructor and two methods : Check and Exec.
 
-> Constructor ### FINO QUI ###
+**Constructor**  
+| Actibute   |      Description      |
+|----------|:-------------:|
+| name |  Function Name |
+| typeToken | [TypeToken](./src/com/gpsoft/jevalexpr/TypeToken.java) |
+| operatorSyntaxType | [OperatorSyntaxType](./src/com/gpsoft/jevalexpr/OperatorSyntaxType.java) |
+| operatorPriority | [OperatorPriority](./src/com/gpsoft/jevalexpr/OperatorPriority.java) |
+| idxPartOpe | Index from 0 to indicate component in composite functions like (between ... and) |
+| valueType | [ValueType](./src/com/gpsoft/jevalexpr/ValueType.java) |
+| stepRef |Set to 0 |
+| typeData | Set to [TypeData](./src/com/gpsoft/jevalexpr/TypeData.java).E_string |
 
+**Check**  
+Check function checks corrects type of arguments and set return type. Return true if is OK or false if not.  
+```
+	/**
+	 * This method checks function, number of arguments, types, ...
+	 * 
+	 * @param expBin
+	 * @param stepIdx
+	 * @return boolean (true if it's ok false is nok)
+	 */
+	
+	public boolean check(ExpBin<?> expBin, int stepIdx) {
+		return false;
+	}
+```
+**Exec**  
+Exec function executes funtion and set result. Return true if is OK or false if not.  
+```
+	/**
+	 * This method execute function
+	 * 
+	 * @param expBin
+	 * @param stepIdx
+	 * @return boolean (true if it's ok false is nok)
+	 */
+	
+	public boolean exec(ExpBin<?> expBin, int stepIdx) {
+		return false;
+	}
+```
+2. Add new Function in HashMap **names** present in class [Functions](./src/com/gpsoft/jevalexpr/functions/Functions.java) :  
 
+Example :  
+
+> put("between", new FBetween_and());
+
+Where "between" is the function reserved word and FBetween_and() is new function created.   
+
+3. Add new enum present in enum [TypeStep](./src/src/com/gpsoft/jevalexpr/TypeStep.java), with prefix E_ .   
+
+Example : 
+
+>  E_between_and               /* FUNCTION between_and         */  
 
 <hr/>
 

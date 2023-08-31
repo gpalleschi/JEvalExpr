@@ -43,7 +43,7 @@ public class FAbs extends Function{
 		if ( expBin.getStep().get(idxOpd).getResType() != TypeData.E_double &&
 		     expBin.getStep().get(idxOpd).getResType() != TypeData.E_int  && 
 		     expBin.getStep().get(idxOpd).getResType() != TypeData.E_string ) {
-			Logger.error("function acos work only with a numeric argument or string contains a numeric value.");
+			Logger.error("function abs work only with a numeric argument or string contains a numeric value.");
 			return false;
 		}
 		

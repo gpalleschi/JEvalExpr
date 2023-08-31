@@ -110,6 +110,7 @@ public class JEvalExprTest {
 		 tests.add(new TestData<Boolean>("in 4"," 12.3 in (11.0,12.4,11.0,12.3,19.34) ", false, TypeData.E_boolean, true));
 		 tests.add(new TestData<String>("Initcap 1"," initcap('gianni') ", false, TypeData.E_string, "Gianni"));
 		 tests.add(new TestData<String>("Initcap 2"," initcap('JOHN') ", false, TypeData.E_string, "John"));
+		 tests.add(new TestData<String>("Initcap 3"," initcap('mary white') ", false, TypeData.E_string, "Mary White"));
 		 tests.add(new TestData<Integer>("Instr 1"," instr('aXaaXaaaX','X') ", false, TypeData.E_int, 2));
 		 tests.add(new TestData<Integer>("Instr 2"," instr('aXaaXaaaX','Y') ", false, TypeData.E_int, 0));
 		 tests.add(new TestData<Integer>("Instr 3"," instr('aXaaXaaaXaaaaX','X',3) ", false, TypeData.E_int, 5));
