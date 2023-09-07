@@ -218,6 +218,7 @@ public class JEvalExprTest {
 		 tests.add(new TestData<Integer>("trunc 1","trunc(12.56)", false, TypeData.E_int, 12));
 		 tests.add(new TestData<Integer>("trunc 2","trunc(99.99)", false, TypeData.E_int, 99));
 		 tests.add(new TestData<Integer>("trunc 3","trunc(710.00)", false, TypeData.E_int, 710));
+		 tests.add(new TestData<Double>("trunc 4","trunc(710.1234,2)", false, TypeData.E_double, 710.12));
 		 tests.add(new TestData<Integer>("unaryMinus 1","-563", false, TypeData.E_int, -563));
 		 tests.add(new TestData<Double>("unaryMinus 2","-31.89", false, TypeData.E_double, -31.89));
 		 tests.add(new TestData<Integer>("unaryPlus 1","+563", false, TypeData.E_int, 563));

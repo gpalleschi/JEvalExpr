@@ -15,10 +15,10 @@ package com.gpsoft.jevalexpr;
  */
 
 public enum TypeToken {
-	  E_lim,                      /* LIMITE DELLA SEQUENZA DI TOKEN */
-	  E_lbrc,                     /* PARENTESI TONDA APERTA         */
-	  E_comma,                    /* VIRGOLA                        */
-	  E_rbrc,                     /* PARENTESI TONDA CHIUSA         */
-	  E_value,                    /* VALORE                         */
-	  E_op                        /* PARTE DI UN OPERATORE          */
+	  E_lim,                      /* TOKEN SEQUENCE LIMIT */
+	  E_lbrc,                     /* OPEN ROUND BRACKET   */
+	  E_comma,                    /* COMMA                */
+	  E_rbrc,                     /* CLOSING ROUND BRACKET */
+	  E_value,                    /* VALUE                 */
+	  E_op                        /* PART OF AN OPERATOR   */
 }

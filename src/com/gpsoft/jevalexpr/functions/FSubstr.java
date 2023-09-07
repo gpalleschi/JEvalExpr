@@ -126,15 +126,22 @@ public class FSubstr extends Function{
 				
 				length = (Integer)expBin.getStep().get(idxOpd3).getData().getValue();
 				
-				if ( length < 0 ) {
-					Logger.error("function substr second argument can't be negative.");
+				if ( length < 1 ) {
+					Logger.error("function substr second argument can't be less than 1.");
 					return false;
 				}
 				
-				if ( start+length-1 > value.length() ) {
+				/*
+ 				if ( length < start ) {
+					Logger.error("function substr second argument can't be less than first argument.");
+					return false;
+				}
+				*/
+				
+				if ( length+start-1 > value.length() ) {
 				  ris = value.substring(start-1);
 				} else {
-				  ris = value.substring(start-1, start+length-1);
+				  ris = value.substring(start-1,length+start-1);
 				}
 				
 				
