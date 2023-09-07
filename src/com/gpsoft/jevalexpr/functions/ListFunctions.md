@@ -90,15 +90,15 @@ Special Operators
 <hr/>
 <h2 id="abs">abs</h2>
 Function to calculate absolute number value.  
-#####Syntax
+<h5>Syntax</h5> 
 ```
 abs(x)
 ```
 Where x can be a numeric variable (int or double) or string contains a numeric value.  
 
-#####Result
+<h5>Result</h5>   
 Result will be an Integer or a Double depends input type.
-#####Examples
+<h5>Examples</h5>   
 ```
 abs(-1)
 
@@ -109,17 +109,17 @@ Result will be : 1 (Integer)
 <h2 id="acos">acos</h2>
 Function to calculate arccosine, function works only with a numeric argument .  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 acos(x)
 ```
 Where x is a number (Integer or Double).
 
-#####Result
+<h5>Result</h5>   
 Result will be a Double.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 acos(0)
 
@@ -130,17 +130,17 @@ Result will be : 1.5707963267948966 (Double)
 <h2 id="and">and</h2>
 Logic operator and .  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 x and y
 ```
 Where x and y can be variables of type Integer or Boolean or functions that returns Integer or Boolean.
 
-#####Result
+<h5>Result</h5>   
 Result will be a Boolean value.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 1 and 0
 
@@ -150,17 +150,17 @@ Result will be : false (Boolean)
 <h2 id="asin">asin</h2>
 Function to calculate arcsine, function works only with a numeric argument .  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 asin(x)
 ```
 Where x is a number (Integer or Double).
 
-#####Result
+<h5>Result</h5>   
 Result will be a Double.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 asin(0)
 
@@ -170,17 +170,17 @@ Result will be : 0.0 (Double)
 <h2 id="atan">atan</h2>
 Function to calculate arctangent, function works only with a numeric argument .  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 atan(x)
 ```
 Where x is a number (Integer or Double).
 
-#####Result
+<h5>Result</h5>   
 Result will be a Double.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 atan(180)
 
@@ -190,17 +190,17 @@ Result will be : 1.3386902103511544 (Double)
 <h2 id="between">between</h2>
 Function to check if a value is within a range of values, function works only with numbers (Integer or double).  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 x between y and z
 ```
 Where x is the value to check and y and z the range of values.
 
-#####Result
+<h5>Result</h5>   
 Result will be a Boolean.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 31 between 12 and 45
 
@@ -210,17 +210,17 @@ Result will be : true (Boolean)
 <h2 id="ceil">ceil</h2>
 Function to rounds up and returns the smallest integer greater than or equal to a given number, function works only with numbers (Integer or Double).
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 ceil(x[,y])
 ```
 Where x is the number to round and y is number of digital to trunc.
 
-#####Result
+<h5>Result</h5>   
 Result will be a number (Integer or Double).
 
-#####Examples
+<h5>Examples</h5>   
 ```
 ceil(5.345)
 
@@ -230,17 +230,17 @@ Result will be : 6 (Integer)
 <h2 id="cos">cos</h2>
 Function to calculate cosine, function works only with a numeric argument .  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 cos(x)
 ```
 Where x is a number (Integer or Double).
 
-#####Result
+<h5>Result</h5>   
 Result will be a Double.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 cos(0)
 
@@ -250,7 +250,7 @@ Result will be : 1.0 (Double)
 <h2 id="decode">decode</h2>
 Function decode compares a value to each search value one by one. If expr is equal to a search, then returns the corresponding result. If no match is found, then returns, if present default value. If default is omitted, then returns initial value.
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 decode(x,y1,z1[,y2,z2, .... yn,zn,d])
@@ -258,10 +258,10 @@ decode(x,y1,z1[,y2,z2, .... yn,zn,d])
 Where x is value to compare and y1 to yn value to compare to x and if equals, z1 to zn are values to return, d is default value if present. Variables can be Numbers (Integer or Duoble), String, Boolean or Date, it's important that x and y1..yn are of the same type, so z1...zn and d.
 
 
-#####Result
+<h5>Result</h5>   
 Result will be a number (Double or Integer, String, Boolean or Date).
 
-#####Examples
+<h5>Examples</h5>   
 ```
 decode(12,1,'A',2,'B',12,'C','D')
 
@@ -271,15 +271,15 @@ Result will be : 'C' (String)
 <h2 id="E">E</h2>
 E is a constant Euler's Number (2.718281828459045).
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 E
 ```
-#####Result
+<h5>Result</h5>   
 Value is the number Double 2.718281828459045.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 E
 
@@ -289,7 +289,7 @@ Result will be : 2.718281828459045 (Double)
 <h2 id="extrarray">extr_array</h2>
 Function extr_array is a function that allows you to extract a substring from a string formed by values ​​separated by a separator character, specifying its position. If can't extract the substring returns null.
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 extr_array(x,y,z)
@@ -297,10 +297,10 @@ extr_array(x,y,z)
 Where x is a string, y is the position and z is the separator. Position is from 1.
 
 
-#####Result
+<h5>Result</h5>   
 Return value is a String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 extr_array('1,223,31,4987',2,',')
 
@@ -310,7 +310,7 @@ Result will be : '223' (String)
 <h2 id="in">in</h2>
 Function in allows to check if a value in present in a group of values specified. Value and compare values can be String, number (Double or Integer), Boolean or Date.
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 x in (y1,y2,.... yn)
@@ -318,10 +318,10 @@ x in (y1,y2,.... yn)
 Where x is the value to check, y1...yn los values to compare.
 
 
-#####Result
+<h5>Result</h5>   
 Return value is Boolean.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 'pippo' in ('pluto','paperino','minni','pluto')
 
@@ -331,7 +331,7 @@ Result will be : false (Boolean)
 <h2 id="initcap">initcap</h2>
 Function initcap return an input String, with the first letter of each word in uppercase, all other letters in lowercase.
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 initcap(x)
@@ -339,10 +339,10 @@ initcap(x)
 Where x is the String to transform.
 
 
-#####Result
+<h5>Result</h5>   
 Return value is String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 initcap('john white')
 
@@ -352,7 +352,7 @@ Result will be : 'John White' (String)
 <h2 id="instr">instr</h2>
 The instr function searchs string for substring. The search operation is defined as comparing the substring argument with substrings of string of the same length for equality until a match is found or there are no more substrings left. Each consecutive compared substring of string begins one character to the right, function returns position of substring (from 1) if founded or 0.
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 instr(x,y[,z,k])
@@ -360,10 +360,10 @@ instr(x,y[,z,k])
 Where x is the input String, y the substring, z start position .
 
 
-#####Result
+<h5>Result</h5>   
 Return value is Integer.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 instr('aXaaXaaaXaaaaX','X',1,3)
 
@@ -377,7 +377,7 @@ The is_date function check if a string is in date format or not, is possible spe
 
 If format isn't present will be assumed format 'yyyyMMdd'.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 is_date(x,[,y])
@@ -385,10 +385,10 @@ is_date(x,[,y])
 Where x is the input String, y the pattern date format.    
 
 
-#####Result
+<h5>Result</h5>   
 Return value is Boolean.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 is_date('2023/07/09','yyyy/MM/dd')"
 
@@ -398,7 +398,7 @@ Result will be : true (Boolean)
 <h2 id="isnull">is_null</h2>
 The is_null function check if a variable or a result of a nested function is null or not. Accept all types of variables.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 is_null(x)
@@ -406,10 +406,10 @@ is_null(x)
 Where x is a variable or result of a nested function.    
 
 
-#####Result
+<h5>Result</h5>   
 Return value is Boolean.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 is_null(trim(' '))
 
@@ -419,7 +419,7 @@ Result will be : true (Boolean)
 <h2 id="isnumber">is_number</h2>
 The is_number function check if an input String is a number (Integer or Double).  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 is_number(x)
@@ -427,10 +427,10 @@ is_number(x)
 Where x is the input String.    
 
 
-#####Result
+<h5>Result</h5>   
 Return value is Boolean.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 is_number('1a')
 
@@ -440,7 +440,7 @@ Result will be : false (Boolean)
 <h2 id="length">length</h2>
 The length function return the length of an input String.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 length(x)
@@ -448,10 +448,10 @@ length(x)
 Where x is the input String.    
 
 
-#####Result
+<h5>Result</h5>   
 Return values is Integer.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 length('John')
 
@@ -461,7 +461,7 @@ Result will be : 4 (Integer)
 <h2 id="like">like</h2>
 The like function check if an input String match with another String using jolly Character '%'.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 like(x,y)
@@ -469,10 +469,10 @@ like(x,y)
 Where x is the input String and y is String to match.    
 
 
-#####Result
+<h5>Result</h5>   
 Return values is Boolean.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 'pippo' like 'p%'
 
@@ -482,7 +482,7 @@ Result will be : true (Boolean)
 <h2 id="lower">lower</h2>
 The lower function converts all upercase letters of an input String in lowercase.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 lower(x)
@@ -490,10 +490,10 @@ lower(x)
 Where x is the input String.    
 
 
-#####Result
+<h5>Result</h5>   
 Return values is String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 lower('JOhN')
 
@@ -503,7 +503,7 @@ Result will be : 'john' (String)
 <h2 id="lpad">lpad</h2>
 The lpad function left-pads a String with another character/String to a certain length.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 lpad(x,y[,z])
@@ -511,10 +511,10 @@ lpad(x,y[,z])
 Where x is the input String, y is the length to pad, and z is the character/String to pad (If isn't presente character ' ' will be used).     
 
 
-#####Result
+<h5>Result</h5>   
 Return value is String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 lpad('12345',10,'xyz')
 
@@ -524,7 +524,7 @@ Result will be : 'yzxyz12345' (String)
 <h2 id="ltrim">ltrim</h2>
 The ltrim function removes leading spaces from an input string.    
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 ltrim(x)
@@ -532,10 +532,10 @@ ltrim(x)
 Where x is the input String.     
 
 
-#####Result
+<h5>Result</h5>   
 Return values is String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 ltrim('    12345 ')
 
@@ -545,17 +545,17 @@ Result will be : '12345 ' (String)
 <h2 id="max">max</h2>
 The max function return max value from a list of values, only Strings or numbers (Integer or Double) are accepted.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 max(x1,x2,...,xn)
 ```
 Where x1,...,xn is the list of values to check.     
 
-#####Result
+<h5>Result</h5>   
 Return value is String or Double or Integer.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 max('C','D','A','L','Z','M')
 
@@ -565,17 +565,17 @@ Result will be : 'Z' (String)
 <h2 id="min">min</h2>
 The min function return min value from a list of values, only Strings or numbers (Integer or Double) are accepted.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 min(x1,x2,...,xn)
 ```
 Where x1,...,xn is the list of values to check.     
 
-#####Result
+<h5>Result</h5>   
 Return value is String or Double or Integer.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 min(1.9,2,8,1.1,8.1,3)
 
@@ -585,17 +585,17 @@ Result will be : 1.1 (Double)
 <h2 id="mod">% (mod)</h2>
 The mod (%) function return the remainder (modulus) of a number divided by another.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 x % y
 ```
 Where x is the number to divide, y is the divisor, both can be Integer or Double.     
 
-#####Result
+<h5>Result</h5>   
 Return values is Double or Integer depends by divider and divisor.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 
 77%2
@@ -606,17 +606,17 @@ Result will be : 1 (Integer)
 <h2 id="not">! (not)</h2>
 The not (!) function return the inverse value of a Boolean or Integer value.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 !x 
 ```
 Where x is a Boolean or Integer value.     
 
-#####Result
+<h5>Result</h5>   
 Return value is Boolean or Integer depends type of x.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 
 !(1 = 1)
@@ -627,17 +627,17 @@ Result will be : false (Boolean)
 <h2 id="nvl">nvl</h2>
 The nvl function check a variable or a result of a function and if is null return a value specified.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 nvl(x,y) 
 ```
 Where x is a variable or a result of a function, y is the value to return if is x is null.  x and y have to be of the same type (String, Boolean, Date, Integer or Double).   
 
-#####Result
+<h5>Result</h5>   
 Return value depends of type of x and y.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 
 nvl(trim(' '),'pluto')
@@ -648,17 +648,17 @@ Result will be : 'pluto' (String)
 <h2 id="or">or</h2>
 The or function is logical operator to compare two conditions if one of them is true return true.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 x or y
 ```
 Where x is a variable/condition to compare with another variable/condition, y. x and y can be Integer or Boolean.   
 
-#####Result
+<h5>Result</h5>   
 Return value is Boolean.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 
 1 or 0
@@ -669,15 +669,15 @@ Result will be : true (Boolean)
 <h2 id="PI">PI</h2>
 PI is a constant Pi greco Number (3.141592653589793).
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 PI
 ```
-#####Result
+<h5>Result</h5>   
 Value is the number Double 3.141592653589793.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 PI
 
@@ -687,17 +687,17 @@ Result will be : 3.141592653589793 (Double)
 <h2 id="regexpinstr">regexp_instr</h2>
 The regexp_instr function extends the functionality of the instr function by letting you search a string for a regular expression pattern. The function evaluates strings using characters as defined by the input character set. It returns an integer indicating the beginning or ending position of the matched substring, depending on the value of the return_option argument. If no match is found, then the function returns 0.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 regexp_instr(x,y[,z,k])
 ```
 Where x is the input String, y is the search pattern in regexp syntax, z is start position, k is number of occurences.
 
-#####Result
+<h5>Result</h5>   
 Return value is Integer (position in input String from 1).
 
-#####Examples
+<h5>Examples</h5>   
 ```
 regexp_instr('xxAxxAxxxAxxxxAxxxxxAxxxxxxxA','A',10)
 
@@ -707,16 +707,16 @@ Result will be : 15 (Integer)
 <h2 id="regexplike">regexp_like</h2>
 The regexp_like function extends the functionality of the like function by letting you search a string for a regular expression pattern. The function evaluates strings using characters as defined by the input character set. It returns a boolean flag true if match, false if not.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 regexp_like(x,y)
 ```
 Where x is the input String, y is the compare pattern in regexp syntax
-#####Result
+<h5>Result</h5>   
 Return value is Boolean.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 regexp_like('John','^[A-Z]o')
 
@@ -726,16 +726,16 @@ Result will be : true (Boolean)
 <h2 id="regexpsubstr">regexp_substr</h2>
 The regexp_substr function extends the functionality of the substr function by letting you search a string for a regular expression pattern. The function evaluates strings using characters as defined by the input character set. It returns a substr if match, or a null String if not. You can specify also the start position from search (from 1) and occurences number.
 
-#####Syntax
+<h5>Syntax</h5> 
 ```
 regexp_substr(x,y[,z,k])
 ```
 Where x is the input String, y is the search pattern in regexp syntax, z is start position, k is number of occurences.
 
-#####Result
+<h5>Result</h5>   
 Return value is String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 regexp_substr('xxABxxADxxxACxxxxAExxxxxBCxxxxxxBBxxxx','[A-C]{2}',14,2)
 
@@ -745,17 +745,17 @@ Result will be : 'BB' (String)
 <h2 id="replace">replace</h2>
 The replace function replace in a string a substring/character with another substring/character. If this last substring/character is not present will be replaced with NULL.   
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 replace(x,y[,z]) 
 ```
 Where x is an input String, y is the substring/character to search, z is the substring/character to replace.   
 
-#####Result
+<h5>Result</h5>   
 Return value is a String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 replace('1234a56a78','a')
 
@@ -765,17 +765,17 @@ Result will be : '12345678' (String)
 <h2 id="reverse">reverse</h2>
 The reverse function returns a character string of exactly the same length as the argument, whose characters are exactly the same as those specified in the argument except that they are in reverse order.
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 reverse(x) 
 ```
 Where x is an input String
 
-#####Result
+<h5>Result</h5>   
 Return value is a String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 reverse('AMICO')
 
@@ -785,17 +785,17 @@ Result will be : 'OCIMA' (String)
 <h2 id="round">round</h2>
 Function round returns a number rounded to a certain number of decimal places.
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 round(x[,y])
 ```
 Where x is the number to round and y is number of digital to round.
 
-#####Result
+<h5>Result</h5>   
 Result will be a number (Integer or Double).
 
-#####Examples
+<h5>Examples</h5>   
 ```
 round(6.5)
 
@@ -805,7 +805,7 @@ Result will be : 7 (Integer)
 <h2 id="rpad">rpad</h2>
 The rpad function rigth-pads a String with another character/String to a certain length.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 rpad(x,y[,z])
@@ -813,10 +813,10 @@ rpad(x,y[,z])
 Where x is the input String, y is the length to pad, and z is the character/String to pad (If isn't presente character ' ' will be used).     
 
 
-#####Result
+<h5>Result</h5>   
 Return value is String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 rpad('12345',10,'xyz')
 
@@ -826,7 +826,7 @@ Result will be : '12345xyzxy' (String)
 <h2 id="rtrim">rtrim</h2>
 The rtrim function removes whitespace from the right side of an input string.    
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 rtrim(x)
@@ -834,10 +834,10 @@ rtrim(x)
 Where x is the input String.     
 
 
-#####Result
+<h5>Result</h5>   
 Return values is String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 rtrim(' 12345      ')
 
@@ -847,17 +847,17 @@ Result will be : ' 12345' (String)
 <h2 id="sin">sin</h2>
 Function to calculate sine, function works only with a numeric argument .  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 asin(x)
 ```
 Where x is a number (Integer or Double).
 
-#####Result
+<h5>Result</h5>   
 Result will be a Double.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 sin(90)
 
@@ -867,17 +867,17 @@ Result will be : 0.0 (Double)
 <h2 id="substr">substr</h2>
 Function substr extracts a substring from a string (starting at any position).  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 substr(x,y[,z])
 ```
 Where x is an input String, y is position from (start from 1) inclusive, z is number of characters to extract, if isn't present to the end of the String.
 
-#####Result
+<h5>Result</h5>   
 Result will be a String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 substr('1234567890',2,4)
 
@@ -887,15 +887,15 @@ Result will be : '2345' (String)
 <h2 id="sysdate">sysdate</h2>
 Function sysdate return the current system date and time
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 sysdate
 ```
-#####Result
+<h5>Result</h5>   
 Result will be a LocalDateTime.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 sysdate
 
@@ -905,17 +905,17 @@ Result will be : (LocalDateTime)
 <h2 id="tan">tan</h2>
 Function to calculate tangent, function works only with a numeric argument .  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 tan(x)
 ```
 Where x is a number (Integer or Double).
 
-#####Result
+<h5>Result</h5>   
 Result will be a Double.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 tan(180)
 
@@ -925,7 +925,7 @@ Result will be : 1.3386902103511544 (Double)
 <h2 id="tochar">to_char</h2>
 Function to_char converts a date, a Boolean or a number (Integer or Double) to a string. 
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 to_char(x[,y])
@@ -934,10 +934,10 @@ Where x is a number(Integer or Double), or a Boolean or a Date, if is a Date is 
 
 [DateTimeFormatter](https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html).     
 
-#####Result
+<h5>Result</h5>   
 Result will be a String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 to_char((1=1))
 
@@ -952,7 +952,7 @@ Result will be : '20051214' (String)
 <h2 id="todate">to_date</h2>
 Function to_date converts a string to a date. 
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 to_date(x[,y])
@@ -961,10 +961,10 @@ Where x is a String, y is a format pattern (if not present format will be yyyyMM
 
 [DateTimeFormatter](https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html).     
 
-#####Result
+<h5>Result</h5>   
 Result will be a LocalDate, LocalDateTime, LocalTime depends from format.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 to_date ( '2023/07/09 12:23:34' , 'yyyy/MM/dd HH:mm:ss' )
 
@@ -975,17 +975,17 @@ Result will be : a LocalDateTime 2023-07-09T12:23:34
 <h2 id="tohhmiss">to_hhmiss</h2>
 Function to_hhmiss return a string in format HH:MI:SS from a Integer/Double value in seconds. 
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 to_hhmiss(x)
 ```
 Where x is a number (Integer/Double) represent number of seconds.
 
-#####Result
+<h5>Result</h5>   
 Result will be a String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 to_hhmiss(239445)
 
@@ -995,17 +995,17 @@ Result will be : '66:30:45'
 <h2 id="translate">translate</h2>
 The translate function replace in a string a substring/character with another substring/character.   
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 traslate(x,y,z) 
 ```
 Where x is an input String, y is the substring/character to search, z is the substring/character to replace.   
 
-#####Result
+<h5>Result</h5>   
 Return value is a String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 translate('xxxxYxxxYxxxx','Y','ZX')
 
@@ -1015,7 +1015,7 @@ Result will be : 'xxxxZXxxxZXxxxx' (String)
 <h2 id="trim">trim</h2>
 The trim function removes leading spaces and spaces from the right side from an input string.    
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 trim(x)
@@ -1023,10 +1023,10 @@ trim(x)
 Where x is the input String.     
 
 
-#####Result
+<h5>Result</h5>   
 Return values is String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 ltrim('    12345 ')
 
@@ -1036,17 +1036,17 @@ Result will be : '12345' (String)
 <h2 id="trunc">trunc</h2>
 Function trunc returns a number truncated to a certain number of decimal places. 
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 trunc(x[,y])
 ```
 Where x is the number to round and y is number of digital to trunc, if is not present will be truncated all decimal digits.
 
-#####Result
+<h5>Result</h5>   
 Result will be a number (Integer or Double).
 
-#####Examples
+<h5>Examples</h5>   
 ```
 trunc(710.1234,2)
 
@@ -1056,17 +1056,17 @@ Result will be : 710.12 (Double)
 <h2 id="upper">upper</h2>
 The upper function converts all lowercase letters of an input String in uppercase.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 upper(x)
 ```
 Where x is the input String.    
 
-#####Result
+<h5>Result</h5>   
 Return values is String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 upper('minUs')
 
@@ -1076,17 +1076,17 @@ Result will be : 'MINUS' (String)
 <h2 id="xor">xor</h2>
 The xor function is a logical operator xor where if both condition are equals return false otherwise true.  
 
-#####Syntax
+<h5>Syntax</h5> 
 
 ```
 x xor y
 ```
 Where x and y are two conditions/values (Boolean or Integer).    
 
-#####Result
+<h5>Result</h5>   
 Return values is String.
 
-#####Examples
+<h5>Examples</h5>   
 ```
 (1=1) xor (1=1)
 
