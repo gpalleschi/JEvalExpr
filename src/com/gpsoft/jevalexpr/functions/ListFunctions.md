@@ -88,23 +88,25 @@ Special Operators
 
 ```  
 <hr/>
+
 <h2 id="abs">abs</h2>  
-Function to calculate absolute number value.  
+> Function to calculate absolute number value.  
+
 <h5>Syntax</h5> 
 
-```  
-abs(x)
-```  
-Where x can be a numeric variable (int or double) or string contains a numeric value.  
+> abs(x)
+> 
+> Where x can be a numeric variable (int or double) or string contains a numeric value.  
 
 <h5>Result</h5>   
-Result will be an Integer or a Double depends input type.
-<h5>Examples</h5>   
-```  
-abs(-1)
 
-Result will be : 1 (Integer)
-```  
+> Result will be an Integer or a Double depends input type.
+
+<h5>Examples</h5>   
+
+> abs(-1)  
+> 
+> Result will be : 1 (Integer)
 
 <hr/>
 <h2 id="acos">acos</h2>
@@ -112,20 +114,19 @@ Function to calculate arccosine, function works only with a numeric argument .
 
 <h5>Syntax</h5> 
 
-```  
-acos(x)
-```  
-Where x is a number (Integer or Double).
+> acos(x)
+> 
+> Where x is a number (Integer or Double).
 
 <h5>Result</h5>   
-Result will be a Double.
+
+> Result will be a Double.
 
 <h5>Examples</h5>   
-```  
-acos(0)
 
-Result will be : 1.5707963267948966 (Double) 
-```  
+> acos(0)
+> 
+> Result will be : 1.5707963267948966 (Double) 
 
 <hr/>
 <h2 id="and">and</h2>
